@@ -39,16 +39,13 @@ public class Bullet : MonoBehaviour
 
         if (other.CompareTag("Fish"))
         {
-            isHitting = true;
-            col.enabled = false;
-            rb.velocity = Vector2.zero;
+            //isHitting = true;
+            //col.enabled = false;
+            //rb.velocity = Vector2.zero;
+            Destroy(gameObject);
+            //fish fish = other.GetComponent<fish>();
 
-            Fish fish = other.GetComponent<Fish>();
-            if (fish != null)
-                fish.TakeDamage(1);
 
-            // 播放打击特效...
-            StartCoroutine(HitAndReturn());
         }
     }
 
