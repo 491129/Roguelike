@@ -29,7 +29,7 @@ public class FishMaker : MonoBehaviour
         if(moveType==0)
         {
             angOffset = Random.Range(-22, 22);
-            StartCoroutine(GenStraightFish(genPosIndex, fishPreIndex,num,speed,angOffset));
+           // StartCoroutine(GenStraightFish(genPosIndex, fishPreIndex,num,speed,angOffset));
         }
         else
         {

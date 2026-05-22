@@ -12,11 +12,11 @@ public class ObjectPool : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
+        /*if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
-        }
+        }*/
         Instance = this;
         // ≥ı ºªØ≥ÿ
         for (int i = 0; i < poolSize; i++)
