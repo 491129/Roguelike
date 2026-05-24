@@ -5,14 +5,24 @@ using UnityEngine;
 
 public class fish : MonoBehaviour
 {
+    public static fish _instance;
+    public static fish instance
+    {
+        get { return _instance; }
+    } 
+
     public GameObject[] fishPres;
     public int fishSpeed=3;
     public Transform[] fishMakers;
     public Transform fishParent;
-    // Start is called before the first frame update
+
+    public int gold;
+    void Awake()
+    {
+         _instance = this; 
+    }
     void Start()
     {
-        //  InvokeRepeating(nameof(FishMaker), 0, 0.5f);
         InvokeRepeating("FishMaker", 0, 0.3f);
 
     }
@@ -20,7 +30,6 @@ public class fish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
     }
 
     public void FishMaker() 

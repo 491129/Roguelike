@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishNumber: 2
   fishSpeed: 6
+  goldNum: 10
 --- !u!60 &-8953973703578661479
 PolygonCollider2D:
   m_ObjectHideFlags: 0

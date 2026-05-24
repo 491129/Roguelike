@@ -5,14 +5,17 @@ using UnityEngine;
 public class Fishself : MonoBehaviour
 {
     private int speed;
+    private FishAttrbute attr;
     void Start()
     {
-        speed = GetComponent<FishAttrbute>().fishSpeed;
+        attr = GetComponent<FishAttrbute>();
+        speed = attr.fishSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (attr != null && attr.isDead) return;
         transform.Translate(Vector3.right*speed * Time.deltaTime);
     }
 }

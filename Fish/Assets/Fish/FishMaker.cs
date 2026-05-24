@@ -13,7 +13,6 @@ public class FishMaker : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void MakeFishes()
     {
         int genPosIndex=Random.Range(0, genPosition.Length);
@@ -29,26 +28,8 @@ public class FishMaker : MonoBehaviour
         if(moveType==0)
         {
             angOffset = Random.Range(-22, 22);
-           // StartCoroutine(GenStraightFish(genPosIndex, fishPreIndex,num,speed,angOffset));
+           
         }
-        else
-        {
-
-        }
+      
     }
-
-    IEnumerator GenStraightFish(int genPosIndex, int fishPreIndex, int num, int speed, int angOffset)
-    {
-        //for (int i = 0; i < num; i++)
-        //{
-        //    GameObject fish = Instantiate(fishPrefabs[fishPreIndex]);
-        //    fish.transform.SetParent(fishHolder, false);
-        //    fish.transform.localPosition = genPositions[genPosIndex].localPosition;
-        //    fish.transform.Rotate(0, 0, angOffset);
-        //    fish.GetComponent<SpriteRenderer>(). sortingOrder += i;
-        //    fish.AddComponent<Ef_AutoMlove>().speed = speed;
-        yield return 0; //new WaitForSeconds(fishGenWaitTime);
-        //}
-    }
-
 }

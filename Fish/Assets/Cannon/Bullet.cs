@@ -1,11 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float lifeTime = 3f;
     [Header("打击反馈")]
-    [SerializeField] private GameObject hitEffect;       // 可选的粒子特效子物体
+    [SerializeField] private GameObject hitEffect;       // 特效子物体
     [SerializeField] private float hitAnimationTime = 0.3f; // 动画时长
     private Rigidbody2D rb;
     private Collider2D col;
@@ -39,26 +40,38 @@ public class Bullet : MonoBehaviour
 
         if (other.CompareTag("Fish"))
         {
-            //isHitting = true;
-            //col.enabled = false;
-            //rb.velocity = Vector2.zero;
-            Destroy(gameObject);
-            //fish fish = other.GetComponent<fish>();
+            isHitting = true;
+            col.enabled = false;
+            rb.velocity = Vector2.zero;
 
-
+            StartCoroutine(DelayedDeactivate(0.3f));  // 0.3秒后消失
         }
-    }
 
-    System.Collections.IEnumerator HitAndReturn()
+
+
+        System.Collections.IEnumerator HitAndReturn()
+        {
+            yield return new WaitForSeconds(hitAnimationTime);
+            Deactivate();
+        }
+
+    }
+    IEnumerator DelayedDeactivate(float delay)
     {
-        yield return new WaitForSeconds(hitAnimationTime);
+        yield return new WaitForSeconds(delay);
         Deactivate();
     }
 
     void Deactivate()
     {
-        // 重置特效
         if (hitEffect) hitEffect.SetActive(false);
-        ObjectPool.Instance.ReturnBullet(gameObject);
+        isHitting = false;                  // 重置状态供下次使用
+        col.enabled = true;
+
+        // 使用对象池回收
+        if (ObjectPool.Instance != null)
+            ObjectPool.Instance.ReturnBullet(gameObject);
+        else
+            Destroy(gameObject);            // 后备：无对象池时销毁
     }
 }

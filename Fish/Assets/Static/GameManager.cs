@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static int Coin { get; private set; } = 100;
 
-    [SerializeField] private Text coinText;   // 左下角金币 Text，Inspector中拖入
+    [SerializeField] private Text coinText;  
 
     public static void AddCoin(int amount)
     {
