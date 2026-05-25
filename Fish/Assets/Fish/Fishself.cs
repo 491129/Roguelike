@@ -12,7 +12,6 @@ public class Fishself : MonoBehaviour
         speed = attr.fishSpeed;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (attr != null && attr.isDead) return;

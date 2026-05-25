@@ -3,10 +3,12 @@ using UnityEngine.UI;
 
 public class TimerUI : MonoBehaviour
 {
-    [SerializeField] private float totalTime = 180f; 
+    [SerializeField] private float totalTime = 1050f; 
     private Slider slider;
     private float timeRemaining;
     private bool isTimeUp;
+    public float TimeElapsed => totalTime - timeRemaining;
+    public float TotalTime => totalTime;
 
     void Start()
     {

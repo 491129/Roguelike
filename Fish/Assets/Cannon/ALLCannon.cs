@@ -13,10 +13,13 @@ public class ALLCannon : MonoBehaviour
     [SerializeField] private Text costText;
 
     [Header("等级配置")]
-    [SerializeField]static public int[] levelCosts = { 5, 10, 15 }; // C,B,A 对应消耗金币
-    static public int currentLevel = 0;     // 0=C, 1=B, 2=A
+    [SerializeField]static public int[] levelCosts = { 5, 10, 15 }; 
+    static public int currentLevel = 0;   
+
     public GameObject[] Cannons;
     public int CurrentLevel => currentLevel;
+    private int buttonDisableCount = 0;
+
     private void Start()
     {
         Cannons[currentLevel].SetActive(true);
@@ -30,7 +33,6 @@ public class ALLCannon : MonoBehaviour
     {
         if (currentLevel < levelCosts.Length - 1)
         {
-
             Cannons[currentLevel].SetActive(false);
             currentLevel++;
             UpdateButtons();
@@ -50,11 +52,15 @@ public class ALLCannon : MonoBehaviour
     }
     void UpdateButtons()
     {
-        // 升级按钮：达到最高级时禁用
+        if (buttonDisableCount > 0)
+        {
+            if (upgradeButton != null) upgradeButton.interactable = false;
+            if (downgradeButton != null) downgradeButton.interactable = false;
+            return;
+        }
         if (upgradeButton != null)
             upgradeButton.interactable = (currentLevel < levelCosts.Length - 1);
 
-        // 降级按钮：最低级时禁用
         if (downgradeButton != null)
             downgradeButton.interactable = (currentLevel > 0);
     }
@@ -63,4 +69,17 @@ public class ALLCannon : MonoBehaviour
         if (costText != null)
             costText.text = "消耗：" + levelCosts[currentLevel];
     }
+    public void DisableButtonsByBoss()
+    {
+        buttonDisableCount++;
+        UpdateButtons();
+    }
+
+    public void EnableButtonsByBoss()
+    {
+        buttonDisableCount--;
+        if (buttonDisableCount < 0) buttonDisableCount = 0;
+        UpdateButtons();
+    }
+
 }
