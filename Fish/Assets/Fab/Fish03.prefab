@@ -113,6 +113,9 @@ MonoBehaviour:
   fishNumber: 2
   fishSpeed: 6
   goldNum: 10
+  coinPrefab: {fileID: 1288983291828762122, guid: cf9834f28f4709d47937524460a7e7c9, type: 3}
+  targetPos: {x: -8, y: -4}
+  moveDuration: 0.6
 --- !u!60 &-8953973703578661479
 PolygonCollider2D:
   m_ObjectHideFlags: 0

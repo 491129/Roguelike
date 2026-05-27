@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FishAttrbute : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class FishAttrbute : MonoBehaviour
 
     private Rigidbody2D rb;
     private Collider2D col;
+
+    [Header("金币动画")]
+    [SerializeField] private GameObject coinPrefab;
+    [SerializeField] private Vector2 targetPos = new Vector2(-8f, -4f); 
+    [SerializeField] private float moveDuration = 0.5f;  
+
     public bool isDead { get; private set; }   
     private void Start()
     {
@@ -24,20 +31,38 @@ public class FishAttrbute : MonoBehaviour
         }
         if (collision.tag == "Bullet")
         {
-           
             isDead = true;
-            rb.velocity = Vector2.zero;       // 停止物理运动（如果用了刚体）
-            col.enabled = false;              // 关闭碰撞器，防止重复击中
-            GameManager.AddCoin(goldNum);
-            // 启动延迟销毁协程
+              
+            col.enabled = false;  
             StartCoroutine(DieAfterDelay(0.2f));
+
+            SpawnCoinAndFly();
+            GameManager.AddCoin(goldNum);
+
         }
        
     }
     IEnumerator DieAfterDelay(float delay)
     {
-        // 可以在这里播放死亡动画、闪红等
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
+    }
+    private void SpawnCoinAndFly()
+    {
+        if (coinPrefab == null)
+        {
+            return;
+        }
+
+        GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        Vector3 originalPos = coin.transform.position;
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(coin.transform.DOMoveY(originalPos.y + 0.5f, 0.2f).SetEase(Ease.OutQuad));
+        seq.Append(coin.transform.DOMoveY(originalPos.y, 0.2f).SetEase(Ease.InQuad));
+        seq.AppendInterval(0.1f);
+        seq.Append(coin.transform.DOMove(targetPos, moveDuration).SetEase(Ease.InBack));
+        seq.OnComplete(() => Destroy(coin));
     }
 }
