@@ -30,6 +30,7 @@ public class fish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void FishMaker() 
@@ -37,7 +38,7 @@ public class fish : MonoBehaviour
         int index = Random.Range(0, fishMakers.Length);
         int indexFishPre=Random.Range(0, fishPres.Length);
         int fishNum=fishPres[indexFishPre].GetComponent<FishAttrbute>().fishNumber;
-        float angle=Random.Range(-45,45);
+        float angle = Random.Range(-45,45);
         StartCoroutine(MakeOneFish(indexFishPre, index,fishNum,angle));
     }
     IEnumerator MakeOneFish(int fishPre,int fishPoint,int fishNum,float angle )
@@ -49,6 +50,16 @@ public class fish : MonoBehaviour
             fish.transform.SetParent(fishParent, false);
             fish.GetComponent<SpriteRenderer>().sortingOrder += i;
             fish.transform.rotation = Quaternion.Euler(0, 0, fishMakers[fishPoint].eulerAngles.z + angle);
+            //if (fishMakers[fishPoint].eulerAngles.z > -90 && fishMakers[fishPoint].eulerAngles.z  < 90)
+            //{
+            //    fish.GetComponent<SpriteRenderer>().flipY = false;
+            //}
+            float eulerZ = fish.transform.eulerAngles.z;
+            float normalizedZ = eulerZ > 180 ? eulerZ - 360 : eulerZ;
+            if (normalizedZ > -90 && normalizedZ < 90)
+                fish.GetComponent<SpriteRenderer>().flipY = false;
+            else
+                fish.GetComponent<SpriteRenderer>().flipY = true;
             yield return new WaitForSeconds(0.3f);
         }
        

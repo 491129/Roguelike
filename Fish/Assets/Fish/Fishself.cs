@@ -16,5 +16,6 @@ public class Fishself : MonoBehaviour
     {
         if (attr != null && attr.isDead) return;
         transform.Translate(Vector3.right*speed * Time.deltaTime);
+       
     }
 }
