@@ -6,6 +6,7 @@ public class Fishself : MonoBehaviour
 {
     private int speed;
     private FishAttrbute attr;
+    public static bool IsFrozen;
     void Start()
     {
         attr = GetComponent<FishAttrbute>();
@@ -14,6 +15,8 @@ public class Fishself : MonoBehaviour
 
     void Update()
     {
+        if (IsFrozen) return;
+        //if (isDead) return;
         if (attr != null && attr.isDead) return;
         transform.Translate(Vector3.right*speed * Time.deltaTime);
        

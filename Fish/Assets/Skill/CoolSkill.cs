@@ -14,18 +14,18 @@ public class CoolSkill : MonoBehaviour
     private void Update()
     {
         SkillManager.iscool = true;
-        WaitFor();
+        FreezeAllFish(3f);
     }
-    void WaitFor()
+    public void FreezeAllFish(float duration)
     {
-        StartCoroutine(FreezeCoroutine(3f));
+        StartCoroutine(FreezeCoroutine(duration));
     }
+
     IEnumerator FreezeCoroutine(float duration)
     {
-        Time.timeScale = 0f;
-        Debug.Log("设定 timeScale=0，当前值：" + Time.timeScale);
+        Fishself.IsFrozen = true;    // 冻结所有鱼
         yield return new WaitForSecondsRealtime(duration);
-        Debug.Log("恢复 timeScale=1，当前值：" + Time.timeScale);
-        Time.timeScale = 1f;
+        Fishself.IsFrozen = false;   // 恢复
     }
+   
 }

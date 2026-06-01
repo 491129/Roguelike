@@ -12,9 +12,6 @@ public class SkillButtonManager : MonoBehaviour
 
     private void Awake() => Instance = this;
 
-    /// <summary>
-    /// 激活下一个技能按钮（由商店调用）
-    /// </summary>
     public bool ActivateNextSkill(Sprite skillSprite, System.Action skillEffect)
     {
         if (AllActivated)
@@ -31,8 +28,5 @@ public class SkillButtonManager : MonoBehaviour
         return true;
     }
 
-    /// <summary>
-    /// 供商店检查是否可以购买技能
-    /// </summary>
     public bool CanPurchase => !AllActivated;
 }
