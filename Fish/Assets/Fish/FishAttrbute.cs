@@ -5,6 +5,16 @@ using DG.Tweening;
 
 public class FishAttrbute : MonoBehaviour
 {
+    public enum FishType
+    {
+        Normal,   // ∆’Õ®”„
+        Gold,     // YF 
+        Shark,    // SF 
+        HHH,
+        YYY
+    }
+
+    public FishType fishType;
     public int fishNumber = 0;
     public int fishSpeed = 0;
     public int goldNum = 0;
@@ -37,8 +47,37 @@ public class FishAttrbute : MonoBehaviour
             StartCoroutine(DieAfterDelay(0.2f));
 
             SpawnCoinAndFly();
-            GameManager.AddCoin(goldNum);
+           
+            switch (fishType)
+            {
+                case FishType.Gold:
+                    if (SkillShopManager.YFskill)
+                    {
+                        Debug.Log("2" + YFSkill.fishCoin);
+                        GameManager.AddCoin(YFSkill.fishCoin);
+                    }
+                    else
+                        Debug.Log("1"+goldNum);
+                    GameManager.AddCoin(goldNum);
+                    break;
+                case FishType.Shark:
+                    Debug.Log(goldNum);
+                    GameManager.AddCoin(goldNum);
+                    break;
+                   // return SkillShopManager.SFskill ? specialCoin : goldNum;
+                default:
+                    Debug.Log("N"+goldNum);
+                    GameManager.AddCoin(goldNum);
+                    break;
+                   // return goldNum;
+            }
 
+            //if (SkillShopManager.YFskill)
+            //{
+            //    GameManager.AddCoin(YFSkill.fishCoin);
+            //}
+            //else
+            //    GameManager.AddCoin(goldNum);
         }
        
     }
