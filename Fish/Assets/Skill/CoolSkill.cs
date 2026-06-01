@@ -9,24 +9,23 @@ public class CoolSkill : MonoBehaviour
     static public int Duration;
     void Start()
     {
-        SkillManager.iscool = true;
-        WaitFor();
+       
     }
     private void Update()
     {
-        
+        SkillManager.iscool = true;
+        WaitFor();
     }
     void WaitFor()
     {
-        Debug.Log("1111");
         StartCoroutine(FreezeCoroutine(3f));
     }
     IEnumerator FreezeCoroutine(float duration)
     {
         Time.timeScale = 0f;
-        Debug.Log("222");
+        Debug.Log("设定 timeScale=0，当前值：" + Time.timeScale);
         yield return new WaitForSecondsRealtime(duration);
-        Debug.Log("333");
+        Debug.Log("恢复 timeScale=1，当前值：" + Time.timeScale);
         Time.timeScale = 1f;
     }
 }

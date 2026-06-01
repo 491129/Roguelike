@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
         isHitting = false;
         col.enabled = true;
         rb.velocity = transform.up * speed;
+        //transform.Translate(transform.up * speed * Time.unscaledDeltaTime, Space.World);
         if (hitEffect) hitEffect.SetActive(false);
         CancelInvoke();
         Invoke(nameof(Deactivate), lifeTime);

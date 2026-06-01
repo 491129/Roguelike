@@ -36,7 +36,7 @@ public class SkillShopManager : MonoBehaviour
     public Text Diname;
     public Text Ditext;
     public Text Dctext;
-
+    public Sprite skillSpriteDJ;
     private void Start()
     {
 
@@ -82,10 +82,11 @@ public class SkillShopManager : MonoBehaviour
             Dctext.text = CoolSkill.Skillcoin.ToString();
 
         }
-        if (DJskill)
-        {
-            GetComponent<CoolSkill>().enabled = true;
-        }
+        //if (DJskill)
+        //{
+        //   // GetComponent<CoolSkill>().enabled = true;
+
+        //}
     }
     public void MakeSureYF()
     {
@@ -111,10 +112,24 @@ public class SkillShopManager : MonoBehaviour
         TTskill = true;
         SureTT.SetActive(false);
     }
-    public void SureYesD()
+    //public void SureYesD()
+    //{
+    //    GameManager.CostCoin(CoolSkill.Skillcoin);
+    //    DJskill = true;
+    //    SureD.SetActive(false);
+    //}
+    public void SureYesDJ()
     {
+        Debug.Log("111111");
+        if (!SkillButtonManager.Instance.CanPurchase)
+        {
+            Debug.Log("¼¼ÄÜÒÑÂú");
+            return;
+        }
         GameManager.CostCoin(CoolSkill.Skillcoin);
         DJskill = true;
+        SkillButtonManager.Instance.ActivateNextSkill(skillSpriteDJ, () => { Debug.Log("Button"); GetComponent<CoolSkill>().enabled = true; });
         SureD.SetActive(false);
     }
+ 
 }
