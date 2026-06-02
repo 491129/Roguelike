@@ -3578,7 +3578,8 @@ MonoBehaviour:
   sitext: {fileID: 1111007410}
   sctext: {fileID: 986519618}
   allItems:
-  - itemName: "\u51B0\u51BB"
+  - YFskill: 0
+    itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -3597,7 +3598,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: YF
+  - YFskill: 0
+    itemName: YF
     price: 10
     icon: {fileID: 21300000, guid: 5252d6763fb49544aa762e1747a73c38, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -3616,7 +3618,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: "\u51B0\u51BB"
+  - YFskill: 0
+    itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -3635,7 +3638,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: "\u51B0\u51BB"
+  - YFskill: 0
+    itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -3654,7 +3658,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - itemName: "\u51B0\u51BB"
+  - YFskill: 0
+    itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -5127,19 +5132,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 985990868}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 764058472}
-        m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
-        m_MethodName: MakeSureYF
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &985990868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7402,19 +7395,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1590603040}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 764058472}
-        m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
-        m_MethodName: MakeSureD
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1590603040
 MonoBehaviour:
   m_ObjectHideFlags: 0

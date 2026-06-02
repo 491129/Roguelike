@@ -44,12 +44,12 @@ public class SkillButton : MonoBehaviour
     {
         isCooldown = true;
         button.interactable = false;
-        iconImage.sprite = defaultGray;   // 变灰
+        iconImage.sprite = defaultGray; 
 
         yield return new WaitForSeconds(8f);
 
         isCooldown = false;
-        if (isActive)   // 如果技能没有被移除，恢复可点击状态
+        if (isActive)
         {
             button.interactable = true;
             iconImage.sprite = activeSprite;

@@ -21,6 +21,7 @@ public class SkillShopManager : MonoBehaviour
     [System.Serializable]
     public class ShopItemData
     {
+        public bool YFskill;
         public string itemName;         // 名字
         public int price;               // 价格
         public Sprite icon;             // 图片
@@ -41,6 +42,8 @@ public class SkillShopManager : MonoBehaviour
     private ShopItemData[] currentSlots = new ShopItemData[5];
 
     private void Awake() => Instance = this;
+
+    public static bool isUsed = false;
     private void Start()
     {
         for (int i = 0; i < slotButtons.Length; i++)
@@ -74,7 +77,7 @@ public class SkillShopManager : MonoBehaviour
    
     public void SureYesTT()
     {
-        GameManager.CostCoin(Onemore.Skillcoin);
+        GameManager.SpendCoin(Onemore.Skillcoin);
         TTskill = true;
         SureTT.SetActive(false);
     }
@@ -85,8 +88,8 @@ public class SkillShopManager : MonoBehaviour
             Debug.Log("技能已满");
             return;
         }
-        GameManager.CostCoin(CoolSkill.Skillcoin);
-        SkillButtonManager.Instance.ActivateNextSkill(currentSlots[1].icon, () => { Debug.Log("Button"); GetComponent<CoolSkill>().enabled = true; });
+        GetComponent<CoolSkill>().enabled = true;
+        SkillButtonManager.Instance.ActivateNextSkill(currentSlots[1].icon, () => { Debug.Log("Button");  CoolSkill.FreezeAllFish(); });
     }
     public void RefreshAllSlots()
     {
@@ -116,6 +119,7 @@ public class SkillShopManager : MonoBehaviour
                 if (slotPriceTexts != null && slotPriceTexts.Length > i)
                     slotPriceTexts[i].text = currentSlots[i].price.ToString();
                 slotButtons[i].interactable = true;
+                isUsed = currentSlots[i].YFskill;
             }
             else
             {
@@ -129,6 +133,7 @@ public class SkillShopManager : MonoBehaviour
     {
         if (currentSlots[index] != null)
             confirmPanel.Show(currentSlots[index]);
+        Debug.Log($"按钮{index}被点击，interactable={slotButtons[index].interactable}, 商品={currentSlots[index]?.itemName}");
     }
 
     /// <summary> 实际购买，由确认弹窗调用 </summary>

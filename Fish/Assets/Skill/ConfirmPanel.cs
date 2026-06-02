@@ -27,7 +27,7 @@ public class ConfirmPanel : MonoBehaviour
     private void OnConfirm()
     {
         if (currentItem == null) return;
-       // SkillShopManager.Instance.TryPurchase(currentItem);
+       SkillShopManager.Instance.TryPurchase(currentItem);
         Hide();
     }
 }

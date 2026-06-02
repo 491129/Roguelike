@@ -6,22 +6,21 @@ using UnityEngine.PlayerLoop;
 public class CoolSkill : MonoBehaviour
 {
     static public int Skillcoin = 20;
-    static public int Duration;
     void Start()
     {
+        SkillManager.iscool = true;
        
     }
     private void Update()
     {
-        SkillManager.iscool = true;
-        FreezeAllFish(3f);
+        
     }
-    public void FreezeAllFish(float duration)
+    public static void FreezeAllFish()
     {
-        StartCoroutine(FreezeCoroutine(duration));
+        SkillShopManager.Instance.StartCoroutine(FreezeCoroutine(3f));
     }
 
-    IEnumerator FreezeCoroutine(float duration)
+    private static IEnumerator FreezeCoroutine(float duration)
     {
         Fishself.IsFrozen = true;    // ∂≥Ω·À˘”–”„
         yield return new WaitForSecondsRealtime(duration);
