@@ -51,14 +51,14 @@ public class FishAttrbute : MonoBehaviour
             switch (fishType)
             {
                 case FishType.Gold:
-                    if (SkillShopManager.YFskill)
+                    /*if (SkillShopManager.YFskill)
                     {
                         Debug.Log("2" + YFSkill.fishCoin);
                         GameManager.AddCoin(YFSkill.fishCoin);
                     }
                     else
                         Debug.Log("1"+goldNum);
-                    GameManager.AddCoin(goldNum);
+                    GameManager.AddCoin(goldNum);*/
                     break;
                 case FishType.Shark:
                     Debug.Log(goldNum);

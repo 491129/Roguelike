@@ -16,12 +16,12 @@ public class AddCoin : MonoBehaviour
         {
             FishAttrbute fishAttr = fish.GetComponent<FishAttrbute>();
         fishCoin = fishAttr.goldNum;
-        if (SkillShopManager.YFskill)
-        {
-            GameManager.AddCoin(YFSkill.fishCoin);
-        }
-        else
-            GameManager.AddCoin(fishAttr.goldNum);
+            /* if (SkillShopManager.YFskill)
+             {
+                 GameManager.AddCoin(YFSkill.fishCoin);
+             }
+             else
+                 GameManager.AddCoin(fishAttr.goldNum);*/
         }
     }
 }
