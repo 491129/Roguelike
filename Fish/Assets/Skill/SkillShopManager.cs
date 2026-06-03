@@ -21,7 +21,6 @@ public class SkillShopManager : MonoBehaviour
     [System.Serializable]
     public class ShopItemData
     {
-        public bool YFskill;
         public string itemName;         // 名字
         public int price;               // 价格
         public Sprite icon;             // 图片
@@ -88,8 +87,19 @@ public class SkillShopManager : MonoBehaviour
             Debug.Log("技能已满");
             return;
         }
+        CoolSkill.isUsed = true;
         GetComponent<CoolSkill>().enabled = true;
         SkillButtonManager.Instance.ActivateNextSkill(currentSlots[1].icon, () => { Debug.Log("Button");  CoolSkill.FreezeAllFish(); });
+    }
+    public void YFskill()
+    {
+        if (!SkillButtonManager.Instance.CanPurchase)
+        {
+            Debug.Log("技能已满");
+            return;
+        }
+        GetComponent<YFSkill>().enabled = true;
+        YFSkill.isUsed = true;
     }
     public void RefreshAllSlots()
     {
@@ -102,9 +112,12 @@ public class SkillShopManager : MonoBehaviour
         List<ShopItemData> pool = new List<ShopItemData>(allItems);
         for (int i = 0; i < 5; i++)
         {
-            int rand = UnityEngine.Random.Range(0, pool.Count);
-            currentSlots[i] = pool[rand];
-            pool.RemoveAt(rand);
+            if (CoolSkill.isUsed)
+            {
+                int rand = UnityEngine.Random.Range(0, pool.Count);
+                currentSlots[i] = pool[rand];
+                pool.RemoveAt(rand);
+            }
         }
         UpdateSlotUI();
     }
@@ -119,7 +132,6 @@ public class SkillShopManager : MonoBehaviour
                 if (slotPriceTexts != null && slotPriceTexts.Length > i)
                     slotPriceTexts[i].text = currentSlots[i].price.ToString();
                 slotButtons[i].interactable = true;
-                isUsed = currentSlots[i].YFskill;
             }
             else
             {
@@ -131,9 +143,9 @@ public class SkillShopManager : MonoBehaviour
 
     void OnSlotClicked(int index)
     {
-        if (currentSlots[index] != null)
-            confirmPanel.Show(currentSlots[index]);
-        Debug.Log($"按钮{index}被点击，interactable={slotButtons[index].interactable}, 商品={currentSlots[index]?.itemName}");
+        confirmPanel.gameObject.SetActive(true); 
+        confirmPanel.Show(currentSlots[index]);
+
     }
 
     /// <summary> 实际购买，由确认弹窗调用 </summary>

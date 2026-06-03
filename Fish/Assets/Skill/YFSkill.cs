@@ -8,6 +8,7 @@ public class YFSkill : MonoBehaviour
     public int addCoin=8;
     static public int Skillcoin=10;
     public GameObject fish;
+    public static bool isUsed=false;
     void Start()
     {
         FishAttrbute fishAttr = fish.GetComponent<FishAttrbute>();

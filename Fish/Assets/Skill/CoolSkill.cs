@@ -6,6 +6,7 @@ using UnityEngine.PlayerLoop;
 public class CoolSkill : MonoBehaviour
 {
     static public int Skillcoin = 20;
+    public static bool isUsed = false;
     void Start()
     {
         SkillManager.iscool = true;

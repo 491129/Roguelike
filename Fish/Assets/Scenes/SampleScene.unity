@@ -3578,8 +3578,7 @@ MonoBehaviour:
   sitext: {fileID: 1111007410}
   sctext: {fileID: 986519618}
   allItems:
-  - YFskill: 0
-    itemName: "\u51B0\u51BB"
+  - itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -3598,17 +3597,16 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - YFskill: 0
-    itemName: YF
+  - itemName: YF
     price: 10
-    icon: {fileID: 21300000, guid: 5252d6763fb49544aa762e1747a73c38, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    icon: {fileID: 21300000, guid: 9cfbac1a746550c43b62167e498b29ce, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 764058472}
           m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
-          m_MethodName: DJskill
+          m_MethodName: YFskill
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3618,8 +3616,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - YFskill: 0
-    itemName: "\u51B0\u51BB"
+  - itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -3638,8 +3635,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - YFskill: 0
-    itemName: "\u51B0\u51BB"
+  - itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
@@ -3658,8 +3654,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - YFskill: 0
-    itemName: "\u51B0\u51BB"
+  - itemName: "\u51B0\u51BB"
     price: 20
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"

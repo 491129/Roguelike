@@ -15,6 +15,8 @@ public class SkillButton : MonoBehaviour
 
     public System.Action OnSkillUsed;
 
+    public static float duration;
+
     private void Start()
     {
         // 初始状态：灰色，不可交互
@@ -46,7 +48,7 @@ public class SkillButton : MonoBehaviour
         button.interactable = false;
         iconImage.sprite = defaultGray; 
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(duration);
 
         isCooldown = false;
         if (isActive)
