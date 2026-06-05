@@ -8,6 +8,8 @@ public class ConfirmPanel : MonoBehaviour
     [SerializeField] private Button cancelButton;
 
     private ShopItemData currentItem;
+    private ShopItemData00 currentItem00;
+    private bool isBossItem = false;
 
     private void Awake()
     {
@@ -19,15 +21,29 @@ public class ConfirmPanel : MonoBehaviour
     public void Show(ShopItemData item)
     {
         currentItem = item;
+        isBossItem = false;
         gameObject.SetActive(true);
     }
-
+    public void Show(ShopItemData00 item)
+    {
+        currentItem00 = item;
+        isBossItem = true;
+        gameObject.SetActive(true);
+    }
     public void Hide() => gameObject.SetActive(false);
 
     private void OnConfirm()
     {
-        if (currentItem == null) return;
-       SkillShopManager.Instance.TryPurchase(currentItem);
+        if (isBossItem)
+        {
+            if (currentItem00 != null)
+                SkillShopManager.Instance.TryPurchase00(currentItem00);
+        }
+        else
+        {
+            if (currentItem != null)
+                SkillShopManager.Instance.TryPurchase(currentItem);
+        }
         Hide();
     }
 }

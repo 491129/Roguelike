@@ -15,7 +15,7 @@ public class SkillButton : MonoBehaviour
 
     public System.Action OnSkillUsed;
 
-    public static float duration;
+    public static float duration = 8f;
 
     private void Start()
     {
@@ -46,7 +46,7 @@ public class SkillButton : MonoBehaviour
     {
         isCooldown = true;
         button.interactable = false;
-        iconImage.sprite = defaultGray; 
+        iconImage.sprite = defaultGray;
 
         yield return new WaitForSeconds(duration);
 

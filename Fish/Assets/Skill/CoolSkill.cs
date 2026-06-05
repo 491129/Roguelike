@@ -7,6 +7,7 @@ public class CoolSkill : MonoBehaviour
 {
     static public int Skillcoin = 20;
     public static bool isUsed = false;
+    public static float duration=3f;
     void Start()
     {
         SkillManager.iscool = true;
@@ -18,7 +19,7 @@ public class CoolSkill : MonoBehaviour
     }
     public static void FreezeAllFish()
     {
-        SkillShopManager.Instance.StartCoroutine(FreezeCoroutine(3f));
+        SkillShopManager.Instance.StartCoroutine(FreezeCoroutine(duration));
     }
 
     private static IEnumerator FreezeCoroutine(float duration)
