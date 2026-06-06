@@ -72,12 +72,6 @@ public class FishAttrbute : MonoBehaviour
                    // return goldNum;
             }
 
-            //if (SkillShopManager.YFskill)
-            //{
-            //    GameManager.AddCoin(YFSkill.fishCoin);
-            //}
-            //else
-            //    GameManager.AddCoin(goldNum);
         }
        
     }
