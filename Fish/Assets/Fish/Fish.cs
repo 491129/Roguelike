@@ -50,10 +50,7 @@ public class fish : MonoBehaviour
             fish.transform.SetParent(fishParent, false);
             fish.GetComponent<SpriteRenderer>().sortingOrder += i;
             fish.transform.rotation = Quaternion.Euler(0, 0, fishMakers[fishPoint].eulerAngles.z + angle);
-            //if (fishMakers[fishPoint].eulerAngles.z > -90 && fishMakers[fishPoint].eulerAngles.z  < 90)
-            //{
-            //    fish.GetComponent<SpriteRenderer>().flipY = false;
-            //}
+       
             float eulerZ = fish.transform.eulerAngles.z;
             float normalizedZ = eulerZ > 180 ? eulerZ - 360 : eulerZ;
             if (normalizedZ > -90 && normalizedZ < 90)

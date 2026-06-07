@@ -22,17 +22,40 @@ public class FishAttrbute : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D col;
 
+    [Header("动画与特效")]
+    [SerializeField] private GameObject deathEffect;    // 死亡动画/粒子预制体
+    [SerializeField] private float deathEffectDuration = 0.5f;
+
     [Header("金币动画")]
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private Vector2 targetPos = new Vector2(-8f, -4f); 
-    [SerializeField] private float moveDuration = 0.5f;  
+    [SerializeField] private float moveDuration = 0.5f;
 
+    [Header("逃脱设置")]
+    public float escapeChance = 0.2f;
+    public float escapeSpeedMultiplier = 2f;
+    public float escapeDuration = 3f;
+    public float CurrentSpeed { get; set; }   // 当前实际速度，逃脱时会变化
+    //private float baseSpeed;                  // 原始速度
+
+
+    private SpriteRenderer sr;
+    private bool escaping = false; // 是否正在逃脱
     public bool isDead { get; private set; }   
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        sr = GetComponent<SpriteRenderer>();
+        CurrentSpeed = fishSpeed;
     }
+    //记录初始速度
+    //public void InitBaseSpeed(float speed)
+    //{
+    //    baseSpeed = speed;
+    //    CurrentSpeed = speed;
+    //}
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Wall")
@@ -41,13 +64,35 @@ public class FishAttrbute : MonoBehaviour
         }
         if (collision.tag == "Bullet")
         {
-            isDead = true;
-              
-            col.enabled = false;  
-            StartCoroutine(DieAfterDelay(0.2f));
+            HandleBulletHit();
 
+        }
+       
+    }
+    private void HandleBulletHit()
+    {
+        // 随机判断是否逃脱
+        float rand = Random.value;
+        if (rand < escapeChance)
+        {
+            // 逃脱成功
+            StartCoroutine(EscapeRoutine());
+        }
+        else
+        {
+            // 被捕获，死亡
+            isDead = true;
+            col.enabled = false;
+            StartCoroutine(DieAfterDelay(0.2f));
+            //死亡动画
+            if (deathEffect != null)
+            {
+                GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+                Destroy(effect, deathEffectDuration);
+            }
+            //金币动画
             SpawnCoinAndFly();
-           
+
             switch (fishType)
             {
                 case FishType.Gold:
@@ -57,23 +102,47 @@ public class FishAttrbute : MonoBehaviour
                         GameManager.AddCoin(YFSkill.fishCoin);
                     }
                     else
-                        Debug.Log("1"+goldNum);
+                        Debug.Log("1" + goldNum);
                     GameManager.AddCoin(goldNum);
                     break;
                 case FishType.Shark:
                     Debug.Log(goldNum);
                     GameManager.AddCoin(goldNum);
                     break;
-                   // return SkillShopManager.SFskill ? specialCoin : goldNum;
+                // return SkillShopManager.SFskill ? specialCoin : goldNum;
                 default:
-                    Debug.Log("N"+goldNum);
+                    Debug.Log("N" + goldNum);
                     GameManager.AddCoin(goldNum);
                     break;
-                   // return goldNum;
+                    // return goldNum;
             }
-
         }
-       
+    }
+    IEnumerator EscapeRoutine()
+    {
+        escaping = true;
+        // 关闭碰撞器，避免重复击中
+        col.enabled = false;
+
+        // 加速：速度变为原来的 escapeSpeedMultiplier 倍
+        CurrentSpeed = fishSpeed * escapeSpeedMultiplier;   // 加速
+
+        // 可以播放一个受惊特效（闪烁、变色）
+        //if (sr != null)
+        //    sr.color = Color.yellow;  // 变黄表示受惊
+
+        yield return new WaitForSeconds(escapeDuration);
+
+        // 恢复正常速度
+        CurrentSpeed = fishSpeed;
+
+        // 恢复颜色
+        if (sr != null)
+            sr.color = Color.white;
+
+        // 恢复碰撞器
+        col.enabled = true;
+        escaping = false;
     }
     IEnumerator DieAfterDelay(float delay)
     {
