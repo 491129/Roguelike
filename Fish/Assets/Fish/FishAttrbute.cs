@@ -16,7 +16,7 @@ public class FishAttrbute : MonoBehaviour
 
     public FishType fishType;
     public int fishNumber = 0;
-    public int fishSpeed = 0;
+    public float fishSpeed = 0;
     public int goldNum = 0;
 
     private Rigidbody2D rb;

@@ -12,7 +12,7 @@ public class fish : MonoBehaviour
     } 
 
     public GameObject[] fishPres;
-    public int fishSpeed=3;
+   // public int fishSpeed=3;
     public Transform[] fishMakers;
     public Transform fishParent;
 
