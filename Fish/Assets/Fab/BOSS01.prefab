@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7718350893325746411}
   m_Layer: 0
   m_Name: BOSS01
-  m_TagString: Fish
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,9 +199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e84ccb6d7649e41b3f9223cceb2a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossType: FreezeTurtle
+  bossType: KillerWhale
   speed: 1
   health: 10
+  catchProbability: 0.4
 --- !u!95 &-7718350893325746411
 Animator:
   serializedVersion: 5

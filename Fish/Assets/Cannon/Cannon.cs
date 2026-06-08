@@ -36,6 +36,7 @@ public class Cannon : MonoBehaviour
         {
             Fire();
             nextFireTime = Time.time + fireRate;
+            Debug.Log("fireRate:"+fireRate);
         }
 
     }
@@ -74,7 +75,7 @@ public class Cannon : MonoBehaviour
         switch (bossType)
         {
             case "Freeze":
-                attackSpeedMultiplier *= 0.85f;
+                attackSpeedMultiplier *= 0.6f;
                 break;
                 // 其他类型如攻速不影响，但可保留扩展
         }
@@ -86,7 +87,7 @@ public class Cannon : MonoBehaviour
         switch (bossType)
         {
             case "Freeze":
-                attackSpeedMultiplier /= 0.85f;
+                attackSpeedMultiplier /= 0.6f;
                 break;
         }
         fireRate = baseFireRate / attackSpeedMultiplier;

@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
     {
         if (isHitting) return;
 
-        if (other.CompareTag("Fish"))
+        if (other.CompareTag("Fish") || other.CompareTag("BOSS"))
         {
             isHitting = true;
             col.enabled = false;

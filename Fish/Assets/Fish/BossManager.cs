@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    public static BossManager Instance { get; private set; }
+
     [Header("出生点设置")]
-    [SerializeField] private Transform[] spawnPoints;   // 拖入所有出生点空物体
+    [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform centerPoint;
 
     [Header("引用")]
     [SerializeField] private TimerUI timerUI;
-    [SerializeField] private Cannon cannon;               // 拖入炮台脚本
-    [SerializeField] private ALLCannon AllCannon;   // 拖入挂有 ALLCannon 的物体
-    [SerializeField] private GameObject warningUI;         // 预警 UI 物体
-    [SerializeField] private GameObject[] bossPrefabs;     // 四种 Boss 预制体
+    [SerializeField] private Cannon cannon;
+    [SerializeField] private ALLCannon AllCannon;
+    [SerializeField] private GameObject warningUI;
+    [SerializeField] private GameObject[] bossPrefabs;
 
     [Header("设置")]
     [SerializeField] private float warningDuration = 30f;
     [SerializeField] private float bossDuration = 60f;
 
-    // 内部状态
-    private float[] triggerPercents = { 0.05f, 0.50f, 0.99f }; // 剩余百分比
-    private bool[] triggered = new bool[3];                // 是否已进入预警流程
-
+    private float[] triggerPercents = { 0.05f, 0.50f, 0.99f };
+    private bool[] triggered = new bool[3];
     private List<ActiveBoss> activeBosses = new List<ActiveBoss>();
 
     class ActiveBoss
@@ -30,6 +30,12 @@ public class BossManager : MonoBehaviour
         public GameObject obj;
         public string bossType;
     }
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Update()
     {
         float elapsed = timerUI.TimeElapsed;
@@ -38,9 +44,8 @@ public class BossManager : MonoBehaviour
         for (int i = 0; i < triggerPercents.Length; i++)
         {
             if (triggered[i]) continue;
-
-            float spawnTime = total * (1f - triggerPercents[i]);   // Boss 出现的时间点
-            float warnTime = spawnTime - warningDuration;          // 预警开始的时间点
+            float spawnTime = total * (1f - triggerPercents[i]);
+            float warnTime = spawnTime - warningDuration;
 
             if (elapsed >= warnTime)
             {
@@ -49,6 +54,7 @@ public class BossManager : MonoBehaviour
             }
         }
     }
+
     IEnumerator BossSequence(int index)
     {
         // 预警动画...
@@ -56,22 +62,16 @@ public class BossManager : MonoBehaviour
         yield return new WaitForSeconds(warningDuration);
         warningUI.SetActive(false);
 
-        // 随机获取出生点和方向
         var (pos, dir) = GetRandomSpawnData();
-
-        // 随机选一个 Boss 预制体
         GameObject bossPrefab = bossPrefabs[Random.Range(0, bossPrefabs.Length)];
         GameObject bossObj = Instantiate(bossPrefab, pos, Quaternion.identity);
         Boss boss = bossObj.GetComponent<Boss>();
 
-        // 初始化 Boss，赋予方向
         if (boss != null)
         {
-            boss.Init(dir);  
-        }
-        // 3. 应用 Debuff
-        if (boss != null)
-        {
+            boss.Init(dir);
+
+            // 应用 Debuff
             switch (boss.bossType)
             {
                 case "FreezeTurtle":
@@ -80,28 +80,54 @@ public class BossManager : MonoBehaviour
                 case "ThreeHeadShark":
                     AllCannon.DisableButtonsByBoss();
                     break;
-                    // 其他类型（速度快、难捕捉）可能无需 Debuff，仅靠预制体属性
             }
+
+            // 修正：字段名 bossType，而不是 type
+            activeBosses.Add(new ActiveBoss { obj = bossObj, bossType = boss.bossType });
         }
 
-        // 4. Boss 持续一段时间后游走
-        yield return new WaitForSeconds(bossDuration);
-
-        // 5. 移除 Boss 和 Debuff
-        if (boss != null)
+        // 等待 Boss 持续时间或直到被击败
+        float timer = 0f;
+        while (timer < bossDuration && bossObj != null)
         {
-            switch (boss.bossType)
-            {
-                case "FreezeTurtle":
-                    cannon.RemoveDebuff("Freeze");
-                    break;
-                case "ThreeHeadShark":
-                    AllCannon.EnableButtonsByBoss();
-                    break;
-            }
+            timer += Time.deltaTime;
+            yield return null;
         }
-        Destroy(bossObj);
+
+        // 如果 Boss 还活着，移除 Debuff 并销毁
+        if (bossObj != null)
+        {
+            RemoveBossDebuff(bossObj);
+            Destroy(bossObj);
+        }
     }
+    /// <summary>
+    /// 当 Boss 被玩家击败时调用，立即移除负面效果
+    /// </summary>
+    public void OnBossDefeated(Boss defeatedBoss)
+    {
+        if (defeatedBoss == null) return;
+        RemoveBossDebuff(defeatedBoss.gameObject);
+        activeBosses.RemoveAll(b => b.obj == defeatedBoss.gameObject);
+    }
+
+    private void RemoveBossDebuff(GameObject bossObj)
+    {
+        if (bossObj == null) return;
+        Boss boss = bossObj.GetComponent<Boss>();
+        if (boss == null) return;
+        switch (boss.bossType)
+        {
+            case "FreezeTurtle":
+                cannon.RemoveDebuff("Freeze");
+                break;
+            case "ThreeHeadShark":
+                AllCannon.EnableButtonsByBoss();
+                break;
+        }
+    }
+
+
     private (Vector3 position, Vector2 direction) GetRandomSpawnData()
     {
         if (spawnPoints.Length == 0)
@@ -109,12 +135,9 @@ public class BossManager : MonoBehaviour
             Debug.LogError("没有设置 Boss 出生点！");
             return (Vector3.zero, Vector2.right);
         }
-
         Transform chosen = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Vector3 spawnPos = chosen.position;
         Vector3 center = centerPoint != null ? centerPoint.position : Vector3.zero;
-
-        // 计算从出生点指向中心的方向（2D）
         Vector2 dir = (center - spawnPos).normalized;
         return (spawnPos, dir);
     }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2922792865181371120}
   m_Layer: 0
   m_Name: BOSS00
-  m_TagString: Fish
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,8 +200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossType: FastShark
-  speed: 1
-  health: 10
+  speed: 5
+  health: 12
+  catchProbability: 0.8
 --- !u!95 &-2922792865181371120
 Animator:
   serializedVersion: 5
