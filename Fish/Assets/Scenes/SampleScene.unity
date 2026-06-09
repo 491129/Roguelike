@@ -3904,6 +3904,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    skillID: 
   - itemName: "\u6D77\u76D7\u6765\u88AD"
     price: 17
     icon: {fileID: 21300000, guid: 5f1906d4f37a90a4381f1b17cb9003d8, type: 3}
@@ -3923,6 +3924,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    skillID: 
   - itemName: "\u518D\u6362\u4E00\u6CE2"
     price: 21
     icon: {fileID: 21300000, guid: 8daa7d7cd2ecdc24e862b23d1a42b250, type: 3}
@@ -3942,6 +3944,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    skillID: 
   - itemName: "\u88C5\u7F6E\u5927\u4EA8"
     price: 22
     icon: {fileID: 21300000, guid: c5d6bb06573a03d40a9185c624413afe, type: 3}
@@ -3962,6 +3965,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    skillID: 
   - itemName: "\u5E02\u573A\u5546\u4EBA"
     price: 23
     icon: {fileID: 21300000, guid: 25d9d63706d77f849a03c0275ad7d400, type: 3}
@@ -3981,6 +3985,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    skillID: 
   - itemName: "\u5927\u6CD5\u5E08"
     price: 24
     icon: {fileID: 21300000, guid: 921fd971851828744a895e3fa75a0939, type: 3}
@@ -4000,6 +4005,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    skillID: 
+  - itemName: "\u6362\u6761\u5927\u8239"
+    price: 27
+    icon: {fileID: 21300000, guid: 5252d6763fb49544aa762e1747a73c38, type: 3}
+    description: "\u6362\u6761\u5927\u8239\uFF1A\u6280\u80FD\u683C\u5B50\uFF0B1\r\r"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls: []
+    skillID: ExpandSlot
   slotImages00: {fileID: 14865552}
   slotButtons00: {fileID: 710635955}
   slotPriceTexts00: {fileID: 986519618}

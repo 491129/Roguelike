@@ -55,6 +55,7 @@ public class SkillShopManager : MonoBehaviour
         [TextArea] public string description;
         public UnityEvent onPurchase;
 
+        public string skillID;
     }
 
     [Header("补给券商品（在Inspector中配置）")]
@@ -284,6 +285,7 @@ public class SkillShopManager : MonoBehaviour
     //普通商品购买，确认弹窗调用
     public void TryPurchase(ShopItemData item)
     {
+        if (item.skillID == "Skill1"&& SkillButtonManager.Instance.AllActivated) { Debug.Log("满了"); return; }
         int finalPrice = Mathf.RoundToInt(item.price * priceMultiplier);
         if (GameManager.Coin < finalPrice) { Debug.Log("金币不足"); return; }
 
@@ -309,11 +311,28 @@ public class SkillShopManager : MonoBehaviour
     public void TryPurchase00(ShopItemData00 item)
     {
         if (GameManager.Coin < item.price) { Debug.Log("金币不足"); return; }
-        GameManager.SpendCoin(item.price);
-        item.onPurchase.Invoke();
-        currentSlots00 = null;
+        if (item.skillID == "ExpandSlot")
+        {
+            if (!SkillButtonManager.Instance.CanExpandSlot)
+            {
+                Debug.Log("技能槽已满，无法再次扩容");
+                return;
+            }
+            if (GameManager.Coin < item.price)
+            {
+                Debug.Log("金币不足");
+                return;
+            }
+            GameManager.SpendCoin(item.price);
+            SkillButtonManager.Instance.ExpandSlot();
+            return;
+        }
+            GameManager.SpendCoin(item.price);
+            item.onPurchase.Invoke();
+            currentSlots00 = null;
 
-        UpdateSlotUI00();
+            UpdateSlotUI00();
+        
     }
     //冰冻技能冷却时间减少
     public void CoolChange00()

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static int Coin { get; private set; } = 100;
+    public static int Coin { get; private set; } = 1000;
 
     [SerializeField] private Text coinText;
     [SerializeField] private Text coinText1;
