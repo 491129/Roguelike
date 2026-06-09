@@ -128,6 +128,36 @@ public class SkillShopManager : MonoBehaviour
         GetComponent<YFSkill>().enabled = true;
         YFSkill.isUsed = true;
     }
+    public void CFskill()
+    {
+        GetComponent<CFSkill>().enabled = true;
+        CFSkill.isUsed=true;
+    }
+    public void GBskill()
+    {
+        GetComponent<GBSkill>().enabled = true;
+        GBSkill.isUsed=true;
+    }
+    public void GDskill()
+    {
+        GetComponent<GDSkill>().enabled = true;
+        GDSkill.isUsed = true;
+    }
+    public void GFskill()
+    {
+        GetComponent<GFSkill>().enabled = true;
+        GFSkill.isUsed = true;
+    }
+    public void GFskill00()
+    {
+        GetComponent<GF00Skill>().enabled = true;
+        GF00Skill.isUsed = true;
+    }
+    public void MTkill()
+    {
+        GetComponent<MTSkill>().enabled = true;
+        MTSkill.isUsed = true;
+    }
     public void HDSkill()
     {
         priceMultiplier = 0.8f;

@@ -377,6 +377,7 @@ MonoBehaviour:
   iconImage: {fileID: 9868724}
   button: {fileID: 9868723}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
+  activeSprite: {fileID: 0}
 --- !u!1 &12310380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,6 +1299,7 @@ MonoBehaviour:
   iconImage: {fileID: 217250645}
   button: {fileID: 217250644}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
+  activeSprite: {fileID: 0}
 --- !u!1 &223019044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,6 +3659,12 @@ GameObject:
   - component: {fileID: 764058473}
   - component: {fileID: 764058474}
   - component: {fileID: 764058475}
+  - component: {fileID: 764058476}
+  - component: {fileID: 764058477}
+  - component: {fileID: 764058478}
+  - component: {fileID: 764058481}
+  - component: {fileID: 764058480}
+  - component: {fileID: 764058479}
   m_Layer: 5
   m_Name: SKILL
   m_TagString: Untagged
@@ -3865,6 +3873,150 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+  - itemName: CF
+    price: 11
+    icon: {fileID: 21300000, guid: dcd29e4e1a891f44a8f6afb6e3cd866d, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(CF"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: CFskill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 1
+    isTotem: 0
+  - itemName: GB
+    price: 12
+    icon: {fileID: 21300000, guid: c5d6bb06573a03d40a9185c624413afe, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GB"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: GBskill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 1
+    isTotem: 0
+  - itemName: GD
+    price: 13
+    icon: {fileID: 21300000, guid: 0bd5ed91e0501d040b145208894e3cae, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GD"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: GDskill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 1
+    isTotem: 0
+  - itemName: GF
+    price: 14
+    icon: {fileID: 21300000, guid: fc75438e7b94a2b488051b62b18f14ad, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GF"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: GFskill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 1
+    isTotem: 0
+  - itemName: GF00
+    price: 17
+    icon: {fileID: 21300000, guid: 94404c61e90d4864ea4fd570b0ff3ca5, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GF00"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: GFskill00
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 1
+    isTotem: 0
+  - itemName: MT
+    price: 15
+    icon: {fileID: 21300000, guid: b21b94b537217e1428f4e35737273994, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(MT"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: MTkill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 1
+    isTotem: 0
   slotImages:
   - {fileID: 1037107797}
   - {fileID: 105243509}
@@ -4059,6 +4211,90 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54575026c96c4bd47973ebdbabf12e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &764058476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4ffbe28c1f5b43814c56fe922fd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addCoin: 10
+  fish: {fileID: 7209689518507787559, guid: 823821c29d2f4194bb258a05fca22470, type: 3}
+--- !u!114 &764058477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3fea127de074f42aaea7f7b93c68a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addCoin: 12
+  fish: {fileID: 7209689518507787559, guid: a32db8fbe80ff84429f530d2639fd344, type: 3}
+--- !u!114 &764058478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8c2b44babd84d46a4397e61b01fd6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addCoin: 13
+  fish: {fileID: 7133270906613277885, guid: f554196428e2d7e4a9f28d80f1e12c5f, type: 3}
+--- !u!114 &764058479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577f2ebdf0c312445921cd566a5f5c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addCoin: 15
+  fish: {fileID: 7209689518507787559, guid: fd64d6eab35caa54bb1c04909e84e610, type: 3}
+--- !u!114 &764058480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3bcf0dba2b73e4fbe2179390a96384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addCoin: 14
+  fish: {fileID: 7209689518507787559, guid: 5f42a106ac2ad5442873492a6d46fab0, type: 3}
+--- !u!114 &764058481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 385cf64189b29c2409169800273c980e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addCoin: 16
+  fish: {fileID: 2109948905434324986, guid: 2a03d11e7ca1a074d88deb08335deeef, type: 3}
 --- !u!1 &773148971
 GameObject:
   m_ObjectHideFlags: 0
@@ -9570,6 +9806,7 @@ MonoBehaviour:
   iconImage: {fileID: 1282311577}
   button: {fileID: 1282311576}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
+  activeSprite: {fileID: 0}
 --- !u!1 &1305678697
 GameObject:
   m_ObjectHideFlags: 0
@@ -10262,6 +10499,7 @@ MonoBehaviour:
   iconImage: {fileID: 1541924514}
   button: {fileID: 1541924513}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
+  activeSprite: {fileID: 0}
 --- !u!1 &1543902553
 GameObject:
   m_ObjectHideFlags: 0
@@ -12959,9 +13197,10 @@ MonoBehaviour:
   AllCannon: {fileID: 2098783732}
   warningUI: {fileID: 232207708}
   bossPrefabs:
-  - {fileID: 7556482849136550777, guid: 371b88265d53f3447a0b6ae366e9ba64, type: 3}
+  - {fileID: 3274055922356728128, guid: 3a6fb0cffcb63244ba9c36b2052ec436, type: 3}
   warningDuration: 10
   bossDuration: 60
+  disSprite: {fileID: 0}
 --- !u!1 &2117496160
 GameObject:
   m_ObjectHideFlags: 0

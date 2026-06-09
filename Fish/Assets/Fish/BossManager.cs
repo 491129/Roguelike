@@ -25,6 +25,10 @@ public class BossManager : MonoBehaviour
     private bool[] triggered = new bool[3];
     private List<ActiveBoss> activeBosses = new List<ActiveBoss>();
 
+    [Header("¹Ø±Õ¼¼ÄÜ")]
+    private SkillButtonManager skillButtonManager;
+    public Sprite disSprite;
+    private Sprite fabSprite;
     class ActiveBoss
     {
         public GameObject obj;
@@ -78,7 +82,12 @@ public class BossManager : MonoBehaviour
                     cannon.ApplyDebuff("Freeze");
                     break;
                 case "ThreeHeadShark":
-                    AllCannon.DisableButtonsByBoss();
+                    //AllCannon.DisableButtonsByBoss();
+                    int buttonLength= skillButtonManager.skillButtons.Length;
+                    int DisableNum=Random.Range(0,buttonLength);
+                    fabSprite = skillButtonManager.skillButtons[DisableNum].activeSprite;
+                    skillButtonManager.skillButtons[DisableNum].Activate(disSprite);
+                   
                     break;
             }
 
@@ -122,7 +131,7 @@ public class BossManager : MonoBehaviour
                 cannon.RemoveDebuff("Freeze");
                 break;
             case "ThreeHeadShark":
-                AllCannon.EnableButtonsByBoss();
+               // AllCannon.EnableButtonsByBoss();
                 break;
         }
     }

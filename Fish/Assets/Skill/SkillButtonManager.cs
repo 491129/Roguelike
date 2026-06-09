@@ -5,7 +5,7 @@ public class SkillButtonManager : MonoBehaviour
     public static SkillButtonManager Instance { get; private set; }
 
     [Header("技能按钮（按顺序拖入，共4个）")]
-    [SerializeField] private SkillButton[] skillButtons;   // 必须拖入4个，但第4个初始隐藏
+    public SkillButton[] skillButtons;   // 必须拖入4个，但第4个初始隐藏
 
     private int nextActivateIndex = 0;                     // 下一个待激活的索引
     private int maxActiveSlots = 3;                        // 当前最大激活槽位数（初始3）

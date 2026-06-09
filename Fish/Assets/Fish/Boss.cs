@@ -65,12 +65,6 @@ public class Boss : MonoBehaviour
         // 使用Translate移动，受Time.timeScale影响
         transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
 
-        // 超出屏幕销毁
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-        if (viewPos.x < -0.2f || viewPos.x > 1.2f || viewPos.y < -0.2f || viewPos.y > 1.2f)
-        {
-            Die();
-        }
     }
 
     void Die()

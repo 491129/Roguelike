@@ -7,11 +7,13 @@ public class FishAttrbute : MonoBehaviour
 {
     public enum FishType
     {
-        Normal,   // ∆’Õ®”„
         Gold,     // YF 
-        Shark,    // SF 
-        HHH,
-        YYY
+        GF00,    // SF 
+        CF,     //CF
+        GB,      //GB
+        GD,
+        GF,
+        MT
     }
 
     public FishType fishType;
@@ -98,18 +100,59 @@ public class FishAttrbute : MonoBehaviour
                 case FishType.Gold:
                     if (YFSkill.isUsed)
                     {
-                        Debug.Log("2" + YFSkill.fishCoin);
                         GameManager.AddCoin(YFSkill.fishCoin);
                     }
                     else
-                        Debug.Log("1" + goldNum);
                     GameManager.AddCoin(goldNum);
                     break;
-                case FishType.Shark:
-                    Debug.Log(goldNum);
-                    GameManager.AddCoin(goldNum);
+                case FishType.GF:
+                    if (GFSkill.isUsed)
+                    {
+                        GameManager.AddCoin(GFSkill.fishCoin);
+                    }
+                    else
+                        GameManager.AddCoin(goldNum);
                     break;
-                // return SkillShopManager.SFskill ? specialCoin : goldNum;
+                case FishType.CF:
+                    if (CFSkill.isUsed)
+                    {
+                        GameManager.AddCoin(CFSkill.fishCoin);
+                    }
+                    else
+                        GameManager.AddCoin(goldNum);
+                    break;
+                case FishType.GB:
+                    if (GBSkill.isUsed)
+                    {
+                        GameManager.AddCoin(GBSkill.fishCoin);
+                    }
+                    else
+                        GameManager.AddCoin(goldNum);
+                    break;
+                case FishType.GD:
+                    if (GDSkill.isUsed)
+                    {
+                        GameManager.AddCoin(GDSkill.fishCoin);
+                    }
+                    else
+                        GameManager.AddCoin(goldNum);
+                    break;
+                case FishType.GF00:
+                    if (GF00Skill.isUsed)
+                    {
+                        GameManager.AddCoin(GF00Skill.fishCoin);
+                    }
+                    else
+                        GameManager.AddCoin(goldNum);
+                    break;
+                case FishType.MT:
+                    if (MTSkill.isUsed)
+                    {
+                        GameManager.AddCoin(MTSkill.fishCoin);
+                    }
+                    else
+                        GameManager.AddCoin(goldNum);
+                    break;
                 default:
                     Debug.Log("N" + goldNum);
                     GameManager.AddCoin(goldNum);

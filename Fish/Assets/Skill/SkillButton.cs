@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class SkillButton : MonoBehaviour
 {
     [Header("UI 组件")]
-    [SerializeField] private Image iconImage;      // 显示技能图标的 Image
+    public Image iconImage;      // 显示技能图标的 Image
     [SerializeField] private Button button;        // 按钮组件
-    [SerializeField] private Sprite defaultGray;   // 未激活/冷却时的灰色图
+    public Sprite defaultGray;   // 未激活/冷却时的灰色图
 
-    private Sprite activeSprite;                   // 激活后的技能图
+    public Sprite activeSprite;                   // 激活后的技能图
     private bool isActive = false;                 // 是否已激活（购买后）
     private bool isCooldown = false;               // 是否在冷却中
 

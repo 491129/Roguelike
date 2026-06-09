@@ -69,17 +69,17 @@ public class ALLCannon : MonoBehaviour
         if (costText != null)
             costText.text = "ÏûºÄ£º" + levelCosts[currentLevel];
     }
-    public void DisableButtonsByBoss()
-    {
-        buttonDisableCount++;
-        UpdateButtons();
-    }
+    //public void DisableButtonsByBoss()
+    //{
+    //    buttonDisableCount++;
+    //    UpdateButtons();
+    //}
 
-    public void EnableButtonsByBoss()
-    {
-        buttonDisableCount--;
-        if (buttonDisableCount < 0) buttonDisableCount = 0;
-        UpdateButtons();
-    }
+    //public void EnableButtonsByBoss()
+    //{
+    //    buttonDisableCount--;
+    //    if (buttonDisableCount < 0) buttonDisableCount = 0;
+    //    UpdateButtons();
+    //}
 
 }

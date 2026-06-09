@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -1977715835025660618}
   - component: {fileID: 6067575557328455560}
   - component: {fileID: 7220071937435976921}
-  - component: {fileID: 1943668517195698759}
+  - component: {fileID: 6645904705459002876}
   m_Layer: 0
-  m_Name: Fish02
+  m_Name: CF
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.9301233, y: 1.6271725, z: 0}
-  m_LocalScale: {x: 0.06, y: 0.06, z: 0.09999999}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 66aa0837422e62441b58bd7acc72b54e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 12e840a46adc4174ea2b39c9fadb5e57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishType: 2
-  fishNumber: 4
-  fishSpeed: 3
+  fishNumber: 3
+  fishSpeed: 3.5
   goldNum: 8
   deathEffect: {fileID: 0}
   deathEffectDuration: 0.5
@@ -161,7 +161,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 13.56, y: 7.41}
+    oldSize: {x: 12.29, y: 7.68}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -235,7 +235,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &1943668517195698759
+--- !u!95 &6645904705459002876
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ Animator:
   m_GameObject: {fileID: 7209689518507787559}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8c289fe7e21b2204e96b635f72ff3bff, type: 2}
+  m_Controller: {fileID: 9100000, guid: a075ab8f89c63cb43833dd83e1936d1f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
