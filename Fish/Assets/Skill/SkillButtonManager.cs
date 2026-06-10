@@ -8,7 +8,7 @@ public class SkillButtonManager : MonoBehaviour
     public SkillButton[] skillButtons;   // 必须拖入4个，但第4个初始隐藏
 
     private int nextActivateIndex = 0;                     // 下一个待激活的索引
-    private int maxActiveSlots = 3;                        // 当前最大激活槽位数（初始3）
+    public int maxActiveSlots = 3;                        // 当前最大激活槽位数（初始3）
 
     public bool AllActivated => nextActivateIndex >= maxActiveSlots;
     public bool CanPurchase => !AllActivated;
@@ -63,5 +63,6 @@ public class SkillButtonManager : MonoBehaviour
         }
         return true;
     }
+
 
 }

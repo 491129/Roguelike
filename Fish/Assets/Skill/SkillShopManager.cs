@@ -158,6 +158,7 @@ public class SkillShopManager : MonoBehaviour
         GetComponent<MTSkill>().enabled = true;
         MTSkill.isUsed = true;
     }
+
     public void HDSkill()
     {
         priceMultiplier = 0.8f;
@@ -188,6 +189,10 @@ public class SkillShopManager : MonoBehaviour
     public void DFSSkill()
     {
         doubleTotemWeight = true;
+    }
+    public void MDSkill()
+    {
+        Boss.skillDuration += 10;
     }
     public void RefreshAllSlots()
     {

@@ -16,17 +16,13 @@ public class FishShadow : MonoBehaviour
         float angle = transform.rotation.eulerAngles.z;
         if (angle > 180f) angle -= 360f;
         bool shouldFlip = Mathf.Abs(angle) > 90f;
-        shadowMat.SetFloat("_VerticalFlip", shouldFlip? 1 : 0);
-        //Debug.Log(GetComponent<SpriteRenderer>().flipX);
-        //var FishTex=GetComponent<SpriteRenderer>().sprite.texture;
-        //shadowMat.SetTexture("_FishTex", FishTex);
+        shadowMat.SetInt("_VerticalFlip", shouldFlip? 1 : 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         Texture FishTex = GetComponent<SpriteRenderer>().sprite.texture;
-        //shadowMat.SetFloat("_VerticalFlip", GetComponent<SpriteRenderer>().flipX ? 1 : 0);
         shadowMat.SetTexture("_FishTex", FishTex);
     }
 }

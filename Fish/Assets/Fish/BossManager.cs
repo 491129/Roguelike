@@ -26,9 +26,8 @@ public class BossManager : MonoBehaviour
     private List<ActiveBoss> activeBosses = new List<ActiveBoss>();
 
     [Header("关闭技能")]
-    private SkillButtonManager skillButtonManager;
-    public Sprite disSprite;
-    private Sprite fabSprite;
+   // private SkillButtonManager skillButtonManager;
+    private SkillButton disabledButton;
     class ActiveBoss
     {
         public GameObject obj;
@@ -74,7 +73,7 @@ public class BossManager : MonoBehaviour
         if (boss != null)
         {
             boss.Init(dir);
-
+            boss.SetCenter(centerPoint);   // 传递中心点，让其知道何时停留
             // 应用 Debuff
             switch (boss.bossType)
             {
@@ -82,13 +81,28 @@ public class BossManager : MonoBehaviour
                     cannon.ApplyDebuff("Freeze");
                     break;
                 case "ThreeHeadShark":
-                    //AllCannon.DisableButtonsByBoss();
-                    int buttonLength= skillButtonManager.skillButtons.Length;
-                    int DisableNum=Random.Range(0,buttonLength);
-                    fabSprite = skillButtonManager.skillButtons[DisableNum].activeSprite;
-                    skillButtonManager.skillButtons[DisableNum].Activate(disSprite);
-                   
+                    SkillButtonManager sm = SkillButtonManager.Instance;
+                    if (sm == null) break;
+
+                    // 获取当前已激活的技能按钮列表（只随机禁用一个已激活的）
+                    List<SkillButton> activeButtons = new List<SkillButton>();
+                    for (int i = 0; i < sm.skillButtons.Length; i++)
+                    {
+                        if (sm.skillButtons[i].IsActive)  // 需要在 SkillButton 中公开 IsActive
+                            activeButtons.Add(sm.skillButtons[i]);
+                    }
+
+                    if (activeButtons.Count > 0)
+                    {
+                        int randIndex = Random.Range(0, activeButtons.Count);
+                        SkillButton targetBtn = activeButtons[randIndex];
+                        targetBtn.DisableByBoss();
+
+                        // 保存这个引用，以便 Boss 死亡时恢复
+                        disabledButton = targetBtn; // 需要在 BossManager 中定义 private SkillButton disabledButton;
+                    }
                     break;
+                    
             }
 
             // 修正：字段名 bossType，而不是 type
@@ -131,7 +145,13 @@ public class BossManager : MonoBehaviour
                 cannon.RemoveDebuff("Freeze");
                 break;
             case "ThreeHeadShark":
-               // AllCannon.EnableButtonsByBoss();
+                if (disabledButton != null)
+                {
+                    disabledButton.RestoreByBoss();
+                    disabledButton = null;
+                }
+                // 如果你的三头鲨还有其他效果（如禁用升级按钮），也在这里恢复
+                // AllCannon.EnableButtonsByBoss();
                 break;
         }
     }

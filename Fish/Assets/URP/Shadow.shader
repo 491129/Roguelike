@@ -34,7 +34,7 @@ Shader "Image/Shadow"
 
              sampler2D _MainTex;
             sampler2D _FishTex;
-            float _VerticalFlip;
+            int _VerticalFlip;
             // float _Brightness;
 
             v2f vert (appdata v)

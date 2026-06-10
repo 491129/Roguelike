@@ -13,6 +13,19 @@ public class Boss : MonoBehaviour
     private Collider2D col;
     private bool isDead = false;
 
+    [Header("停留设置")]
+    [SerializeField] private float stopDistance = 1.5f;   // 距中心点多近时停留
+    [SerializeField] private float minStayDuration = 3f;
+    [SerializeField] private float maxStayDuration = 5f;
+    public static float skillDuration = 0;
+    // 停留相关
+    private Transform centerPoint;
+    private bool hasStopped = false;
+    private bool isStaying = false;
+    private Vector2 savedDirection;   // 保存原方向，停留结束后恢复
+
+    //SkillShopManager skillShopManager;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -52,20 +65,51 @@ public class Boss : MonoBehaviour
     public void Init(Vector2 dir)
     {
         moveDirection = dir.normalized;
+        savedDirection = moveDirection;
         if (sr != null)
             sr.flipX = dir.x < 0;
+    }
+    public void SetCenter(Transform center)
+    {
+        centerPoint = center;
     }
 
     void Update()
     {
         if (isDead) return;
-        // 配合冻结技能
         if (Fishself.IsFrozen) return;
 
-        // 使用Translate移动，受Time.timeScale影响
-        transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+        // 检查是否到达中心点附近且尚未停留
+        if (!hasStopped && centerPoint != null)
+        {
+            float dist = Vector2.Distance(transform.position, centerPoint.position);
+            if (dist < stopDistance)
+            {
+                StartCoroutine(StayRoutine());
+            }
+        }
 
+        // 只有不在停留状态时才移动
+        if (!isStaying)
+        {
+            transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+        }
     }
+
+    IEnumerator StayRoutine()
+    {
+        hasStopped = true;
+        isStaying = true;
+        moveDirection = Vector2.zero;   // 停止移动
+
+        float stayDuration = Random.Range(minStayDuration, maxStayDuration) + skillDuration;
+        Debug.Log($"{bossType} 在中心点停留 {stayDuration} 秒");
+        yield return new WaitForSeconds(stayDuration);
+
+        moveDirection = savedDirection; // 恢复原方向
+        isStaying = false;
+    }
+   
 
     void Die()
     {
@@ -76,6 +120,7 @@ public class Boss : MonoBehaviour
         // 通知BossManager移除Debuff
         if (BossManager.Instance != null)
             BossManager.Instance.OnBossDefeated(this);
+        SkillShopManager.Instance.BJRefreshAllSlots();
         Debug.Log("DEAD");
         StartCoroutine(DieAfterDelay(0.5f));
     }

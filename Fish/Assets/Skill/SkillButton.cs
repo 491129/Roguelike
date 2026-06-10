@@ -10,12 +10,16 @@ public class SkillButton : MonoBehaviour
     public Sprite defaultGray;   // 未激活/冷却时的灰色图
 
     public Sprite activeSprite;                   // 激活后的技能图
+    public Sprite ActiveSprite => activeSprite;
     private bool isActive = false;                 // 是否已激活（购买后）
+    public bool IsActive => isActive;
     private bool isCooldown = false;               // 是否在冷却中
 
     public System.Action OnSkillUsed;
-
     public static float duration = 8f;
+    [Header("禁用")]
+    private bool isTemporarilyDisabled = false;  // 是否被 Boss 临时禁用
+    private Sprite originalActiveSprite;         // 保存原始技能图标
 
     private void Start()
     {
@@ -55,6 +59,26 @@ public class SkillButton : MonoBehaviour
         {
             button.interactable = true;
             iconImage.sprite = activeSprite;
+        }
+    }
+    public void DisableByBoss()
+    {
+        if (!isActive || isTemporarilyDisabled) return;
+
+        isTemporarilyDisabled = true;
+        originalActiveSprite = activeSprite;    // 保存原图标
+        button.interactable = false;
+        iconImage.sprite = defaultGray;
+    }
+    public void RestoreByBoss()
+    {
+        if (!isTemporarilyDisabled) return;
+        isTemporarilyDisabled = false;
+
+        if (isActive)
+        {
+            button.interactable = true;
+            iconImage.sprite = originalActiveSprite;   // 恢复原图标
         }
     }
 }
