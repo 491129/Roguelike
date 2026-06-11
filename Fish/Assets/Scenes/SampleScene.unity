@@ -2483,14 +2483,14 @@ RectTransform:
   m_GameObject: {fileID: 498381114}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1264243542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 210, y: -375.3}
+  m_AnchoredPosition: {x: 149.4, y: -445.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498381116
@@ -4171,6 +4171,7 @@ GameObject:
   - component: {fileID: 764058481}
   - component: {fileID: 764058480}
   - component: {fileID: 764058479}
+  - component: {fileID: 764058482}
   m_Layer: 5
   m_Name: SKILL
   m_TagString: Untagged
@@ -4235,6 +4236,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 0
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: "\u51B7\u5374\u65F6\u95F4\u51CF\u5C11\uFF08\u51B0\u51BB\uFF09"
     price: 15
     icon: {fileID: 21300000, guid: fa6fd744dd820e34d843b53980638bed, type: 3}
@@ -4259,6 +4261,7 @@ MonoBehaviour:
     isZZ: 1
     isMarketTicket: 0
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: "\u6301\u7EED\u65F6\u95F4\u589E\u52A0\uFF08\u51B0\u51BB\uFF09"
     price: 25
     icon: {fileID: 21300000, guid: 25a933f3fee40e447a7fbd10e7eb11f4, type: 3}
@@ -4283,6 +4286,7 @@ MonoBehaviour:
     isZZ: 1
     isMarketTicket: 0
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: "\u6FC0\u5149"
     price: 11
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
@@ -4307,6 +4311,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 0
     isTotem: 1
+    totemEffectPrefab: {fileID: 0}
   - itemName: "\u70B8\u5F39"
     price: 12
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
@@ -4331,6 +4336,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 0
     isTotem: 1
+    totemEffectPrefab: {fileID: 0}
   - itemName: "\u9501\u5B9A"
     price: 13
     icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
@@ -4355,6 +4361,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 0
     isTotem: 1
+    totemEffectPrefab: {fileID: 0}
   - itemName: YF
     price: 10
     icon: {fileID: 21300000, guid: 9cfbac1a746550c43b62167e498b29ce, type: 3}
@@ -4379,6 +4386,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: CF
     price: 11
     icon: {fileID: 21300000, guid: dcd29e4e1a891f44a8f6afb6e3cd866d, type: 3}
@@ -4403,6 +4411,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: GB
     price: 12
     icon: {fileID: 21300000, guid: c5d6bb06573a03d40a9185c624413afe, type: 3}
@@ -4427,6 +4436,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: GD
     price: 13
     icon: {fileID: 21300000, guid: 0bd5ed91e0501d040b145208894e3cae, type: 3}
@@ -4451,6 +4461,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: GF
     price: 14
     icon: {fileID: 21300000, guid: fc75438e7b94a2b488051b62b18f14ad, type: 3}
@@ -4475,6 +4486,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: GF00
     price: 17
     icon: {fileID: 21300000, guid: 94404c61e90d4864ea4fd570b0ff3ca5, type: 3}
@@ -4499,6 +4511,7 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
   - itemName: MT
     price: 15
     icon: {fileID: 21300000, guid: b21b94b537217e1428f4e35737273994, type: 3}
@@ -4523,6 +4536,59 @@ MonoBehaviour:
     isZZ: 0
     isMarketTicket: 1
     isTotem: 0
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u5F3A\u5316\u70AE\u7BA1"
+    price: 31
+    icon: {fileID: 21300000, guid: 4ad69b83c247b0944b0192be5de4c1eb, type: 3}
+    description: "\u5F3A\u5316\u70AE\u7BA1\uFF1A\u6355\u9C7C\u6982\u7387\u63D0\u5347X%\r"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls: []
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 0
+    isTotem: 1
+    totemEffectPrefab: {fileID: 2416651650890662485, guid: 2ba72a49764c8b84b8c4c676fdda4be2, type: 3}
+  - itemName: "\u5FEB\u901F\u586B\u88C5"
+    price: 32
+    icon: {fileID: 21300000, guid: fa6fd744dd820e34d843b53980638bed, type: 3}
+    description: "\u5FEB\u901F\u586B\u88C5\uFF1A\u653B\u51FB\u901F\u5EA6\u63D0\u5347X%\r\r"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls: []
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 0
+    isTotem: 1
+    totemEffectPrefab: {fileID: 827987104123289762, guid: fea0b14c064bef74dbccc766161d8607, type: 3}
+  - itemName: "\u5E7F\u57DF\u6E14\u7F51"
+    price: 33
+    icon: {fileID: 21300000, guid: b07446625759c4349bbd79b776145286, type: 3}
+    description: "\u5E7F\u57DF\u6E14\u7F51\uFF1A\u6E14\u7F51\u8303\u56F4\u63D0\u5347X%\r\r\r"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls: []
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 0
+    isTotem: 1
+    totemEffectPrefab: {fileID: 8496940698654563901, guid: 3c2bec65b75926042a9ffdb103db4aa8, type: 3}
+  - itemName: "\u7701\u94B1\u8FBE\u4EBA"
+    price: 34
+    icon: {fileID: 21300000, guid: c04c2c37342bfff418a57ccc60f0eb1c, type: 3}
+    description: "\u7701\u94B1\u8FBE\u4EBA\uFF1A\u51CF\u5C11\u653B\u51FB\u82B1\u8D39X%\r\r\r\r"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls: []
+    skillID: 
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 0
+    isTotem: 1
+    totemEffectPrefab: {fileID: 2111758837520490270, guid: 4d36bb586da028b4a836f2e0bae33e2e, type: 3}
   slotImages:
   - {fileID: 1037107797}
   - {fileID: 105243509}
@@ -4829,6 +4895,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addCoin: 16
   fish: {fileID: 2109948905434324986, guid: 2a03d11e7ca1a074d88deb08335deeef, type: 3}
+--- !u!114 &764058482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12918a6df0be4b94baaabae4650ef889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totemPoints:
+  - {fileID: 884030169}
+  - {fileID: 1927431779}
+  - {fileID: 826840950}
+  - {fileID: 780815172}
+  - {fileID: 762150674}
+  isPlace: 0
 --- !u!1 &773148971
 GameObject:
   m_ObjectHideFlags: 0
@@ -5396,7 +5481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 754090022317359663, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 816114413385285886, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: playOnAwake
@@ -5600,7 +5685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1246669140822844242, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1250003176491590061, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_LocalScale.x
@@ -5816,7 +5901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1811543033302938704, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1849782351459900084, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_LocalScale.x
@@ -6088,7 +6173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2148493162194320796, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2157845077634303990, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: playOnAwake
@@ -6520,7 +6605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3786010701999655306, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3807804040613843658, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: playOnAwake
@@ -7304,7 +7389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6344015688670508589, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6438161905483151958, guid: 08887891fca5dd149949fae42da289d2, type: 3}
       propertyPath: m_LocalScale.x
@@ -13645,14 +13730,14 @@ RectTransform:
   m_GameObject: {fileID: 1860583763}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1264243542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -237, y: -375.3}
+  m_AnchoredPosition: {x: -113.9, y: -445.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1860583765

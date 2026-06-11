@@ -28,6 +28,8 @@ public class SkillShopManager : MonoBehaviour
         public bool isZZ;                    // 装置
         public bool isMarketTicket;          // 是否是市场券
         public bool isTotem;                 // 是否是图腾商品
+
+        public GameObject totemEffectPrefab;   // 图腾对应的粒子特效预制体
     }
     private HashSet<string> purchasedSkills = new HashSet<string>();
 
@@ -82,6 +84,7 @@ public class SkillShopManager : MonoBehaviour
     public static bool doubleType23Weight = false;   // 装置大亨
     public static bool doubleMarketWeight = false;   // 市场商人
     public static bool doubleTotemWeight = false;    // 大法师
+
     private void Start()
     {
         if (slotImages.Length >= 6) slotImages[5].gameObject.SetActive(false);
@@ -109,7 +112,7 @@ public class SkillShopManager : MonoBehaviour
     }
     public void TTskill00()
     {
-        GetComponent<Onemore>().enabled = true;
+        TotemManager.Instance.ExpandSlots();
     }
     public void DJskill()
     {
@@ -320,10 +323,46 @@ public class SkillShopManager : MonoBehaviour
     //普通商品购买，确认弹窗调用
     public void TryPurchase(ShopItemData item)
     {
+        if (item.isTotem)
+        {
+            if (!TotemManager.Instance.PlaceTotem(item))
+            {
+                Debug.Log("图腾购买失败（点位已满）");
+                return;
+            }
+
+            // 扣钱并执行绑定事件
+            if (GameManager.Coin < item.price) { Debug.Log("金币不足"); return; }
+            GameManager.SpendCoin(item.price);
+            item.onPurchase.Invoke();
+
+            // 清除该商品在普通槽位的显示（如果图腾也出现在随机槽位中）
+            for (int i = 0; i < currentSlots.Length; i++)
+            {
+                if (currentSlots[i] == item)
+                {
+                    currentSlots[i] = null;
+                    break;
+                }
+            }
+            UpdateSlotUI();
+            return;
+        }
+
         if (item.skillID == "Skill1"&& SkillButtonManager.Instance.AllActivated) { Debug.Log("满了"); return; }
         int finalPrice = Mathf.RoundToInt(item.price * priceMultiplier);
         if (GameManager.Coin < finalPrice) { Debug.Log("金币不足"); return; }
-
+       
+        // 清除该商品在普通槽位的显示（如果图腾也出现在随机槽位中）
+        for (int i = 0; i < currentSlots.Length; i++)
+        {
+            if (currentSlots[i] == item)
+            {
+                currentSlots[i] = null;
+                break;
+            }
+        }
+   
         GameManager.SpendCoin(finalPrice);
         item.onPurchase.Invoke();
 
@@ -341,6 +380,7 @@ public class SkillShopManager : MonoBehaviour
             }
         }
         UpdateSlotUI();
+        return;
     }
     //补给券购买
     public void TryPurchase00(ShopItemData00 item)
@@ -365,9 +405,17 @@ public class SkillShopManager : MonoBehaviour
             GameManager.SpendCoin(item.price);
             item.onPurchase.Invoke();
             currentSlots00 = null;
-
-            UpdateSlotUI00();
-        
+        // 清空购买槽位
+        for (int i = 0; i < currentSlots.Length; i++)
+        {
+            if (currentSlots00 == item)
+            {
+                currentSlots[i] = null;
+                break;
+            }
+        }
+        UpdateSlotUI00();
+        return;
     }
     //冰冻技能冷却时间减少
     public void CoolChange00()
