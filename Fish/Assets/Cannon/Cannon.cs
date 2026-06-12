@@ -6,8 +6,7 @@ public class Cannon : MonoBehaviour
 {
     [Header("炮台设置")]
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float fireRate = 0.5f;
-    [SerializeField] private float rotationSpeed = 360f;
+    [SerializeField] private float fireRate = 0.8f;
 
     [Header("Debuff")]
     public float attackSpeedMultiplier = 1f;  
@@ -18,8 +17,13 @@ public class Cannon : MonoBehaviour
     private ObjectPool pool;
     private float currentAngle;
     public Text NoCoin;
+    public int actualCost;
 
-    
+    public static Cannon Instance;
+    private void Awake() => Instance = this;
+
+    private int shotCount = 0;            // 开火计数
+    private const int chargeInterval = 6; // 每6炮触发蓄力
     void Start()
     {
         baseFireRate = fireRate;
@@ -36,7 +40,7 @@ public class Cannon : MonoBehaviour
         {
             Fire();
             nextFireTime = Time.time + fireRate;
-            Debug.Log("fireRate:"+fireRate);
+            Debug.Log("fireRate:"+fireRate+ "attackSpeedMultiplier" + attackSpeedMultiplier);
         }
 
     }
@@ -50,9 +54,11 @@ public class Cannon : MonoBehaviour
 
     void Fire()
     {
-       
-        int cost = ALLCannon.levelCosts[ALLCannon.currentLevel];
-        if (!GameManager.SpendCoin(cost))
+        int originalCost = ALLCannon.levelCosts[ALLCannon.currentLevel];
+        float costMultiplier = TotemManager.Instance != null ? TotemManager.Instance.CostMultiplier : 1f;
+        actualCost = Mathf.RoundToInt(originalCost * costMultiplier);
+        //int cost = ALLCannon.levelCosts[ALLCannon.currentLevel];
+        if (!GameManager.SpendCoin(actualCost))
         {
             NoCoin.text = "金币不足!无法发射!";
             return;
@@ -61,7 +67,16 @@ public class Cannon : MonoBehaviour
         {
             NoCoin.text = " ";
         }
-            GameObject bullet = pool.GetBullet();
+        if ( TotemManager.Instance.xuli)
+        {
+            shotCount++;
+            if (shotCount >= chargeInterval)
+            {
+                FishAttrbute.escapeChance *= 0.8f;
+                shotCount = 0;   // 重置计数
+            }
+        }
+        GameObject bullet = pool.GetBullet();
         if (bullet != null)
         {
             bullet.transform.position = firePoint.position;
@@ -92,5 +107,15 @@ public class Cannon : MonoBehaviour
         }
         fireRate = baseFireRate / attackSpeedMultiplier;
     }
-
+    public void ApplyDebuffCAnnon()
+    {
+        attackSpeedMultiplier *= 1.2f;
+        fireRate = baseFireRate / attackSpeedMultiplier;
+    }
+    public int GetActualCost()
+    {
+        int baseCost = ALLCannon.levelCosts[ALLCannon.currentLevel];
+        float multiplier = TotemManager.Instance != null ? TotemManager.Instance.CostMultiplier : 1f;
+        return Mathf.RoundToInt(baseCost * multiplier);
+    }
 }

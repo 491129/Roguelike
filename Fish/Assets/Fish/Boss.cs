@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    public static Boss Instance { get; private set; }
     public string bossType;                     // 类型标识
     public float speed = 5f;                   // 移动速度
     public int health = 10;                    // 生命值
@@ -25,7 +26,7 @@ public class Boss : MonoBehaviour
     private Vector2 savedDirection;   // 保存原方向，停留结束后恢复
 
     //SkillShopManager skillShopManager;
-
+    public bool bossDefeated = false;
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -58,6 +59,7 @@ public class Boss : MonoBehaviour
             if (health <= 0)
             {
                 Die();
+                bossDefeated = true;
             }
         }
     }

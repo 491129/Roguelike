@@ -20,6 +20,7 @@ public class FishAttrbute : MonoBehaviour
     public int fishNumber = 0;
     public float fishSpeed = 0;
     public int goldNum = 0;
+    public static float getgoldMore = 1f;
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -34,7 +35,7 @@ public class FishAttrbute : MonoBehaviour
     [SerializeField] private float moveDuration = 0.5f;
 
     [Header("逃脱设置")]
-    public float escapeChance = 0.2f;
+    public static float escapeChance = 0.4f;
     public float escapeSpeedMultiplier = 2f;
     public float escapeDuration = 3f;
     public float CurrentSpeed { get; set; }   // 当前实际速度，逃脱时会变化
@@ -42,7 +43,7 @@ public class FishAttrbute : MonoBehaviour
 
 
     private SpriteRenderer sr;
-    private bool escaping = false; // 是否正在逃脱
+   // private bool escaping = false; // 是否正在逃脱
     public bool isDead { get; private set; }   
     private void Start()
     {
@@ -51,12 +52,7 @@ public class FishAttrbute : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         CurrentSpeed = fishSpeed;
     }
-    //记录初始速度
-    //public void InitBaseSpeed(float speed)
-    //{
-    //    baseSpeed = speed;
-    //    CurrentSpeed = speed;
-    //}
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -73,11 +69,13 @@ public class FishAttrbute : MonoBehaviour
     }
     private void HandleBulletHit()
     {
+        int coin = Mathf.RoundToInt(goldNum * getgoldMore);
         // 随机判断是否逃脱
         float rand = Random.value;
         if (rand < escapeChance)
         {
             // 逃脱成功
+            Debug.Log("escapeChance"+escapeChance);
             StartCoroutine(EscapeRoutine());
         }
         else
@@ -94,68 +92,72 @@ public class FishAttrbute : MonoBehaviour
             }
             //金币动画
             SpawnCoinAndFly();
-
+            Coin100();
             switch (fishType)
             {
                 case FishType.Gold:
                     if (YFSkill.isUsed)
                     {
-                        GameManager.AddCoin(YFSkill.fishCoin);
+                        GameManager.AddCoin(Mathf.RoundToInt(YFSkill.fishCoin*getgoldMore));
+                        Debug.Log("111"+YFSkill.fishCoin);
                     }
                     else
-                    GameManager.AddCoin(goldNum);
+                    GameManager.AddCoin(coin);
+                    Debug.Log("111" + coin);
                     break;
                 case FishType.GF:
                     if (GFSkill.isUsed)
                     {
-                        GameManager.AddCoin(GFSkill.fishCoin);
+                        GameManager.AddCoin(Mathf.RoundToInt(GFSkill.fishCoin * getgoldMore));
+                        Debug.Log("222" + GFSkill.fishCoin);
                     }
                     else
-                        GameManager.AddCoin(goldNum);
+                        GameManager.AddCoin(coin);
+                    Debug.Log("222" + coin);
                     break;
                 case FishType.CF:
                     if (CFSkill.isUsed)
                     {
-                        GameManager.AddCoin(CFSkill.fishCoin);
+                        GameManager.AddCoin(Mathf.RoundToInt(CFSkill.fishCoin * getgoldMore));
                     }
                     else
-                        GameManager.AddCoin(goldNum);
+                        GameManager.AddCoin(coin);
                     break;
                 case FishType.GB:
                     if (GBSkill.isUsed)
                     {
-                        GameManager.AddCoin(GBSkill.fishCoin);
+                        GameManager.AddCoin(Mathf.RoundToInt(GBSkill.fishCoin * getgoldMore));
                     }
                     else
-                        GameManager.AddCoin(goldNum);
+                        GameManager.AddCoin(coin);
                     break;
                 case FishType.GD:
                     if (GDSkill.isUsed)
                     {
-                        GameManager.AddCoin(GDSkill.fishCoin);
+                        GameManager.AddCoin(Mathf.RoundToInt(GDSkill.fishCoin * getgoldMore));
                     }
                     else
-                        GameManager.AddCoin(goldNum);
+                        GameManager.AddCoin(coin);
                     break;
                 case FishType.GF00:
                     if (GF00Skill.isUsed)
                     {
-                        GameManager.AddCoin(GF00Skill.fishCoin);
+                        GameManager.AddCoin(Mathf.RoundToInt(GF00Skill.fishCoin * getgoldMore));
                     }
                     else
-                        GameManager.AddCoin(goldNum);
+                        GameManager.AddCoin(coin);
                     break;
                 case FishType.MT:
                     if (MTSkill.isUsed)
                     {
-                        GameManager.AddCoin(MTSkill.fishCoin);
+                        GameManager.AddCoin(Mathf.RoundToInt(MTSkill.fishCoin * getgoldMore));
                     }
                     else
-                        GameManager.AddCoin(goldNum);
+                        GameManager.AddCoin(coin);
                     break;
                 default:
                     Debug.Log("N" + goldNum);
-                    GameManager.AddCoin(goldNum);
+                    GameManager.AddCoin(coin);
                     break;
                     // return goldNum;
             }
@@ -163,7 +165,7 @@ public class FishAttrbute : MonoBehaviour
     }
     IEnumerator EscapeRoutine()
     {
-        escaping = true;
+        //escaping = true;
         // 关闭碰撞器，避免重复击中
         col.enabled = false;
 
@@ -185,7 +187,7 @@ public class FishAttrbute : MonoBehaviour
 
         // 恢复碰撞器
         col.enabled = true;
-        escaping = false;
+        //escaping = false;
     }
     IEnumerator DieAfterDelay(float delay)
     {
@@ -209,5 +211,12 @@ public class FishAttrbute : MonoBehaviour
         seq.AppendInterval(0.1f);
         seq.Append(coin.transform.DOMove(targetPos, moveDuration).SetEase(Ease.InBack));
         seq.OnComplete(() => Destroy(coin));
+    }
+    public void Coin100()
+    {
+        if (TotemManager.Instance.get100)
+        {
+            GameManager.AddCoin(100);
+        }
     }
 }

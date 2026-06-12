@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ALLCannon : MonoBehaviour
 {
+    public static ALLCannon Instance;
     [Header("按钮")]
     [SerializeField] private UnityEngine.UI.Button upgradeButton;
     [SerializeField] private UnityEngine.UI.Button downgradeButton;
@@ -13,13 +14,14 @@ public class ALLCannon : MonoBehaviour
     [SerializeField] private Text costText;
 
     [Header("等级配置")]
-    [SerializeField]static public int[] levelCosts = { 5, 10, 15 }; 
+    [SerializeField]static public int[] levelCosts = { 5, 10, 15, 20, 25 }; 
     static public int currentLevel = 0;   
 
     public GameObject[] Cannons;
     public int CurrentLevel => currentLevel;
     private int buttonDisableCount = 0;
 
+    private void Awake() => Instance = this;
     private void Start()
     {
         Cannons[currentLevel].SetActive(true);
@@ -66,20 +68,11 @@ public class ALLCannon : MonoBehaviour
     }
     void UpdateCostText()
     {
-        if (costText != null)
-            costText.text = "消耗：" + levelCosts[currentLevel];
+        if (costText != null && Cannon.Instance != null)
+        {
+            int actual = Cannon.Instance.GetActualCost();
+            costText.text = ""+actual;
+        }
     }
-    //public void DisableButtonsByBoss()
-    //{
-    //    buttonDisableCount++;
-    //    UpdateButtons();
-    //}
-
-    //public void EnableButtonsByBoss()
-    //{
-    //    buttonDisableCount--;
-    //    if (buttonDisableCount < 0) buttonDisableCount = 0;
-    //    UpdateButtons();
-    //}
-
+    
 }

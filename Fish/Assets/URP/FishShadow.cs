@@ -6,13 +6,11 @@ public class FishShadow : MonoBehaviour
 {
     public GameObject shadow;
     Material shadowMat;
-    private float lastAngle;
 
     void Start()
     {
         //if(!shadow) return;
         shadowMat=shadow.GetComponent<SpriteRenderer>().material;
-        lastAngle = float.NaN;
         float angle = transform.rotation.eulerAngles.z;
         if (angle > 180f) angle -= 360f;
         bool shouldFlip = Mathf.Abs(angle) > 90f;

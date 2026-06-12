@@ -23,7 +23,6 @@ public class FishMaker : MonoBehaviour
         int speed = Random.Range(maxSpeed / 2, maxSpeed);
         int moveType = Random.Range(0, 2);
         int angOffset;
-        int angSppeed;
         
         if(moveType==0)
         {

@@ -48,14 +48,6 @@ public class Bullet : MonoBehaviour
             StartCoroutine(DelayedDeactivate(0.3f));  // 0.3√Î∫Ûœ˚ ß
         }
 
-
-
-        System.Collections.IEnumerator HitAndReturn()
-        {
-            yield return new WaitForSeconds(hitAnimationTime);
-            Deactivate();
-        }
-
     }
     IEnumerator DelayedDeactivate(float delay)
     {

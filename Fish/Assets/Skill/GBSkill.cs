@@ -12,8 +12,8 @@ public class GBSkill : MonoBehaviour
     void Start()
     {
         FishAttrbute fishAttr = fish.GetComponent<FishAttrbute>();
-        fishCoin = fishAttr.goldNum;
         fishCoin += addCoin;
+        fishCoin = Mathf.RoundToInt(fishAttr.goldNum * FishAttrbute.getgoldMore);
 
     }
 }

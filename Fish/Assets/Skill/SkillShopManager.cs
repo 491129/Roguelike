@@ -84,6 +84,9 @@ public class SkillShopManager : MonoBehaviour
     public static bool doubleType23Weight = false;   // 装置大亨
     public static bool doubleMarketWeight = false;   // 市场商人
     public static bool doubleTotemWeight = false;    // 大法师
+    //图腾功能
+    private int marketTicketUsed = 0;//市场券+概率
+    private int shopRefreshCount = 0;//刷新+概率
 
     private void Start()
     {
@@ -101,9 +104,15 @@ public class SkillShopManager : MonoBehaviour
     }
     private void Update()
     {
-
+        if (TotemManager.Instance.xijin)
+        {
+            float xijin = (float)GameManager.Coin / 1000f;
+            FishAttrbute.escapeChance -= 0.01f * xijin;
+        }
+        
     }
-   public void CSSkill()
+   
+    public void CSSkill()
     {
         hasExtraSlot = true;
         if (slotImages.Length >= 6) slotImages[5].gameObject.SetActive(true);
@@ -266,17 +275,28 @@ public class SkillShopManager : MonoBehaviour
     {
         int slotCount = hasExtraSlot ? 6 : 5;
 
-        for (int i = 0; i < slotCount; i++)
+            for (int i = 0; i < slotCount; i++)
         {
             if (i >= slotImages.Length) break;
 
             if (currentSlots[i] != null)
             {
-                slotImages[i].sprite = currentSlots[i].icon;
-                if (slotPriceTexts != null && slotPriceTexts.Length > i)
-                    slotPriceTexts[i].text = (currentSlots[i].price * priceMultiplier).ToString("F0");
-                slotButtons[i].interactable = true;
-                slotImages[i].gameObject.SetActive(true); // 确保显示
+                if (currentSlots[i].isMarketTicket && TotemManager.Instance.chuanzhang)
+                {
+                    slotImages[i].sprite = currentSlots[i].icon;
+                    if (slotPriceTexts != null && slotPriceTexts.Length > i)
+                        slotPriceTexts[i].text = "0";
+                    slotButtons[i].interactable = true;
+                    slotImages[i].gameObject.SetActive(true); // 确保显示
+                }
+                else
+                {
+                    slotImages[i].sprite = currentSlots[i].icon;
+                    if (slotPriceTexts != null && slotPriceTexts.Length > i)
+                        slotPriceTexts[i].text = (currentSlots[i].price * priceMultiplier).ToString("F0");
+                    slotButtons[i].interactable = true;
+                    slotImages[i].gameObject.SetActive(true); // 确保显示
+                }
             }
             else
             {
@@ -332,7 +352,7 @@ public class SkillShopManager : MonoBehaviour
             }
 
             // 扣钱并执行绑定事件
-            if (GameManager.Coin < item.price) { Debug.Log("金币不足"); return; }
+            if (!GameManager.SpendCoin(item.price)) { Debug.Log("金币不足"); return; }
             GameManager.SpendCoin(item.price);
             item.onPurchase.Invoke();
 
@@ -348,20 +368,36 @@ public class SkillShopManager : MonoBehaviour
             UpdateSlotUI();
             return;
         }
+        if (item.isMarketTicket&&TotemManager.Instance.hasMerchantPirate)
+        {
+            marketTicketUsed++;
+            FishAttrbute.escapeChance -= 0.07f * marketTicketUsed;
+            
+        }
+        if(item.isMarketTicket&&TotemManager.Instance.chuanzhang)
+        {
+            item.onPurchase.Invoke();
 
+            // 记录已购买的技能ID（作为后续商品的前置条件）
+            if (!string.IsNullOrEmpty(item.skillID))
+                purchasedSkills.Add(item.skillID);
+
+            // 清空购买槽位
+            for (int i = 0; i < currentSlots.Length; i++)
+            {
+                if (currentSlots[i] == item)
+                {
+                    currentSlots[i] = null;
+                    break;
+                }
+            }
+            UpdateSlotUI();
+            return;
+        }
         if (item.skillID == "Skill1"&& SkillButtonManager.Instance.AllActivated) { Debug.Log("满了"); return; }
         int finalPrice = Mathf.RoundToInt(item.price * priceMultiplier);
-        if (GameManager.Coin < finalPrice) { Debug.Log("金币不足"); return; }
+        if (!GameManager.SpendCoin(finalPrice)) { Debug.Log("金币不足"); return; }
        
-        // 清除该商品在普通槽位的显示（如果图腾也出现在随机槽位中）
-        for (int i = 0; i < currentSlots.Length; i++)
-        {
-            if (currentSlots[i] == item)
-            {
-                currentSlots[i] = null;
-                break;
-            }
-        }
    
         GameManager.SpendCoin(finalPrice);
         item.onPurchase.Invoke();
@@ -385,7 +421,7 @@ public class SkillShopManager : MonoBehaviour
     //补给券购买
     public void TryPurchase00(ShopItemData00 item)
     {
-        if (GameManager.Coin < item.price) { Debug.Log("金币不足"); return; }
+        if (!GameManager.SpendCoin(item.price)) { Debug.Log("金币不足"); return; }
         if (item.skillID == "ExpandSlot")
         {
             if (!SkillButtonManager.Instance.CanExpandSlot)
@@ -393,7 +429,7 @@ public class SkillShopManager : MonoBehaviour
                 Debug.Log("技能槽已满，无法再次扩容");
                 return;
             }
-            if (GameManager.Coin < item.price)
+            if (!GameManager.SpendCoin(item.price))
             {
                 Debug.Log("金币不足");
                 return;
@@ -432,8 +468,13 @@ public class SkillShopManager : MonoBehaviour
     //刷新按钮
     public void OnRefreshButtonClicked()
     {
+        if (TotemManager.Instance.hasPickyPirate)
+        {
+            shopRefreshCount++;
+            FishAttrbute.escapeChance -= 0.07f * shopRefreshCount;
+        }
         int refreshPrice = Mathf.RoundToInt(refreshCost * refreshCostMultiplier);
-        if (GameManager.Coin < refreshPrice)
+        if (!GameManager.SpendCoin(refreshPrice))
             return;
         GameManager.SpendCoin(refreshPrice);
         RefreshAllSlots();
