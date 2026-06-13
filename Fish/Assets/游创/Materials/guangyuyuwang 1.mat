@@ -393,7 +393,7 @@ Material:
     - SaturabilityRangeVec: {r: 0, g: 1, b: 0, a: 0}
     - TexDistortionintensityRangeVec: {r: -1, g: 1, b: 0, a: 0}
     - _BaseBackColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 3.7128878, g: 5.4410067, b: 3.84716, a: 0.49411765}
+    - _BaseColor: {r: 1.4489723, g: 1.7654147, b: 1.4753425, a: 0.39607844}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BaseMapColorRefine: {r: 1, g: 1, b: 2, a: 1}
     - _BaseMapMaskMapOffset: {r: 0, g: 0, b: 0, a: 0}
@@ -432,7 +432,7 @@ Material:
     - _Dissolve_Vec2: {r: 0.2, g: 0.1, b: 0, a: 0}
     - _DistortionDirection: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionMapColor: {r: 4.11197, g: 10.039416, b: 2.4940672, a: 1}
+    - _EmissionMapColor: {r: 3.6612802, g: 6.490958, b: 2.8780653, a: 1}
     - _EmissionMapUVOffset: {r: 0, g: 0, b: 0, a: 0}
     - _Fade: {r: 2, g: 4, b: 0, a: 0}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}

@@ -28,6 +28,7 @@ public class SkillShopManager : MonoBehaviour
         public bool isZZ;                    // 装置
         public bool isMarketTicket;          // 是否是市场券
         public bool isTotem;                 // 是否是图腾商品
+        public bool isFore;
 
         public GameObject totemEffectPrefab;   // 图腾对应的粒子特效预制体
     }
@@ -87,7 +88,8 @@ public class SkillShopManager : MonoBehaviour
     //图腾功能
     private int marketTicketUsed = 0;//市场券+概率
     private int shopRefreshCount = 0;//刷新+概率
-
+    //装置（
+    public int finalPriceZZ;
     private void Start()
     {
         if (slotImages.Length >= 6) slotImages[5].gameObject.SetActive(false);
@@ -123,18 +125,20 @@ public class SkillShopManager : MonoBehaviour
     {
         TotemManager.Instance.ExpandSlots();
     }
-    public void DJskill()
+
+    public void BommSkill()
     {
-            Debug.Log($"CanPurchase: {SkillButtonManager.Instance.CanPurchase}, AllActivated: {SkillButtonManager.Instance.AllActivated}, nextActivateIndex: ..., maxSlotCount: ...");
+        Debug.Log($"CanPurchase: {SkillButtonManager.Instance.CanPurchase}, AllActivated: {SkillButtonManager.Instance.AllActivated}, nextActivateIndex: ..., maxSlotCount: ...");
         if (!SkillButtonManager.Instance.CanPurchase)
         {
             Debug.Log("技能已满");
             return;
         }
-        CoolSkill.isUsed = true;
-        GetComponent<CoolSkill>().enabled = true;
-        SkillButtonManager.Instance.ActivateNextSkill(currentSlots[0].icon, () => { Debug.Log("Button"); CoolSkill.FreezeAllFish(); });
+        DepthChargeSkill.isUsed = true;
+        GetComponent<DepthChargeSkill>().enabled = true;
+        SkillButtonManager.Instance.ActivateNextSkill(currentSlots[0].icon, () => { Debug.Log("Button"); DepthChargeSkill.Instance.Use(); });
     }
+    #region //fish
     public void YFskill()
     {
         GetComponent<YFSkill>().enabled = true;
@@ -206,6 +210,7 @@ public class SkillShopManager : MonoBehaviour
     {
         Boss.skillDuration += 10;
     }
+    #endregion  
     public void RefreshAllSlots()
     {
         // 过滤出所有满足前置条件的商品
@@ -368,6 +373,46 @@ public class SkillShopManager : MonoBehaviour
             UpdateSlotUI();
             return;
         }
+        if (item.isFore)
+        {
+            
+            if (!SkillButtonManager.Instance.CanPurchase)
+            {
+                Debug.Log("技能已满");
+                return;
+            }
+
+            finalPriceZZ = Mathf.RoundToInt(item.price * priceMultiplier);
+            if (GameManager.Coin < finalPriceZZ) { Debug.Log("金币不足"); return; }
+
+            // 扣钱
+            GameManager.SpendCoin(finalPriceZZ);
+            item.onPurchase.Invoke();   // 激活技能物体/效果
+            // 根据技能ID，准备使用回调
+            System.Action onUse = null;
+            switch (item.itemName)
+            {
+                case "冰冻":
+                    onUse = () => CoolSkill.Instance.FreezeAllFish();
+                    break;
+                case "深水炸弹":
+                    onUse = () => DepthChargeSkill.Instance.Use();
+                    break;
+                            
+            }
+            // 激活技能按钮，并传入商品图标和使用回调
+            SkillButtonManager.Instance.ActivateNextSkill(item.icon, onUse);
+
+            // 记录已购技能ID
+            if (!string.IsNullOrEmpty(item.skillID))
+                purchasedSkills.Add(item.skillID);
+
+            // 清除槽位
+            for (int i = 0; i < currentSlots.Length; i++)
+                if (currentSlots[i] == item) { currentSlots[i] = null; break; }
+            UpdateSlotUI();
+            return;
+        }
         if (item.isMarketTicket&&TotemManager.Instance.hasMerchantPirate)
         {
             marketTicketUsed++;
@@ -394,7 +439,7 @@ public class SkillShopManager : MonoBehaviour
             UpdateSlotUI();
             return;
         }
-        if (item.skillID == "Skill1"&& SkillButtonManager.Instance.AllActivated) { Debug.Log("满了"); return; }
+      //  if (item.skillID == "Skill1"&& SkillButtonManager.Instance.AllActivated) { Debug.Log("满了"); return; }
         int finalPrice = Mathf.RoundToInt(item.price * priceMultiplier);
         if (!GameManager.SpendCoin(finalPrice)) { Debug.Log("金币不足"); return; }
        
@@ -456,7 +501,8 @@ public class SkillShopManager : MonoBehaviour
     //冰冻技能冷却时间减少
     public void CoolChange00()
     {
-        SkillButton.duration = 4f;
+        //SkillButton.duration = 4f;
+        CoolSkill.Instance.ReduceCooldown(2f);
     }
     /// <summary>
     //冰冻技能延长时间
@@ -464,6 +510,11 @@ public class SkillShopManager : MonoBehaviour
     public void CoolChange01()
     {
         CoolSkill.duration = 6f;
+    }
+    public void Bommchange00()
+    {
+        if (DepthChargeSkill.Instance != null)
+            DepthChargeSkill.Instance.ReduceCooldown(2f);  // 每次减少2秒
     }
     //刷新按钮
     public void OnRefreshButtonClicked()

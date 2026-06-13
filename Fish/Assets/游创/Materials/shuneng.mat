@@ -393,14 +393,14 @@ Material:
     - SaturabilityRangeVec: {r: 0, g: 1, b: 0, a: 0}
     - TexDistortionintensityRangeVec: {r: -1, g: 1, b: 0, a: 0}
     - _BaseBackColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 10.43295, g: 5.371036, b: 2.3949838, a: 1}
+    - _BaseColor: {r: 7.603769, g: 4.091808, b: 1.9846312, a: 0.8627451}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BaseMapColorRefine: {r: 1, g: 1, b: 2, a: 1}
     - _BaseMapMaskMapOffset: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorA: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBlendColor: {r: 2.608238, g: 1.3218751, b: 0.98321015, a: 1}
+    - _ColorBlendColor: {r: 2.518574, g: 1.711528, b: 1.4968882, a: 1}
     - _ColorBlendMapOffset: {r: -0.27, g: 0, b: 0, a: 0}
     - _ColorBlendVec: {r: 0, g: 0, b: 1, a: 0}
     - _ContrastMidColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

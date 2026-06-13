@@ -392,7 +392,7 @@ Material:
     - SaturabilityRangeVec: {r: 0, g: 1, b: 0, a: 0}
     - TexDistortionintensityRangeVec: {r: -1, g: 1, b: 0, a: 0}
     - _BaseBackColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 33.89676, g: 26.305498, b: 4.4367495, a: 1}
+    - _BaseColor: {r: 9.734288, g: 7.554271, b: 1.2741218, a: 0.8745098}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BaseMapColorRefine: {r: 1, g: 1, b: 2, a: 1}
     - _BaseMapMaskMapOffset: {r: 0.11, g: 0.57, b: 0, a: 0}

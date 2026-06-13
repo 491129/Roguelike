@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6879504188159001980}
   - component: {fileID: 2137146972223892006}
   - component: {fileID: -7718350893325746411}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BOSS01
   m_TagString: BOSS
   m_Icon: {fileID: 0}
@@ -203,6 +203,10 @@ MonoBehaviour:
   speed: 1
   health: 10
   catchProbability: 0.4
+  stopDistance: 1.5
+  minStayDuration: 3
+  maxStayDuration: 5
+  bossDefeated: 0
 --- !u!95 &-7718350893325746411
 Animator:
   serializedVersion: 5

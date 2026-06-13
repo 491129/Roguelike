@@ -17,8 +17,13 @@ public class Fishself : MonoBehaviour
         if (IsFrozen) return;
         if (attr != null && attr.isDead) return;
         float speed = attr.CurrentSpeed;
-        //Debug.Log(speed);
         transform.Translate(Vector3.right * speed * Time.deltaTime);
-       
+        //销毁
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        if (viewPos.x < -0.15f || viewPos.x > 1.15f || viewPos.y < -0.15f || viewPos.y > 1.15f)
+        {
+            // 销毁或回收到对象池
+            Destroy(gameObject);  // 或调用你的 Recycle 方法
+        }
     }
 }

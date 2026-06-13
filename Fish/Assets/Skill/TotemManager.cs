@@ -148,8 +148,8 @@ public class TotemManager : MonoBehaviour
                 Debug.Log("shengqian");
                 break;
             case "超频核心":
-                SkillButton.duration -= 2f;
-                Debug.Log("冷却时间："+SkillButton.duration);
+                SkillButton.changeDuration *= 0.8f;
+                Debug.Log("冷却时间："+SkillButton.changeDuration);
                 break;
             case "黄金渔网":
                 FishAttrbute.getgoldMore = 1.2f;

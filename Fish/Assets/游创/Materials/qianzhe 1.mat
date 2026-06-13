@@ -191,7 +191,7 @@ Material:
     - _W9ParticleCustomDataFlag3: 0
     - _W9ParticleShaderColorChannelFlag: 3
     - _W9ParticleShaderFlags: 532482
-    - _W9ParticleShaderFlags1: 8650752
+    - _W9ParticleShaderFlags1: 8388608
     - _W9ParticleShaderGUIFoldToggle: 67635259
     - _W9ParticleShaderGUIFoldToggle1: 0
     - _W9ParticleShaderGUIFoldToggle2: 255
@@ -432,7 +432,7 @@ Material:
     - _Dissolve_Vec2: {r: 0.2, g: 0.1, b: 0, a: 0}
     - _DistortionDirection: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionMapColor: {r: 24.046463, g: 18.75876, b: 0, a: 1}
+    - _EmissionMapColor: {r: 1.1238712, g: 0.9911078, b: 0.5053885, a: 0.72156864}
     - _EmissionMapUVOffset: {r: 0, g: 0.12, b: 0, a: 0}
     - _Fade: {r: 2, g: 4, b: 0, a: 0}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}

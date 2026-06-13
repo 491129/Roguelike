@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4951642129697369869}
   - component: {fileID: 8536068037446817358}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 6645904705459002876}
   - component: {fileID: 2515424060729660148}
   - component: {fileID: 3929128192241477318}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CF
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -208,7 +208,6 @@ MonoBehaviour:
   coinPrefab: {fileID: 1288983291828762122, guid: cf9834f28f4709d47937524460a7e7c9, type: 3}
   targetPos: {x: -8, y: -4}
   moveDuration: 0.6
-  escapeChance: 0.2
   escapeSpeedMultiplier: 2
   escapeDuration: 3
 --- !u!50 &7220071937435976921
@@ -219,7 +218,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7209689518507787559}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

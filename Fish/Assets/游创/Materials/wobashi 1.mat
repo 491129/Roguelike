@@ -32,7 +32,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bc19a05cc6625cd41a30fa82f71875c9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -178,7 +178,7 @@ Material:
     - _W9ParticleShaderColorChannelFlag: 3
     - _W9ParticleShaderFlags: 8194
     - _W9ParticleShaderFlags1: 8388608
-    - _W9ParticleShaderGUIFoldToggle: 43
+    - _W9ParticleShaderGUIFoldToggle: 59
     - _W9ParticleShaderGUIFoldToggle1: 0
     - _W9ParticleShaderGUIFoldToggle2: 255
     - _W9ParticleShaderPNoiseBlendFlag: 0
@@ -379,10 +379,10 @@ Material:
     - SaturabilityRangeVec: {r: 0, g: 1, b: 0, a: 0}
     - TexDistortionintensityRangeVec: {r: -1, g: 1, b: 0, a: 0}
     - _BaseBackColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 1.011793, g: 0.829354, b: 3.031433, a: 1}
+    - _BaseColor: {r: 3.0314116, g: 2.4848099, b: 9.082413, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BaseMapColorRefine: {r: 1, g: 1, b: 2, a: 1}
-    - _BaseMapMaskMapOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseMapMaskMapOffset: {r: 0.26, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorA: {r: 1, g: 1, b: 1, a: 1}

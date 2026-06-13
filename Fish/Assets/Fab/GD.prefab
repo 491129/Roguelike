@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4483285857315936549}
   - component: {fileID: 4814337986299604932}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 5287339494214576390}
   - component: {fileID: 7834918743090414070}
   - component: {fileID: 7263797947339882588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GD
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -209,7 +209,6 @@ MonoBehaviour:
   coinPrefab: {fileID: 1288983291828762122, guid: cf9834f28f4709d47937524460a7e7c9, type: 3}
   targetPos: {x: -8, y: -4}
   moveDuration: 0.6
-  escapeChance: 0.2
   escapeSpeedMultiplier: 2
   escapeDuration: 3
 --- !u!50 &-3521578522940888058
@@ -220,7 +219,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7133270906613277885}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -931,7 +930,7 @@ MonoBehaviour:
   - {x: 12.775, y: -12.045177, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 90528
+  m_InstanceId: 134338
   m_LocalBounds:
     m_Center: {x: 0.0000009536743, y: 0, z: 0}
     m_Extent: {x: 12.775, y: 12.045177, z: 0}

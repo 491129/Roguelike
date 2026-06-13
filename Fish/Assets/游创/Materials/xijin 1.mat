@@ -190,7 +190,7 @@ Material:
     - _W9ParticleCustomDataFlag3: 0
     - _W9ParticleShaderColorChannelFlag: 3
     - _W9ParticleShaderFlags: 8194
-    - _W9ParticleShaderFlags1: 8650752
+    - _W9ParticleShaderFlags1: 8388608
     - _W9ParticleShaderGUIFoldToggle: 59
     - _W9ParticleShaderGUIFoldToggle1: 0
     - _W9ParticleShaderGUIFoldToggle2: 255
@@ -392,7 +392,7 @@ Material:
     - SaturabilityRangeVec: {r: 0, g: 1, b: 0, a: 0}
     - TexDistortionintensityRangeVec: {r: -1, g: 1, b: 0, a: 0}
     - _BaseBackColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 8.47419, g: 4.297921, b: 1.3590668, a: 0.14901961}
+    - _BaseColor: {r: 6.883181, g: 3.4909968, b: 1.1039053, a: 0.2784314}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BaseMapColorRefine: {r: 1, g: 1, b: 2, a: 1}
     - _BaseMapMaskMapOffset: {r: 0.38, g: 0.06, b: 0, a: 0}

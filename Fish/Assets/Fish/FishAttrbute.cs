@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class FishAttrbute : MonoBehaviour
 {
+    public static FishAttrbute Instance  { get ; private set; }
     public enum FishType
     {
         Gold,     // YF 
@@ -67,7 +68,7 @@ public class FishAttrbute : MonoBehaviour
         }
        
     }
-    private void HandleBulletHit()
+    public void HandleBulletHit()
     {
         int coin = Mathf.RoundToInt(goldNum * getgoldMore);
         // ÀÊª˙≈–∂œ «∑ÒÃ”Õ—

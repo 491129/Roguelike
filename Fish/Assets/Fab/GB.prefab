@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: -1977715835025660618}
   - component: {fileID: 7220071937435976921}
   - component: {fileID: 1943668517195698759}
-  - component: {fileID: -306964184685637268}
   - component: {fileID: 5237394294813258175}
-  m_Layer: 0
+  - component: {fileID: 1712004622344082861}
+  m_Layer: 7
   m_Name: GB
   m_TagString: Fish
   m_Icon: {fileID: 0}
@@ -124,7 +124,6 @@ MonoBehaviour:
   coinPrefab: {fileID: 1288983291828762122, guid: cf9834f28f4709d47937524460a7e7c9, type: 3}
   targetPos: {x: -8, y: -4}
   moveDuration: 0.6
-  escapeChance: 0.2
   escapeSpeedMultiplier: 2
   escapeDuration: 3
 --- !u!50 &7220071937435976921
@@ -135,7 +134,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7209689518507787559}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -175,8 +174,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &-306964184685637268
-BoxCollider2D:
+--- !u!114 &5237394294813258175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209689518507787559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ca921a5020b6246adb1c3d38713cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadow: {fileID: 7210441180757768124}
+--- !u!58 &1712004622344082861
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -207,32 +219,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.96465373, y: 0.32155323}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 14.52, y: 14.23}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.9282312, y: 0.24570924}
   serializedVersion: 2
-  m_Size: {x: 7.8478036, y: 7.397024}
-  m_EdgeRadius: 0
---- !u!114 &5237394294813258175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209689518507787559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7ca921a5020b6246adb1c3d38713cd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shadow: {fileID: 7210441180757768124}
+  m_Radius: 4.1749926
 --- !u!1 &7210441180757768124
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1124126367513464300}
   - component: {fileID: 5993043582025010028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -33,7 +33,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 24d73a0978aa8264d8d2eafb48f370bb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 13e36a3f66d741d48a1228520439b04c, type: 3}
         m_Scale: {x: 2.87, y: 4.81}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -380,7 +380,7 @@ Material:
     - SaturabilityRangeVec: {r: 0, g: 1, b: 0, a: 0}
     - TexDistortionintensityRangeVec: {r: -1, g: 1, b: 0, a: 0}
     - _BaseBackColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 11.984314, g: 1.8616419, b: 0, a: 1}
+    - _BaseColor: {r: 33.81132, g: 11.494777, b: 7.336414, a: 0.41568628}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BaseMapColorRefine: {r: 1, g: 1, b: 2, a: 1}
     - _BaseMapMaskMapOffset: {r: 0, g: 0, b: 0, a: 0}

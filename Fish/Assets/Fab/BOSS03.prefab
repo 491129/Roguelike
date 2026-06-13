@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -5269063369034187156}
   - component: {fileID: 3558908929204720242}
   - component: {fileID: -233574001449841840}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BOSS03
   m_TagString: BOSS
   m_Icon: {fileID: 0}
@@ -202,3 +202,7 @@ MonoBehaviour:
   speed: 1
   health: 14
   catchProbability: 0.8
+  stopDistance: 1.5
+  minStayDuration: 3
+  maxStayDuration: 5
+  bossDefeated: 0

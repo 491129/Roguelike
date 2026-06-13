@@ -12,8 +12,6 @@ public class CFSkill : MonoBehaviour
     void Start()
     {
         FishAttrbute fishAttr = fish.GetComponent<FishAttrbute>();
-        fishCoin += addCoin;
-        fishCoin = Mathf.RoundToInt(fishAttr.goldNum * FishAttrbute.getgoldMore);
-
+        fishCoin= fishAttr.goldNum + addCoin;
     }
 }

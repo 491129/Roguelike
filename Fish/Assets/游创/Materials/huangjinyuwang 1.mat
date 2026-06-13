@@ -191,7 +191,7 @@ Material:
     - _W9ParticleCustomDataFlag3: 0
     - _W9ParticleShaderColorChannelFlag: 3
     - _W9ParticleShaderFlags: 8706
-    - _W9ParticleShaderFlags1: 8650752
+    - _W9ParticleShaderFlags1: 8388608
     - _W9ParticleShaderGUIFoldToggle: 524843
     - _W9ParticleShaderGUIFoldToggle1: 64
     - _W9ParticleShaderGUIFoldToggle2: 255
@@ -393,7 +393,7 @@ Material:
     - SaturabilityRangeVec: {r: 0, g: 1, b: 0, a: 0}
     - TexDistortionintensityRangeVec: {r: -1, g: 1, b: 0, a: 0}
     - _BaseBackColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 2.8898067, g: 2.0056224, b: 0.5749353, a: 1}
+    - _BaseColor: {r: 2.490439, g: 1.9471428, b: 1.0572615, a: 0.7137255}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BaseMapColorRefine: {r: 1, g: 1, b: 2, a: 1}
     - _BaseMapMaskMapOffset: {r: 0, g: 0, b: 0, a: 0}
@@ -432,7 +432,7 @@ Material:
     - _Dissolve_Vec2: {r: 0.2, g: 0.1, b: 0, a: 0}
     - _DistortionDirection: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionMapColor: {r: 0, g: 45.254833, b: 27.72155, a: 1}
+    - _EmissionMapColor: {r: 0, g: 32, b: 31.832458, a: 0.5254902}
     - _EmissionMapUVOffset: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _Fade: {r: 2, g: 4, b: 0, a: 0}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
