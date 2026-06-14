@@ -73,6 +73,7 @@ public class BossManager : MonoBehaviour
         if (boss != null)
         {
             boss.Init(dir);
+
             boss.SetCenter(centerPoint);   // 传递中心点，让其知道何时停留
             // 应用 Debuff
             switch (boss.bossType)
@@ -104,10 +105,10 @@ public class BossManager : MonoBehaviour
                     break;
                     
             }
-
             // 修正：字段名 bossType，而不是 type
             activeBosses.Add(new ActiveBoss { obj = bossObj, bossType = boss.bossType });
         }
+        BGMPlayer.PlayBoss();
 
         // 等待 Boss 持续时间或直到被击败
         float timer = 0f;
@@ -123,6 +124,7 @@ public class BossManager : MonoBehaviour
             RemoveBossDebuff(bossObj);
             Destroy(bossObj);
         }
+        BGMPlayer.PlayNormal();
     }
     /// <summary>
     /// 当 Boss 被玩家击败时调用，立即移除负面效果
