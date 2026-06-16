@@ -122,7 +122,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 100
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -175,7 +175,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 27.65
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4867,8 +4867,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 3
-  hitEffect: {fileID: 6661581241387448062, guid: 744d9ef27c0e36945b2edb846f890d7e, type: 3}
-  hitAnimationTime: 0.3
+  hitEffectA: {fileID: 6100150457812032531, guid: a73a1457d04eb934b89fe6653cb57407, type: 3}
+  hitEffectB: {fileID: 6661581241387448062, guid: 744d9ef27c0e36945b2edb846f890d7e, type: 3}
+  hitEffectLife: 1.5
 --- !u!1 &1185920154573129676
 GameObject:
   m_ObjectHideFlags: 0
@@ -19678,7 +19679,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 100
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -19731,7 +19732,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 27.65
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2

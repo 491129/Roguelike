@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishType: 2
   fishNumber: 3
-  fishSpeed: 3.5
-  goldNum: 8
+  fishSpeed: 1.41
+  goldNum: 1000
   deathEffect: {fileID: 0}
   deathEffectDuration: 0.5
   coinPrefab: {fileID: 1288983291828762122, guid: cf9834f28f4709d47937524460a7e7c9, type: 3}
@@ -209,6 +209,7 @@ MonoBehaviour:
   moveDuration: 0.6
   escapeSpeedMultiplier: 2
   escapeDuration: 3
+  fishID: 2
 --- !u!95 &6645904705459002876
 Animator:
   serializedVersion: 5

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1772255968471554104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3, y: -3.54, z: 1}
+  m_LocalPosition: {x: -1.54, y: -2.2, z: 1}
   m_LocalScale: {x: 13.757783, y: 10.339613, z: 2.6971}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -116,7 +116,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.9301233, y: 1.6271725, z: 0}
-  m_LocalScale: {x: 0.06, y: 0.06, z: 0.09999999}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.13333333}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7775853544119322929}
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishType: 5
   fishNumber: 3
-  fishSpeed: 3.5
-  goldNum: 8
+  fishSpeed: 1.64
+  goldNum: 6000
   deathEffect: {fileID: 0}
   deathEffectDuration: 0.5
   coinPrefab: {fileID: 1288983291828762122, guid: cf9834f28f4709d47937524460a7e7c9, type: 3}
@@ -209,6 +209,7 @@ MonoBehaviour:
   moveDuration: 0.6
   escapeSpeedMultiplier: 2
   escapeDuration: 3
+  fishID: 5
 --- !u!95 &-9005566086732848220
 Animator:
   serializedVersion: 5

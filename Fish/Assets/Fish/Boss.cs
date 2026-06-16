@@ -67,9 +67,13 @@ public class Boss : MonoBehaviour
     public void Init(Vector2 dir)
     {
         moveDirection = dir.normalized;
-        savedDirection = moveDirection;
-        if (sr != null)
-            sr.flipX = dir.x < 0;
+
+        // 计算方向角度（相对于 X 轴正方向）
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        // 旋转 Boss，使其右方（默认朝向）指向移动方向
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // 不再需要 flipX，移除原有 sr.flipX 相关代码
     }
     public void SetCenter(Transform center)
     {

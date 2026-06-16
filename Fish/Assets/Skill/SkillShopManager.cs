@@ -30,6 +30,7 @@ public class SkillShopManager : MonoBehaviour
         public bool isTotem;                 // 是否是图腾商品
         public bool isFore;
 
+        public GameObject totemGrayPrefab;     // 灰色底图预制体（世界空间，常驻显示）
         public GameObject totemEffectPrefab;   // 图腾对应的粒子特效预制体
     }
     private HashSet<string> purchasedSkills = new HashSet<string>();
@@ -109,7 +110,7 @@ public class SkillShopManager : MonoBehaviour
         if (TotemManager.Instance.xijin)
         {
             float xijin = (float)GameManager.Coin / 1000f;
-            FishAttrbute.escapeChance -= 0.01f * xijin;
+           // FishAttrbute.escapeChance -= 0.01f * xijin;//111111111111111111111111
         }
         
     }
@@ -416,7 +417,7 @@ public class SkillShopManager : MonoBehaviour
         if (item.isMarketTicket&&TotemManager.Instance.hasMerchantPirate)
         {
             marketTicketUsed++;
-            FishAttrbute.escapeChance -= 0.07f * marketTicketUsed;
+            //FishAttrbute.escapeChance -= 0.07f * marketTicketUsed;11111111111111111111111
             
         }
         if(item.isMarketTicket&&TotemManager.Instance.chuanzhang)
@@ -522,7 +523,7 @@ public class SkillShopManager : MonoBehaviour
         if (TotemManager.Instance.hasPickyPirate)
         {
             shopRefreshCount++;
-            FishAttrbute.escapeChance -= 0.07f * shopRefreshCount;
+           //FishAttrbute.escapeChance -= 0.07f * shopRefreshCount;//111111111111111111111111111
         }
         int refreshPrice = Mathf.RoundToInt(refreshCost * refreshCostMultiplier);
         if (!GameManager.SpendCoin(refreshPrice))

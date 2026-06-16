@@ -14,7 +14,7 @@ public class ALLCannon : MonoBehaviour
     [SerializeField] private Text costText;
 
     [Header("µ»º∂≈‰÷√")]
-    [SerializeField]static public int[] levelCosts = { 5, 10, 15, 20, 25 }; 
+    [SerializeField]static public int[] levelCosts = { 100, 500, 1000, 2000, 5000 }; 
     static public int currentLevel = 0;   
 
     public GameObject[] Cannons;

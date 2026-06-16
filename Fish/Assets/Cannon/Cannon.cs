@@ -72,7 +72,7 @@ public class Cannon : MonoBehaviour
             shotCount++;
             if (shotCount >= chargeInterval)
             {
-                FishAttrbute.escapeChance *= 0.8f;
+                //FishAttrbute.escapeChance *= 0.8f;//111111111111111111111111111
                 shotCount = 0;   // ÖØÖÃ¼ÆÊý
             }
         }

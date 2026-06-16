@@ -5,9 +5,12 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float lifeTime = 3f;
+
     [Header("打击反馈")]
-    [SerializeField] private GameObject hitEffect;       // 特效子物体
-    [SerializeField] private float hitAnimationTime = 0.3f; // 动画时长
+    [SerializeField] private GameObject hitEffectA;      // 特效A：子弹炸开
+    [SerializeField] private GameObject hitEffectB;      // 特效B：渔网打开
+    [SerializeField] private float hitEffectLife = 1.5f; // 特效播放时长（秒）
+
     private Rigidbody2D rb;
     private Collider2D col;
     private bool isHitting;
@@ -23,15 +26,13 @@ public class Bullet : MonoBehaviour
         isHitting = false;
         col.enabled = true;
         rb.velocity = transform.up * speed;
-        //transform.Translate(transform.up * speed * Time.unscaledDeltaTime, Space.World);
-        if (hitEffect) hitEffect.SetActive(false);
         CancelInvoke();
         Invoke(nameof(Deactivate), lifeTime);
     }
 
     void OnDisable()
     {
-        rb.velocity = Vector2.zero;
+        if (rb) rb.velocity = Vector2.zero;
         CancelInvoke();
     }
 
@@ -45,10 +46,27 @@ public class Bullet : MonoBehaviour
             col.enabled = false;
             rb.velocity = Vector2.zero;
 
-            StartCoroutine(DelayedDeactivate(0.3f));  // 0.3秒后消失
-        }
+            // 播放两个特效在子弹当前位置
+            SpawnHitEffects(transform.position);
 
+            StartCoroutine(DelayedDeactivate(0.1f)); // 0.3秒后回收子弹
+        }
     }
+
+    void SpawnHitEffects(Vector3 position)
+    {
+        if (hitEffectA)
+        {
+            var effectA = Instantiate(hitEffectA, position, Quaternion.identity);
+            Destroy(effectA, hitEffectLife);
+        }
+        if (hitEffectB)
+        {
+            var effectB = Instantiate(hitEffectB, position, Quaternion.identity);
+            Destroy(effectB, hitEffectLife);
+        }
+    }
+
     IEnumerator DelayedDeactivate(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -57,14 +75,11 @@ public class Bullet : MonoBehaviour
 
     void Deactivate()
     {
-        if (hitEffect) hitEffect.SetActive(false);
-        isHitting = false;                  // 重置状态供下次使用
+        isHitting = false;
         col.enabled = true;
-
-        // 使用对象池回收
         if (ObjectPool.Instance != null)
             ObjectPool.Instance.ReturnBullet(gameObject);
         else
-            Destroy(gameObject);            // 后备：无对象池时销毁
+            Destroy(gameObject);
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TotemManager : MonoBehaviour
 {
     public static TotemManager Instance { get; private set; }
@@ -12,15 +13,15 @@ public class TotemManager : MonoBehaviour
     // 当前已激活的图腾数量（也对应下一个空闲点位的索引）
     private int activeCount = 0;            // 当前已放置图腾数量
     private int maxSlots = 4;               // 初始最多放4个
+    // 存储每个已放置图腾的信息
+    private List<TotemSlot> totemSlots = new List<TotemSlot>();
     public bool isPlace;
     // 全局加成属性（其他脚本读取）
     public float RangeBonus { get; private set; } = 1f;        // 范围乘数
     public float CostMultiplier { get; private set; } = 1f;     //省钱达人
-
+    public float CatchRateMultiplier { get; private set; } = 1f;   // 关键：初始化为 1
     public bool get100 = false;
 
-    // 存储每个点位生成的特效实例，用于后续销毁
-    private List<GameObject> activeEffects = new List<GameObject>();
     // 记录“领低保了”图腾所在点位索引（-1表示未放置）
     private int lingDiBaoIndex = -1;
     private bool lingDiBaoTriggered = false;   // 防止重复触发
@@ -39,9 +40,23 @@ public class TotemManager : MonoBehaviour
     public bool heixin = false;
     public bool hasJingbing = false;
     public bool xuli = false;
+
+    // 存储每个点位生成的特效实例，用于后续销毁
+    private List<GameObject> activeEffects = new List<GameObject>();
+    class TotemSlot
+    {
+        public Transform point;
+        public SkillShopManager.ShopItemData itemData;
+        public GameObject grayObj;   // 常驻灰色底图
+    }
     void Awake()
     {
         Instance = this;
+        // 初始化加成
+        //CatchRateMultiplier = 1f;
+        //RangeBonus = 1f;
+        //CostMultiplier = 1f;
+        //AttackSpeedBonus = 1f;
     }
     private void Update()
     {
@@ -72,7 +87,12 @@ public class TotemManager : MonoBehaviour
 
     public bool PlaceTotem(SkillShopManager.ShopItemData item)
     {
-            if (hasJingbing)
+        if (activeCount >= maxSlots)
+        {
+            Debug.Log("图腾点位已满，无法放置");
+            return false;
+        }
+        if (hasJingbing)
             {
                 if (maxSlots <= 0)
                 {
@@ -87,30 +107,51 @@ public class TotemManager : MonoBehaviour
                 return true;
             }
         
-
-        if (activeCount >= maxSlots)
-        {
-            Debug.Log("图腾点位已满，无法放置");
-            return false;
-        }
         if (hasTotemPirate)
         {
             TotemNum++;
-            FishAttrbute.escapeChance -= 0.01f * TotemNum;
+            CatchRateMultiplier -= 0.01f * TotemNum;//11111111111111111111111111111111111111111
         }
         Transform point = totemPoints[activeCount];
-        GameObject effect = null;
-        if (item.totemEffectPrefab != null)
+        GameObject gray = null;
+        if (item.totemGrayPrefab != null)
         {
-            effect = Instantiate(item.totemEffectPrefab, point.position, Quaternion.identity, point);
+            gray = Instantiate(item.totemGrayPrefab, point.position, Quaternion.identity, point);
         }
-        activeEffects.Add(effect);   // 保存实例（可能为null）
-
+        TotemSlot slot = new TotemSlot
+        {
+            point = point,
+            itemData = item,
+            grayObj = gray
+        };
+        totemSlots.Add(slot);
         // 应用加成效果
-        ApplyTotemEffect(item.itemName, activeCount);  // 传入当前索引，便于“领低保了”记录
-
+        ApplyTotemEffect(item.itemName, activeCount);
         activeCount++;
+        TriggerEffect(activeCount - 1);
+
         return true;
+    }
+    public void TriggerEffect(int index)
+    {
+        if (index < 0 || index >= totemSlots.Count) return;
+        TotemSlot slot = totemSlots[index];
+        if (slot.itemData.totemEffectPrefab != null)
+        {
+            // 实例化特效，让它自然播放后销毁（粒子系统可设置 Stop Action = Destroy）
+            Instantiate(slot.itemData.totemEffectPrefab, slot.point.position, Quaternion.identity);
+        }
+    }
+    public void TriggerEffectByName(string itemName)
+    {
+        for (int i = 0; i < totemSlots.Count; i++)
+        {
+            if (totemSlots[i].itemData.itemName == itemName)
+            {
+                TriggerEffect(i);
+                break;
+            }
+        }
     }
 
     public bool ExpandSlots()
@@ -132,7 +173,7 @@ public class TotemManager : MonoBehaviour
         switch (itemName)
         {
             case "强化炮管":
-                FishAttrbute.escapeChance -= 0.2f;
+                CatchRateMultiplier -= 0.2f;//11111111111111111111111
                 Debug.Log("FishAttrbute.escapeChance");
                 break;
             case "快速填装":
@@ -177,7 +218,7 @@ public class TotemManager : MonoBehaviour
                 break;
             case "共享图腾":
                 hasTotemPirate= true;
-                FishAttrbute.escapeChance -= 0.01f * activeCount;
+                CatchRateMultiplier -= 0.01f * activeCount;//111111111111111111111111111111111
                 break;
             case "我爸是船长":
                 chuanzhang = true;
@@ -187,7 +228,7 @@ public class TotemManager : MonoBehaviour
                 break;
             case "精兵":
                 hasJingbing= true;
-                FishAttrbute.escapeChance *= 1.5f;
+                CatchRateMultiplier *= 1.5f;//11111111111111111111111111111111111111111
                 FishAttrbute.getgoldMore *= 2f;
                 break;
             case "蓄力":

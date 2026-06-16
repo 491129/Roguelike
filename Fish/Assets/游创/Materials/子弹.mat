@@ -194,7 +194,7 @@ Material:
     - _BaseBackColor_Toggle: 0
     - _BaseColorIntensityForTimeline: 1
     - _BaseMapColorRefine_Toggle: 0
-    - _BaseMapUVRotation: 180
+    - _BaseMapUVRotation: 90
     - _BaseMapUVRotationSpeed: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -298,7 +298,7 @@ Material:
     - _NB_Debug_Fresnel: 0
     - _NB_Debug_Mask: 0
     - _NB_Debug_PNoise: 0
-    - _NoiseIntensity: 1
+    - _NoiseIntensity: 0.51
     - _NoiseMapUVRotation: 0
     - _ObjectSpaceUVModeSelector: 1
     - _OcclusionStrength: 1
@@ -444,7 +444,7 @@ Material:
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCapInfo: {r: 1, g: 0, b: 0, a: 0}
     - _MaterialInfo: {r: 1, g: 1, b: 0, a: 0}
-    - _NoiseIntensityRangeVec: {r: 0, g: 1, b: 0, a: 0}
+    - _NoiseIntensityRangeVec: {r: 0.51, g: 2.18, b: 0, a: 0}
     - _NoiseOffset: {r: -1.18, g: 0, b: 0, a: 0}
     - _PCCenter: {r: 0.5, g: 0.5, b: 1, a: 0}
     - _ParallaxMapping_IntensityRangeVec: {r: 0, g: 0.1, b: 0, a: 0}
