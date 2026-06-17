@@ -91,6 +91,9 @@ public class SkillShopManager : MonoBehaviour
     private int shopRefreshCount = 0;//刷新+概率
     //装置（
     public int finalPriceZZ;
+
+    //
+    public HashSet<string> purchasedItemNames = new HashSet<string>();
     private void Start()
     {
         if (slotImages.Length >= 6) slotImages[5].gameObject.SetActive(false);
@@ -220,7 +223,8 @@ public class SkillShopManager : MonoBehaviour
         {
             bool canAppear = string.IsNullOrEmpty(item.requiredSkillID)
                              || purchasedSkills.Contains(item.requiredSkillID);
-            if (canAppear)
+            if (!canAppear) continue;
+            if(purchasedItemNames.Contains(item.itemName))continue;
                 available.Add(item);
         }
 
@@ -361,6 +365,7 @@ public class SkillShopManager : MonoBehaviour
             if (!GameManager.SpendCoin(item.price)) { Debug.Log("金币不足"); return; }
             GameManager.SpendCoin(item.price);
             item.onPurchase.Invoke();
+            purchasedItemNames.Add(item.itemName);
 
             // 清除该商品在普通槽位的显示（如果图腾也出现在随机槽位中）
             for (int i = 0; i < currentSlots.Length; i++)
@@ -389,6 +394,8 @@ public class SkillShopManager : MonoBehaviour
             // 扣钱
             GameManager.SpendCoin(finalPriceZZ);
             item.onPurchase.Invoke();   // 激活技能物体/效果
+            purchasedItemNames.Add(item.itemName);
+
             // 根据技能ID，准备使用回调
             System.Action onUse = null;
             switch (item.itemName)
@@ -406,7 +413,9 @@ public class SkillShopManager : MonoBehaviour
 
             // 记录已购技能ID
             if (!string.IsNullOrEmpty(item.skillID))
+            {
                 purchasedSkills.Add(item.skillID);
+            }
 
             // 清除槽位
             for (int i = 0; i < currentSlots.Length; i++)
@@ -417,7 +426,7 @@ public class SkillShopManager : MonoBehaviour
         if (item.isMarketTicket&&TotemManager.Instance.hasMerchantPirate)
         {
             marketTicketUsed++;
-            //FishAttrbute.escapeChance -= 0.07f * marketTicketUsed;11111111111111111111111
+            FishAttrbute.CatchRateMultiplier -= 0.07f * marketTicketUsed;//11111111111111111111111
             
         }
         if(item.isMarketTicket&&TotemManager.Instance.chuanzhang)
@@ -426,7 +435,9 @@ public class SkillShopManager : MonoBehaviour
 
             // 记录已购买的技能ID（作为后续商品的前置条件）
             if (!string.IsNullOrEmpty(item.skillID))
+            {
                 purchasedSkills.Add(item.skillID);
+            }
 
             // 清空购买槽位
             for (int i = 0; i < currentSlots.Length; i++)
@@ -447,10 +458,13 @@ public class SkillShopManager : MonoBehaviour
    
         GameManager.SpendCoin(finalPrice);
         item.onPurchase.Invoke();
+        purchasedItemNames.Add(item.itemName);
 
         // 记录已购买的技能ID（作为后续商品的前置条件）
         if (!string.IsNullOrEmpty(item.skillID))
+        {
             purchasedSkills.Add(item.skillID);
+        }
 
         // 清空购买槽位
         for (int i = 0; i < currentSlots.Length; i++)

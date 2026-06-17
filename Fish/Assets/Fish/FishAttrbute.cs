@@ -41,7 +41,7 @@ using DG.Tweening;
         public float escapeDuration = 3f;
         public float CurrentSpeed { get; set; }   // 当前实际速度，逃脱时会变化
                                                   //private float baseSpeed;                  // 原始速度
-        
+        public static float CatchRateMultiplier = 1f;
 
         private SpriteRenderer sr;
         // private bool escaping = false; // 是否正在逃脱
@@ -76,11 +76,11 @@ using DG.Tweening;
                                                         // 2. 查表得到该鱼的基础捕捉率（万分比）
             float baseCatchRate = FishDataConfig.CatchRates[fishID - 1, cannonLevel] / 10000f;
         // 3. 应用全局捕鱼加成（商人海盗、挑剔海盗等）
-        float catchMultiplier = TotemManager.Instance != null ? TotemManager.Instance.CatchRateMultiplier : 1f;
+        //float catchMultiplier = TotemManager.Instance != null ? TotemManager.Instance.CatchRateMultiplier : 1f;
         //float catchMultiplier = 1f;
-            float finalCatchRate = Mathf.Clamp01(baseCatchRate * catchMultiplier);
+            float finalCatchRate = Mathf.Clamp01(baseCatchRate * CatchRateMultiplier);
 
-            Debug.Log(baseCatchRate+"1" +finalCatchRate+"2"+ catchMultiplier);
+            Debug.Log(baseCatchRate+"1" +finalCatchRate+"2"+ CatchRateMultiplier);
 
         // 4. 判断是否捕捉成功
         if (Random.value < finalCatchRate)
@@ -179,7 +179,7 @@ using DG.Tweening;
         {
             //escaping = true;
             // 关闭碰撞器，避免重复击中
-            col.enabled = false;
+            //col.enabled = false;
 
             // 加速：速度变为原来的 escapeSpeedMultiplier 倍
             CurrentSpeed = fishSpeed * escapeSpeedMultiplier;   // 加速

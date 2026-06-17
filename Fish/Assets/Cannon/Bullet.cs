@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
 
             // 播放两个特效在子弹当前位置
             SpawnHitEffects(transform.position);
-
+        
             StartCoroutine(DelayedDeactivate(0.1f)); // 0.3秒后回收子弹
         }
     }
@@ -63,6 +63,11 @@ public class Bullet : MonoBehaviour
         if (hitEffectB)
         {
             var effectB = Instantiate(hitEffectB, position, Quaternion.identity);
+            CircleCollider2D netCol = effectB.GetComponentInChildren<CircleCollider2D>();
+            if (netCol != null && FishnetManager.Instance != null)
+            {
+                netCol.radius = FishnetManager.Instance.GetCurrentRadius();
+            }
             Destroy(effectB, hitEffectLife);
         }
     }

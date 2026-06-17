@@ -19,7 +19,7 @@ public class TotemManager : MonoBehaviour
     // 全局加成属性（其他脚本读取）
     public float RangeBonus { get; private set; } = 1f;        // 范围乘数
     public float CostMultiplier { get; private set; } = 1f;     //省钱达人
-    public float CatchRateMultiplier { get; private set; } = 1f;   // 关键：初始化为 1
+    //public float CatchRateMultiplier { get; private set; } = 1f;   // 关键：初始化为 1
     public bool get100 = false;
 
     // 记录“领低保了”图腾所在点位索引（-1表示未放置）
@@ -34,6 +34,8 @@ public class TotemManager : MonoBehaviour
     public bool hasMerchantPirate = false;   // 商人海盗
     public bool hasPickyPirate = false;      // 挑剔海盗
     private bool hasTotemPirate = false;      //共享图腾
+    public bool qianghua = false;             //强化管炮
+    public bool kuaisu = false;               //快速装填
     private int TotemNum = 0;
 
     public bool chuanzhang = false;
@@ -110,7 +112,7 @@ public class TotemManager : MonoBehaviour
         if (hasTotemPirate)
         {
             TotemNum++;
-            CatchRateMultiplier -= 0.01f * TotemNum;//11111111111111111111111111111111111111111
+            FishAttrbute.CatchRateMultiplier += 0.01f * TotemNum;//11111111111111111111111111111111111111111
         }
         Transform point = totemPoints[activeCount];
         GameObject gray = null;
@@ -132,14 +134,28 @@ public class TotemManager : MonoBehaviour
 
         return true;
     }
+    //public void TriggerEffect(int index)
+    //{
+    //    if (index < 0 || index >= totemSlots.Count) return;
+    //    TotemSlot slot = totemSlots[index];
+    //    if (slot.itemData.totemEffectPrefab != null)
+    //    {
+    //        // 实例化特效，让它自然播放后销毁（粒子系统可设置 Stop Action = Destroy）
+    //        Instantiate(slot.itemData.totemEffectPrefab, slot.point.position, Quaternion.identity);
+    //       // Destroy(slot.itemData.totemEffectPrefab);
+    //    }
+    //}
     public void TriggerEffect(int index)
     {
         if (index < 0 || index >= totemSlots.Count) return;
         TotemSlot slot = totemSlots[index];
         if (slot.itemData.totemEffectPrefab != null)
         {
-            // 实例化特效，让它自然播放后销毁（粒子系统可设置 Stop Action = Destroy）
-            Instantiate(slot.itemData.totemEffectPrefab, slot.point.position, Quaternion.identity);
+            GameObject effect = Instantiate(slot.itemData.totemEffectPrefab, slot.point.position, Quaternion.identity);
+            // 获取粒子系统总持续时间（若存在）
+            ParticleSystem ps = effect.GetComponent<ParticleSystem>();
+            float duration = (ps != null) ? ps.main.duration + ps.main.startLifetime.constantMax : 2f;
+            Destroy(effect, duration);
         }
     }
     public void TriggerEffectByName(string itemName)
@@ -173,11 +189,13 @@ public class TotemManager : MonoBehaviour
         switch (itemName)
         {
             case "强化炮管":
-                CatchRateMultiplier -= 0.2f;//11111111111111111111111
+                FishAttrbute.CatchRateMultiplier += 0.2f;//11111111111111111111111
+                qianghua = true;
                 Debug.Log("FishAttrbute.escapeChance");
                 break;
             case "快速填装":
-                Cannon.Instance.ApplyDebuffCAnnon(); 
+                Cannon.Instance.ApplyDebuffCAnnon();
+                kuaisu = true;
                 Debug.Log("kauisu");
                 break;
             case "广域渔网":
@@ -218,7 +236,7 @@ public class TotemManager : MonoBehaviour
                 break;
             case "共享图腾":
                 hasTotemPirate= true;
-                CatchRateMultiplier -= 0.01f * activeCount;//111111111111111111111111111111111
+                FishAttrbute.CatchRateMultiplier += 0.01f * activeCount;//111111111111111111111111111111111
                 break;
             case "我爸是船长":
                 chuanzhang = true;
@@ -228,7 +246,7 @@ public class TotemManager : MonoBehaviour
                 break;
             case "精兵":
                 hasJingbing= true;
-                CatchRateMultiplier *= 1.5f;//11111111111111111111111111111111111111111
+                FishAttrbute.CatchRateMultiplier *= 1.5f;//11111111111111111111111111111111111111111
                 FishAttrbute.getgoldMore *= 2f;
                 break;
             case "蓄力":

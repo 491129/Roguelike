@@ -56,6 +56,7 @@ public class Cannon : MonoBehaviour
     {
         int originalCost = ALLCannon.levelCosts[ALLCannon.currentLevel];
         float costMultiplier = TotemManager.Instance != null ? TotemManager.Instance.CostMultiplier : 1f;
+
         actualCost = Mathf.RoundToInt(originalCost * costMultiplier);
         //int cost = ALLCannon.levelCosts[ALLCannon.currentLevel];
         if (!GameManager.SpendCoin(actualCost))
@@ -72,9 +73,19 @@ public class Cannon : MonoBehaviour
             shotCount++;
             if (shotCount >= chargeInterval)
             {
-                //FishAttrbute.escapeChance *= 0.8f;//111111111111111111111111111
+                FishAttrbute.CatchRateMultiplier *= 1.2f;//111111111111111111111111111
                 shotCount = 0;   // 重置计数
+                // 生成蓄力子弹后
+                TotemManager.Instance?.TriggerEffectByName("蓄力");
             }
+        }
+        if(TotemManager.Instance.kuaisu)
+        {
+            TotemManager.Instance?.TriggerEffectByName("快速装填");
+        }
+        if (TotemManager.Instance.qianghua)
+        {
+            TotemManager.Instance?.TriggerEffectByName("强化炮管");
         }
         GameObject bullet = pool.GetBullet();
         if (bullet != null)

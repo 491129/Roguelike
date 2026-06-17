@@ -26,6 +26,8 @@ public class ALLCannon : MonoBehaviour
     {
         Cannons[currentLevel].SetActive(true);
         UpdateButtons();
+        if (FishnetManager.Instance != null)
+            FishnetManager.Instance.SetLevel(currentLevel);
     }
     private void Update()
     {
@@ -35,6 +37,7 @@ public class ALLCannon : MonoBehaviour
     {
         if (currentLevel < levelCosts.Length - 1)
         {
+            FishnetManager.Instance.SetLevel(currentLevel+1);
             Cannons[currentLevel].SetActive(false);
             currentLevel++;
             UpdateButtons();
