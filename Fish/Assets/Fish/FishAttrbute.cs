@@ -15,7 +15,8 @@ using DG.Tweening;
             GB,
             GD,
             GF,
-            MT
+            MT,
+            LF
         }
         public FishType fishType;
         public int fishNumber = 0;
@@ -85,6 +86,34 @@ using DG.Tweening;
         // 4. 判断是否捕捉成功
         if (Random.value < finalCatchRate)
             {
+            if (TotemManager.Instance.huangjin)
+            {
+                TotemManager.Instance?.TriggerEffectByName("黄金渔网");
+            }
+            if (TotemManager.Instance.get100)
+            {
+                TotemManager.Instance?.TriggerEffectByName("熟能生巧");
+            }
+            if(TotemManager.Instance.xijin)
+            {
+                TotemManager.Instance?.TriggerEffectByName("吸金海盗");
+            }
+            if(TotemManager.Instance.hasMerchantPirate)
+            {
+                TotemManager.Instance?.TriggerEffectByName("商人海盗");
+            }
+            if (!TotemManager.Instance.hasPickyPirate)
+            {
+                TotemManager.Instance?.TriggerEffectByName("挑剔海盗");
+            }
+            if (TotemManager.Instance.hasTotemPirate)
+            {
+                TotemManager.Instance?.TriggerEffectByName("共享图腾");
+            }
+            if (!TotemManager.Instance.hasJingbing)
+            {
+                TotemManager.Instance?.TriggerEffectByName("精兵");
+            }
                 // 捕获成功 -> 死亡逻辑
                 isDead = true;
                 col.enabled = false;

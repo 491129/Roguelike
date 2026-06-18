@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
 
     public static void AddCoin(int amount)
     {
-        if (TotemManager.Instance.heixin && Boss.Instance.bossDefeated) { amount *= 2; };
+        if (TotemManager.Instance.heixin && Boss.Instance.bossDefeated) { amount *= 2; TotemManager.Instance?.TriggerEffectByName("黑心商人"); }
+        ;
         Coin += amount;
         if (Instance != null && Instance.coinText != null)
             Instance.coinText.text = "Coin：" + Coin;
@@ -32,6 +33,10 @@ public class GameManager : MonoBehaviour
         else if (TotemManager.Instance != null && TotemManager.Instance.canDebt)
         {
             int newCoin = Coin - amount;
+            if (newCoin <= 0)
+            {
+                TotemManager.Instance?.TriggerEffectByName("先欠着");
+            }
             if (newCoin >= -TotemManager.Instance.debtLimit)
             {
                 Coin = newCoin;
@@ -39,6 +44,7 @@ public class GameManager : MonoBehaviour
                 return true;
             }
         }
+
         return false;
     }
 

@@ -11,7 +11,7 @@ public class FishnetManager : MonoBehaviour
     [SerializeField] private float rangeMultiplier = 1.3f;   // 与图腾一致
 
     private int currentLevel = 0;       // 当前渔网等级（0~4）
-    private bool hasRangeBonus = false; // 是否购买了广域渔网
+    public bool hasRangeBonus = false; // 是否购买了广域渔网
 
     void Awake() => Instance = this;
 

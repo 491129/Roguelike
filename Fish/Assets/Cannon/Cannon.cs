@@ -87,7 +87,15 @@ public class Cannon : MonoBehaviour
         {
             TotemManager.Instance?.TriggerEffectByName("强化炮管");
         }
-        GameObject bullet = pool.GetBullet();
+        if (FishnetManager.Instance.hasRangeBonus)
+        {
+            TotemManager.Instance?.TriggerEffectByName("广域渔网");
+        }
+        if (TotemManager.Instance.shengqian)
+        {
+            TotemManager.Instance?.TriggerEffectByName("省钱达人");
+        }
+            GameObject bullet = pool.GetBullet();
         if (bullet != null)
         {
             bullet.transform.position = firePoint.position;

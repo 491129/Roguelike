@@ -7,20 +7,23 @@ public class Shop : MonoBehaviour
 {
     public GameObject shopPanel;
     public GameObject[] dialoguePanels;
-    private int wel;
+    [SerializeField] private DisDialogue merchantDialogue;   // 拖入商人对话框物体
     public static bool BossDef=true;
     public void LoadShop()
     {
         shopPanel.SetActive(true);
-        wel=Random.Range(0,dialoguePanels.Length);
-        dialoguePanels[wel].SetActive(true);
+        DisDialogue dialogue = FindObjectOfType<DisDialogue>(); // 或直接引用
+        merchantDialogue.ShowTemporary("欢迎光临！挑选你需要的商品吧~", 2.5f);
         Time.timeScale = 0f;
 
     }
     public void closeShop()
     {
-        dialoguePanels[wel].SetActive(false);
         shopPanel.SetActive(false);
         Time.timeScale = 1f;
+        if (TotemManager.Instance.chuanzhang)
+        {
+            TotemManager.Instance?.TriggerEffectByName("我爸是船长");
+        }
     }
 }

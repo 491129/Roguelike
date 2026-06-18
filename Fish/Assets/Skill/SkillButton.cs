@@ -61,6 +61,10 @@ public class SkillButton : MonoBehaviour
     {
         if (isCooldown) return;
         StartCoroutine(CooldownRoutine());
+        if (TotemManager.Instance.chaopin)
+        {
+            TotemManager.Instance?.TriggerEffectByName("³¬ÆµºËÐÄ");
+        }
     }
     IEnumerator CooldownRoutine()
     {

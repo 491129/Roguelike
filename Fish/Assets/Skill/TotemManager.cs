@@ -17,9 +17,7 @@ public class TotemManager : MonoBehaviour
     private List<TotemSlot> totemSlots = new List<TotemSlot>();
     public bool isPlace;
     // 全局加成属性（其他脚本读取）
-    public float RangeBonus { get; private set; } = 1f;        // 范围乘数
     public float CostMultiplier { get; private set; } = 1f;     //省钱达人
-    //public float CatchRateMultiplier { get; private set; } = 1f;   // 关键：初始化为 1
     public bool get100 = false;
 
     // 记录“领低保了”图腾所在点位索引（-1表示未放置）
@@ -31,16 +29,19 @@ public class TotemManager : MonoBehaviour
     public bool canDebt = false;          // 负债
     public int debtLimit = 10000;
 
-    public bool hasMerchantPirate = false;   // 商人海盗
-    public bool hasPickyPirate = false;      // 挑剔海盗
-    private bool hasTotemPirate = false;      //共享图腾
+    public bool hasMerchantPirate = false;    // 商人海盗
+    public bool hasPickyPirate = false;       // 挑剔海盗
+    public bool hasTotemPirate = false;      //共享图腾
     public bool qianghua = false;             //强化管炮
     public bool kuaisu = false;               //快速装填
+    public bool shengqian = false;            //省钱达人
+    public bool chaopin = false;              //超频核心
+    public bool huangjin=false;               //黄金渔网
     private int TotemNum = 0;
 
-    public bool chuanzhang = false;
-    public bool heixin = false;
-    public bool hasJingbing = false;
+    public bool chuanzhang = false;             //我爸是
+    public bool heixin = false;                 //黑心商人
+    public bool hasJingbing = false;            //精兵
     public bool xuli = false;
 
     // 存储每个点位生成的特效实例，用于后续销毁
@@ -54,11 +55,6 @@ public class TotemManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        // 初始化加成
-        //CatchRateMultiplier = 1f;
-        //RangeBonus = 1f;
-        //CostMultiplier = 1f;
-        //AttackSpeedBonus = 1f;
     }
     private void Update()
     {
@@ -134,17 +130,7 @@ public class TotemManager : MonoBehaviour
 
         return true;
     }
-    //public void TriggerEffect(int index)
-    //{
-    //    if (index < 0 || index >= totemSlots.Count) return;
-    //    TotemSlot slot = totemSlots[index];
-    //    if (slot.itemData.totemEffectPrefab != null)
-    //    {
-    //        // 实例化特效，让它自然播放后销毁（粒子系统可设置 Stop Action = Destroy）
-    //        Instantiate(slot.itemData.totemEffectPrefab, slot.point.position, Quaternion.identity);
-    //       // Destroy(slot.itemData.totemEffectPrefab);
-    //    }
-    //}
+   
     public void TriggerEffect(int index)
     {
         if (index < 0 || index >= totemSlots.Count) return;
@@ -188,32 +174,35 @@ public class TotemManager : MonoBehaviour
     {
         switch (itemName)
         {
-            case "强化炮管":
+            case "强化炮管"://2222222222222222222
                 FishAttrbute.CatchRateMultiplier += 0.2f;//11111111111111111111111
                 qianghua = true;
                 Debug.Log("FishAttrbute.escapeChance");
                 break;
-            case "快速填装":
+            case "快速填装"://222222222222222222
                 Cannon.Instance.ApplyDebuffCAnnon();
                 kuaisu = true;
                 Debug.Log("kauisu");
                 break;
-            case "广域渔网":
-                RangeBonus *= 1.3f;              // 范围1.3倍
+            case "广域渔网"://2222222222222222222
+                FishnetManager.Instance.UpgradeRange();
                 Debug.Log("guangyu");
                 break;
-            case "省钱达人":
+            case "省钱达人"://222222222222222222222
+                shengqian = true;
                 CostMultiplier *= 0.8f;   // 花费变为20%
                 Debug.Log("shengqian");
                 break;
-            case "超频核心":
+            case "超频核心"://2222222222222
+                chaopin = true;
                 SkillButton.changeDuration *= 0.8f;
                 Debug.Log("冷却时间："+SkillButton.changeDuration);
                 break;
-            case "黄金渔网":
+            case "黄金渔网"://22222222222
+                huangjin=true;
                 FishAttrbute.getgoldMore = 1.2f;
                 break;
-            case "熟能生巧":
+            case "熟能生巧"://22222222222
                 get100 = true;
                 break;
             case "领低保了":    // 一次性图腾
@@ -221,35 +210,35 @@ public class TotemManager : MonoBehaviour
                 lingDiBaoTriggered = false;
                 Debug.Log("领低保了图腾已放置，等待触发");
                 break;
-            case "吸金海盗":
+            case "吸金海盗"://222222222222222222
                 xijin = true;
                 break;
-            case "先欠着":
+            case "先欠着"://22222222222222222
                 canDebt = true;
                 Debug.Log("已启用负债功能，最大负债10000");
                 break;
-            case "商人海盗":
+            case "商人海盗"://2222222222222
                 hasMerchantPirate = true;
                 break;
-            case "挑剔海盗":
+            case "挑剔海盗"://22222222222
                 hasPickyPirate = true;
                 break;
-            case "共享图腾":
+            case "共享图腾"://2222222222
                 hasTotemPirate= true;
                 FishAttrbute.CatchRateMultiplier += 0.01f * activeCount;//111111111111111111111111111111111
                 break;
-            case "我爸是船长":
+            case "我爸是船长"://2222222222
                 chuanzhang = true;
                 break;
-            case "黑心商人":
+            case "黑心商人"://22222222222222
                 heixin = true;
                 break;
-            case "精兵":
+            case "精兵"://22222222222
                 hasJingbing= true;
                 FishAttrbute.CatchRateMultiplier *= 1.5f;//11111111111111111111111111111111111111111
                 FishAttrbute.getgoldMore *= 2f;
                 break;
-            case "蓄力":
+            case "蓄力"://222222222222
                 xuli=true;
                 break;
         }

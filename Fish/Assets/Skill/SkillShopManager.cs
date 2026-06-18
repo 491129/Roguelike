@@ -107,6 +107,7 @@ public class SkillShopManager : MonoBehaviour
         RefreshAllSlots();
         BJRefreshAllSlots();
         refreshCostText.text=refreshCost.ToString();
+        
     }
     private void Update()
     {
@@ -287,33 +288,38 @@ public class SkillShopManager : MonoBehaviour
 
             for (int i = 0; i < slotCount; i++)
         {
-            if (i >= slotImages.Length) break;
+                if (i >= slotImages.Length) break;
 
-            if (currentSlots[i] != null)
-            {
-                if (currentSlots[i].isMarketTicket && TotemManager.Instance.chuanzhang)
-                {
+                 if (currentSlots[i] != null)
+                 {
+                // 设置悬停数据
+                SlotHover hover = slotImages[i].GetComponent<SlotHover>();
+                // 如果 SlotHover 挂在按钮上，也可从 slotButtons[i] 获取
+                if (hover == null) hover = slotButtons[i].GetComponent<SlotHover>();
+                if (hover != null) hover.SetItem(currentSlots[i]);
+                    if (currentSlots[i].isMarketTicket && TotemManager.Instance.chuanzhang)
+                    {
                     slotImages[i].sprite = currentSlots[i].icon;
                     if (slotPriceTexts != null && slotPriceTexts.Length > i)
                         slotPriceTexts[i].text = "0";
                     slotButtons[i].interactable = true;
                     slotImages[i].gameObject.SetActive(true); // 确保显示
-                }
-                else
-                {
+                    }
+                     else
+                     {
                     slotImages[i].sprite = currentSlots[i].icon;
                     if (slotPriceTexts != null && slotPriceTexts.Length > i)
                         slotPriceTexts[i].text = (currentSlots[i].price * priceMultiplier).ToString("F0");
                     slotButtons[i].interactable = true;
                     slotImages[i].gameObject.SetActive(true); // 确保显示
-                }
+                 }
             }
-            else
-            {
+                 else
+                 {
                 slotImages[i].sprite = null;
                 slotButtons[i].interactable = false;
                 if (i >= 5 && !hasExtraSlot) slotImages[i].gameObject.SetActive(false);
-            }
+                 }
             
         }
        // UpdateSlotUI00();
