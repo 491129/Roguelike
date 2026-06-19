@@ -22,7 +22,7 @@ using DG.Tweening;
         public int fishNumber = 0;
         public float fishSpeed = 0;
         public int goldNum = 0;
-        public static float getgoldMore = 1f;
+        public static float getgoldMore = 1.2f;
 
         private Rigidbody2D rb;
         private Collider2D col;
@@ -50,7 +50,7 @@ using DG.Tweening;
         [Header("鱼种编号 (1~12)")]
         public int fishID = 1;   // 在预制体 Inspector 中设置 1~12
 
-        // 移除原来的静态 escapeChance（若还在用，可保留但不再依赖它）
+        
 
         private void Start()
         {

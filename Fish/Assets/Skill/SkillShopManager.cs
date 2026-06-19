@@ -555,4 +555,15 @@ public class SkillShopManager : MonoBehaviour
         refreshCostText.text = (refreshCost * refreshCostMultiplier).ToString();
         //refreshCostText.text = refreshPrice.ToString();
     }
+    public void AddPurchasedSkill(string skillID)
+    {
+        if (!string.IsNullOrEmpty(skillID))
+            purchasedSkills.Add(skillID);
+    }
+
+    public void RemovePurchasedSkill(string skillID)
+    {
+        if (!string.IsNullOrEmpty(skillID) && purchasedSkills.Contains(skillID))
+            purchasedSkills.Remove(skillID);
+    }
 }
