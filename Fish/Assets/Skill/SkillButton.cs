@@ -26,7 +26,8 @@ public class SkillButton : MonoBehaviour
 
     private void Start()
     {
-        // 初始状态：灰色，不可交互
+        // 自动绑定按钮点击事件，避免手动遗漏
+        button.onClick.AddListener(OnButtonClick);
         button.interactable = false;
         iconImage.sprite = defaultGray;
     }

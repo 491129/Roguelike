@@ -13,7 +13,12 @@ public class SlotHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (currentItem != null && merchantDialogue != null)
+        if (currentItem == null)
+        {
+            merchantDialogue.HideMessage();
+            return;
+        }
+        if (merchantDialogue != null)
             merchantDialogue.ShowMessage(currentItem.description);
     }
 

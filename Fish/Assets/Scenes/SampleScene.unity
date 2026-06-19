@@ -122,6 +122,113 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &2688494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2688497}
+  - component: {fileID: 2688496}
+  - component: {fileID: 2688495}
+  m_Layer: 0
+  m_Name: Ring 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!95 &2688495
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688494}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69ea1e53e7357974286c99638828fc58, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!212 &2688496
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688494}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 7ce8d187f8e7ca7479b2e025244344e2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.97, y: 2.46}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &2688497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.84, y: -3.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1468452557}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3463275
 GameObject:
   m_ObjectHideFlags: 0
@@ -4141,6 +4248,9 @@ GameObject:
   - component: {fileID: 764058479}
   - component: {fileID: 764058482}
   - component: {fileID: 764058483}
+  - component: {fileID: 764058484}
+  - component: {fileID: 764058485}
+  - component: {fileID: 764058486}
   m_Layer: 5
   m_Name: SKILL
   m_TagString: Untagged
@@ -4642,7 +4752,7 @@ MonoBehaviour:
     totemEffectPrefab: {fileID: 0}
   - itemName: "\u51B7\u5374\u65F6\u95F4\u51CF\u5C11\uFF08\u51B0\u51BB\uFF09"
     price: 15
-    icon: {fileID: 21300000, guid: 2e65d44486ca46e47bdfae71adda492f, type: 3}
+    icon: {fileID: 21300000, guid: 2048bb865b2eea64ebfe36f5f39d98f3, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01\uFF08coolChange00\uFF09"
     onPurchase:
       m_PersistentCalls:
@@ -4669,7 +4779,7 @@ MonoBehaviour:
     totemEffectPrefab: {fileID: 0}
   - itemName: "\u6301\u7EED\u65F6\u95F4\u589E\u52A0\uFF08\u51B0\u51BB\uFF09"
     price: 25
-    icon: {fileID: 21300000, guid: 2e65d44486ca46e47bdfae71adda492f, type: 3}
+    icon: {fileID: 21300000, guid: 2048bb865b2eea64ebfe36f5f39d98f3, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01\uFF08coolChange01\uFF09"
     onPurchase:
       m_PersistentCalls:
@@ -4696,7 +4806,7 @@ MonoBehaviour:
     totemEffectPrefab: {fileID: 0}
   - itemName: "\u6DF1\u6C34\u70B8\u5F39"
     price: 12
-    icon: {fileID: 21300000, guid: 94404c61e90d4864ea4fd570b0ff3ca5, type: 3}
+    icon: {fileID: -206226205, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
     description: "\u6DF1\u6C34\u70B8\u5F39\uFF1A\u5411\u533A\u57DF\u6295\u63B7\u70B8\u5F39\u5E76\u9020\u6210\u8303\u56F4\u7206\u70B8\r"
     onPurchase:
       m_PersistentCalls:
@@ -4711,11 +4821,23 @@ MonoBehaviour:
     totemEffectPrefab: {fileID: 0}
   - itemName: "\u51B7\u5374\u65F6\u95F4\u51CF\u5C11\uFF08\u70B8\u5F39\uFF09"
     price: 11
-    icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
+    icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
     onPurchase:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: Bommchange00
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     skillID: 
     requiredSkillID: Skill2
     isZZ: 1
@@ -4726,13 +4848,272 @@ MonoBehaviour:
     totemEffectPrefab: {fileID: 0}
   - itemName: "\u589E\u52A0\u7206\u70B8\u8303\u56F4\uFF08\u70B8\u5F39\uFF09"
     price: 13
-    icon: {fileID: 21300000, guid: 54d58d95b9db8994bb0f3b7e797d666d, type: 3}
+    icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: BoomChange01
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill2
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u7206\u70B8\u540E\u7559\u4E0B\u6301\u7EED\u4F24\u5BB3\u533A\u57DF\uFF08\u70B8\u5F39\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058483}
+          m_TargetAssemblyTypeName: DepthChargeSkill, Assembly-CSharp
+          m_MethodName: EnableDotZone
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill2
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u589E\u52A0\u7206\u70B8\u6B21\u6570\uFF08\u70B8\u5F39\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
+    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058483}
+          m_TargetAssemblyTypeName: DepthChargeSkill, Assembly-CSharp
+          m_MethodName: IncreaseExplosionCount
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill2
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u7535\u78C1\u6F29\u6DA1"
+    price: 13
+    icon: {fileID: -882172376, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
     description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
+    skillID: Skill3
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 1
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u51CF\u5C11\u51B7\u5374 \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: 1c9d985170fc9a44182307962736375d, type: 3}
+    description: "\u51CF\u5C11\u51B7\u5374 \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: VortexChange00
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     skillID: 
-    requiredSkillID: Skill2
+    requiredSkillID: Skill3
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u589E\u52A0\u5438\u9644\u8303\u56F4  \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: 1c9d985170fc9a44182307962736375d, type: 3}
+    description: "\u589E\u52A0\u5438\u9644\u8303\u56F4 \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: VortexChange01
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill3
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4  \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: 1c9d985170fc9a44182307962736375d, type: 3}
+    description: "\u51CF\u5C11\u51B7\u5374\uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: VortexChange02
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill3
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u5F3A\u5316"
+    price: 13
+    icon: {fileID: -1634698085, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
+    description: "\u5F3A\u5316\uFF1AX\u79D2\u5185\u5927\u5E45\u5F3A\u5316\u6355\u9C7C\u6982\u7387\u4E0E\u653B\u51FB\u901F\u5EA6"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls: []
+    skillID: Skill4
+    requiredSkillID: 
+    isZZ: 0
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 1
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u51CF\u5C11\u51B7\u5374 \uFF08\u5F3A\u5316\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: 33f524f44a631404697a235111944993, type: 3}
+    description: "\u51CF\u5C11\u51B7\u5374"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: StrengthenChange00
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill4
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4 \uFF08\u5F3A\u5316\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: 33f524f44a631404697a235111944993, type: 3}
+    description: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: StrengthenChange01
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill4
+    isZZ: 1
+    isMarketTicket: 0
+    isTotem: 0
+    isFore: 0
+    totemGrayPrefab: {fileID: 0}
+    totemEffectPrefab: {fileID: 0}
+  - itemName: "\u589E\u52A0X%\u6355\u9C7C\u6982\u7387\u4E0E\u653B\u51FB\u901F\u5EA6 
+      \uFF08\u5F3A\u5316\uFF09"
+    price: 13
+    icon: {fileID: 21300000, guid: 33f524f44a631404697a235111944993, type: 3}
+    description: "\u589E\u52A0X%\u6355\u9C7C\u6982\u7387\u4E0E\u653B\u51FB\u901F\u5EA6\r\n"
+    onPurchase:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 764058472}
+          m_TargetAssemblyTypeName: SkillShopManager, Assembly-CSharp
+          m_MethodName: StrengthenChange02
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    skillID: 
+    requiredSkillID: Skill4
     isZZ: 1
     isMarketTicket: 0
     isTotem: 0
@@ -4963,6 +5344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCooldown: 0
+  baseCooldown: 10
   freezeEffect: {fileID: 162476586}
 --- !u!114 &764058476
 MonoBehaviour:
@@ -5096,16 +5478,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17c30310c530f44bb83fe4f863216ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoomEffectPrefab: {fileID: 0}
   baseCooldown: 10
-  baseRadius: 3
-  baseDamage: 3
+  baseRadius: 2.4
+  explosionEffectPrefab: {fileID: 6439510625228729148, guid: 5d7ff791691b5824e8bc4b1bfe38d5bd, type: 3}
+  dotZonePrefab: {fileID: 1642973667173859607, guid: 5028204b76b9f964081bfa745b981eb5, type: 3}
   currentCooldown: 0
   currentRadius: 0
-  currentDamage: 0
-  explosionCount: 1
+  currentExplosionCount: 1
   hasDotZone: 0
   dotDuration: 5
+--- !u!114 &764058484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1fb0aa643ec054eac0fd57aa5a79d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &764058485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 641a54b2d20c1bc43bc26bbef41dca0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseCooldown: 10
+  baseRadius: 3
+  baseDuration: 6
+  pullSpeed: 3
+  vortexEffectPrefab: {fileID: 4506778658199269053, guid: d786ddfb1d6922547962c9cadb99879c, type: 3}
+  currentCooldown: 0
+  currentRadius: 0
+  currentDuration: 0
+--- !u!114 &764058486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764058470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4d30e539bda8f4d82742dd20f87c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseCooldown: 10
+  baseDuration: 8
+  baseBoostRate: 1.5
+  currentCooldown: 0
+  currentDuration: 0
+  currentBoostRate: 0
 --- !u!1 &773148971
 GameObject:
   m_ObjectHideFlags: 0
@@ -9174,6 +9605,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411580793}
   m_CullTransparentMesh: 1
+--- !u!1 &1468452556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468452557}
+  - component: {fileID: 1468452558}
+  m_Layer: 0
+  m_Name: RingHead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1468452557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468452556}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.08, y: 1.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2688497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1468452558
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468452556}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: efa4ad12b2bd4e64cab9e2d82effeeeb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.25, y: 0.89}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1473130758
 GameObject:
   m_ObjectHideFlags: 0
@@ -12637,3 +13152,4 @@ SceneRoots:
   - {fileID: 482847978}
   - {fileID: 1880448234}
   - {fileID: 1318366510}
+  - {fileID: 2688497}

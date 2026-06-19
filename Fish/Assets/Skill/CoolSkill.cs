@@ -11,6 +11,7 @@ public class CoolSkill : MonoBehaviour
     public static float duration=3f;
     private SkillButton DJButton;   // 绑定的技能按钮
     [HideInInspector] public float currentCooldown;
+    [SerializeField] private float baseCooldown = 10f;
     [Header("特效")]
     [SerializeField] private GameObject freezeEffect;   // 拖入冰冻持续特效预制体或场景中的物体
     void Awake()
@@ -24,6 +25,7 @@ public class CoolSkill : MonoBehaviour
         // 初始隐藏特效（如果它一开始在场景中是激活的）
         if (freezeEffect != null)
             freezeEffect.SetActive(false);
+        currentCooldown = baseCooldown;
     }
     void Start()
     {
@@ -41,7 +43,7 @@ public class CoolSkill : MonoBehaviour
     public void FreezeAllFish()
     {
         SkillShopManager.Instance.StartCoroutine(FreezeCoroutine(duration));
-        //DJButton.StartCooldown();
+        DJButton.StartCooldown();
     }
     public void ReduceCooldown(float seconds)
     {

@@ -43,7 +43,12 @@ public class SkillButtonManager : MonoBehaviour
         nextActivateIndex++;
         return true;
     }
-
+    public SkillButton GetLastActivatedButton()
+    {
+        if (nextActivateIndex > 0 && nextActivateIndex <= skillButtons.Length)
+            return skillButtons[nextActivateIndex - 1];
+        return null;
+    }
     /// <summary>
     /// 扩展一个槽位（购买“换条大船”时调用）
     /// </summary>

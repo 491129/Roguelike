@@ -131,18 +131,18 @@ public class SkillShopManager : MonoBehaviour
         TotemManager.Instance.ExpandSlots();
     }
 
-    public void BommSkill()
-    {
-        Debug.Log($"CanPurchase: {SkillButtonManager.Instance.CanPurchase}, AllActivated: {SkillButtonManager.Instance.AllActivated}, nextActivateIndex: ..., maxSlotCount: ...");
-        if (!SkillButtonManager.Instance.CanPurchase)
-        {
-            Debug.Log("技能已满");
-            return;
-        }
-        DepthChargeSkill.isUsed = true;
-        GetComponent<DepthChargeSkill>().enabled = true;
-        SkillButtonManager.Instance.ActivateNextSkill(currentSlots[0].icon, () => { Debug.Log("Button"); DepthChargeSkill.Instance.Use(); });
-    }
+    //public void BommSkill()
+    //{
+    //    Debug.Log($"CanPurchase: {SkillButtonManager.Instance.CanPurchase}, AllActivated: {SkillButtonManager.Instance.AllActivated}, nextActivateIndex: ..., maxSlotCount: ...");
+    //    if (!SkillButtonManager.Instance.CanPurchase)
+    //    {
+    //        Debug.Log("技能已满");
+    //        return;
+    //    }
+    //    //DepthChargeSkill.isUsed = true;
+    //    GetComponent<DepthChargeSkill>().enabled = true;
+    //    SkillButtonManager.Instance.ActivateNextSkill(currentSlots[0].icon, () => { Debug.Log("Button"); DepthChargeSkill.Instance.Use(); });
+    //}
     #region //fish
     public void YFskill()
     {
@@ -288,15 +288,10 @@ public class SkillShopManager : MonoBehaviour
 
             for (int i = 0; i < slotCount; i++)
         {
-                if (i >= slotImages.Length) break;
+               if (i >= slotImages.Length) break;
 
                  if (currentSlots[i] != null)
                  {
-                // 设置悬停数据
-                SlotHover hover = slotImages[i].GetComponent<SlotHover>();
-                // 如果 SlotHover 挂在按钮上，也可从 slotButtons[i] 获取
-                if (hover == null) hover = slotButtons[i].GetComponent<SlotHover>();
-                if (hover != null) hover.SetItem(currentSlots[i]);
                     if (currentSlots[i].isMarketTicket && TotemManager.Instance.chuanzhang)
                     {
                     slotImages[i].sprite = currentSlots[i].icon;
@@ -316,13 +311,14 @@ public class SkillShopManager : MonoBehaviour
             }
                  else
                  {
-                slotImages[i].sprite = null;
-                slotButtons[i].interactable = false;
-                if (i >= 5 && !hasExtraSlot) slotImages[i].gameObject.SetActive(false);
+                    slotImages[i].sprite = null;
+                    slotButtons[i].interactable = false;
+                    if (i >= 5 && !hasExtraSlot) slotImages[i].gameObject.SetActive(false);
                  }
-            
-        }
-       // UpdateSlotUI00();
+                    SlotHover hover = slotImages[i].GetComponent<SlotHover>();
+                    if (hover == null) hover = slotButtons[i].GetComponent<SlotHover>();
+                    if (hover != null) hover.SetItem(currentSlots[i]);
+               }
     }
     //补给券加载
     void UpdateSlotUI00()
@@ -404,19 +400,42 @@ public class SkillShopManager : MonoBehaviour
 
             // 根据技能ID，准备使用回调
             System.Action onUse = null;
+        
             switch (item.itemName)
             {
                 case "冰冻":
                     onUse = () => CoolSkill.Instance.FreezeAllFish();
                     break;
                 case "深水炸弹":
-                    onUse = () => DepthChargeSkill.Instance.Use();
+                    onUse = () => DepthChargeSkill.Instance?.Use();
                     break;
-                            
+                case "电磁漩涡":
+                    onUse = () => VortexSkill.Instance?.Use();
+                    break;
+                case "强化":
+                    onUse = () => StrengthenSkill.Instance?.Use();
+                    break;
             }
-            // 激活技能按钮，并传入商品图标和使用回调
-            SkillButtonManager.Instance.ActivateNextSkill(item.icon, onUse);
 
+            if (onUse != null)
+            {
+                SkillButtonManager.Instance.ActivateNextSkill(item.icon, onUse);
+
+                // 绑定按钮给技能（需要绑定冷却控制的技能）
+                SkillButton lastBtn = SkillButtonManager.Instance.GetLastActivatedButton();
+                if (lastBtn != null)
+                {
+                    if (item.itemName == "电磁漩涡")
+                        VortexSkill.Instance?.BindButton(lastBtn);
+                    else if (item.itemName == "深水炸弹")
+                        DepthChargeSkill.Instance?.BindButton(lastBtn);
+                    else if (item.itemName == "冰冻")
+                        CoolSkill.Instance?.BindButton(lastBtn);
+                    else if (item.itemName == "强化")   // 新增
+                        StrengthenSkill.Instance?.BindButton(lastBtn);
+                }
+
+            }
             // 记录已购技能ID
             if (!string.IsNullOrEmpty(item.skillID))
             {
@@ -522,7 +541,6 @@ public class SkillShopManager : MonoBehaviour
     //冰冻技能冷却时间减少
     public void CoolChange00()
     {
-        //SkillButton.duration = 4f;
         CoolSkill.Instance.ReduceCooldown(2f);
     }
     /// <summary>
@@ -536,6 +554,42 @@ public class SkillShopManager : MonoBehaviour
     {
         if (DepthChargeSkill.Instance != null)
             DepthChargeSkill.Instance.ReduceCooldown(2f);  // 每次减少2秒
+    }
+    public void BoomChange01()
+    {
+        DepthChargeSkill.Instance?.IncreaseRadius(1.3f);
+    }
+    public void BoomChange02()
+    {
+        DepthChargeSkill.Instance?.EnableDotZone();
+    }
+    public void VortexChange00()
+    {
+        VortexSkill.Instance?.ReduceCooldown(2f);
+    }
+
+    public void VortexChange01()
+    {
+        VortexSkill.Instance?.IncreaseRadius(1.3f);
+    }
+
+    public void VortexChange02()
+    {
+        VortexSkill.Instance?.IncreaseDuration(2f);
+    }
+    public void StrengthenChange00()
+    {
+        StrengthenSkill.Instance?.ReduceCooldown(2f);
+    }
+
+    public void StrengthenChange01()
+    {
+        StrengthenSkill.Instance?.IncreaseDuration(2f);
+    }
+
+    public void StrengthenChange02()
+    {
+        StrengthenSkill.Instance?.IncreaseBoostRate(0.2f);  // 例如 +0.2 倍
     }
     //刷新按钮
     public void OnRefreshButtonClicked()
