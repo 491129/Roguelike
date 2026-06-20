@@ -39,20 +39,33 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (isHitting) return;
-
         if (other.CompareTag("Fish") || other.CompareTag("BOSS"))
         {
+            FishAttrbute fish = other.GetComponent<FishAttrbute>();
+            Boss boss = other.GetComponent<Boss>();
+            if (fish == null && boss == null) return;
+            // 锁定模式下，只攻击锁定目标，其他鱼穿透
+            if (LockSkill.Instance != null && LockSkill.Instance.IsLockModeActive)
+            {
+                Component locked = LockSkill.Instance.LockedTarget;
+                if (locked == null) return;
+                if (fish != null && fish != locked) return;
+                if (boss != null && boss != locked) return;
+
+                //Debug.Log($"锁定模式激活，当前目标: {(LockSkill.Instance.LockedTarget != null ? LockSkill.Instance.LockedTarget.name : "null")}");
+                //if (fish != LockSkill.Instance.LockedTarget)
+                //    return;
+            }
+            // 正常处理命中
             isHitting = true;
             col.enabled = false;
             rb.velocity = Vector2.zero;
-
             // 播放两个特效在子弹当前位置
             SpawnHitEffects(transform.position);
-        
-            StartCoroutine(DelayedDeactivate(0.1f)); // 0.3秒后回收子弹
+
+            StartCoroutine(DelayedDeactivate(0.1f));
         }
     }
-
     void SpawnHitEffects(Vector3 position)
     {
         if (hitEffectA)

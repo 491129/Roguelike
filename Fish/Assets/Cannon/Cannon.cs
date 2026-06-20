@@ -35,14 +35,15 @@ public class Cannon : MonoBehaviour
     void Update()
     {
         AimAtMouse();
-        if (Input.GetMouseButton(0) && Time.time >= nextFireTime
-            && !EventSystem.current.IsPointerOverGameObject())
+        bool lockedButNoTarget = LockSkill.Instance != null
+                             && LockSkill.Instance.IsLockModeActive
+                             && LockSkill.Instance.LockedTarget == null;
+        if (Input.GetMouseButton(0) && !lockedButNoTarget && Time.time >= nextFireTime
+        && !EventSystem.current.IsPointerOverGameObject())
         {
             Fire();
             nextFireTime = Time.time + fireRate;
-            Debug.Log("fireRate:"+fireRate+ "attackSpeedMultiplier" + attackSpeedMultiplier);
         }
-
     }
 
     void AimAtMouse()

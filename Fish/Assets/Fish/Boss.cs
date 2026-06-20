@@ -12,7 +12,7 @@ public class Boss : MonoBehaviour
     private Vector2 moveDirection;
     private SpriteRenderer sr;
     private Collider2D col;
-    private bool isDead = false;
+    public bool isDead = false;
 
     [Header("停留设置")]
     [SerializeField] private float stopDistance = 1.5f;   // 距中心点多近时停留
@@ -27,13 +27,12 @@ public class Boss : MonoBehaviour
 
     //SkillShopManager skillShopManager;
     public bool bossDefeated = false;
+    public int[] catchRates = new int[5] { 8000, 8500, 9000, 9500, 9800 }; // 万分比，可在预制体修改
+    public int goldReward = 30000000;
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
-        // 避免物理系统干扰，设为运动学刚体
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null) rb.isKinematic = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,21 +46,32 @@ public class Boss : MonoBehaviour
         }
         else if (collision.CompareTag("Bullet"))
         {
-            // 所有Boss均有概率逃脱，catchProbability表示成功造成伤害的概率
-            if (Random.value > catchProbability)
-            {
-                // 逃脱：此次攻击无效，可加入视觉反馈
-                Debug.Log($"{bossType} 闪避了攻击");
-                return;
-            }
-
-            health -= 2;
-            if (health <= 0)
-            {
-                Die();
-                bossDefeated = true;
-            }
+            HandleBulletHit();
         }
+    }
+    public void HandleBulletHit()
+    {
+        if (isDead) return;
+
+        // 锁定检查：只有被锁定的 Boss 才能被击中
+        if (LockSkill.Instance != null && LockSkill.Instance.IsLockModeActive && LockSkill.Instance.LockedTarget != null)
+        {
+            // 注意：LockedTarget 现在可以存储 Boss，需要修改 LockSkill
+            if (this != LockSkill.Instance.LockedTarget)
+                return;
+        }
+
+        // 概率逃脱
+        int lvl = ALLCannon.currentLevel;
+        lvl = Mathf.Clamp(lvl, 0, catchRates.Length - 1);
+        float prob = catchRates[lvl] / 10000f;
+        if (Random.value > prob)
+        {
+            Debug.Log($"{bossType} 闪避了攻击");
+            return;
+        }
+        Die();
+        bossDefeated = true;
     }
 
     public void Init(Vector2 dir)
@@ -118,8 +128,10 @@ public class Boss : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+        if (LockSkill.Instance != null)
+            LockSkill.Instance.OnTargetDied();
         col.enabled = false;
-
+        GameManager.AddCoin(goldReward);      // 击杀奖励
         // 通知BossManager移除Debuff
         if (BossManager.Instance != null)
             BossManager.Instance.OnBossDefeated(this);

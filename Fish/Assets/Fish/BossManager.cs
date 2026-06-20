@@ -15,7 +15,6 @@ public class BossManager : MonoBehaviour
     [SerializeField] private Cannon cannon;
     [SerializeField] private ALLCannon AllCannon;
     [SerializeField] private GameObject warningUI;
-    [SerializeField] private GameObject[] bossPrefabs;
 
     [Header("设置")]
     [SerializeField] private float warningDuration = 30f;
@@ -28,6 +27,13 @@ public class BossManager : MonoBehaviour
     [Header("关闭技能")]
    // private SkillButtonManager skillButtonManager;
     private SkillButton disabledButton;
+    [Header("Boss 预制体")]
+    [SerializeField] private GameObject[] normalBossPrefabs;   // 4个常规Boss
+    [SerializeField] private GameObject finalBossPrefab;        // 章鱼
+
+    [Header("Boss 阶段时间 (分钟)")]
+    [SerializeField] private float[] battleStartMinutes = new float[] { 4f, 8.5f, 16f };
+    private bool[] battleTriggered = new bool[3];   // 3个阶段
     class ActiveBoss
     {
         public GameObject obj;
@@ -41,18 +47,14 @@ public class BossManager : MonoBehaviour
 
     void Update()
     {
-        float elapsed = timerUI.TimeElapsed;
-        float total = timerUI.TotalTime;
+        float elapsedMinutes = timerUI.TimeElapsed / 60f;
 
-        for (int i = 0; i < triggerPercents.Length; i++)
+        for (int i = 0; i < battleStartMinutes.Length; i++)
         {
-            if (triggered[i]) continue;
-            float spawnTime = total * (1f - triggerPercents[i]);
-            float warnTime = spawnTime - warningDuration;
-
-            if (elapsed >= warnTime)
+            if (battleTriggered[i]) continue;
+            if (elapsedMinutes >= battleStartMinutes[i])
             {
-                triggered[i] = true;
+                battleTriggered[i] = true;
                 StartCoroutine(BossSequence(i));
             }
         }
@@ -65,8 +67,13 @@ public class BossManager : MonoBehaviour
         yield return new WaitForSeconds(warningDuration);
         warningUI.SetActive(false);
 
+        GameObject bossPrefab;
+        if (index == 2)   // 最终Boss
+            bossPrefab = finalBossPrefab;
+        else
+            bossPrefab = normalBossPrefabs[Random.Range(0, normalBossPrefabs.Length)];
+
         var (pos, dir) = GetRandomSpawnData();
-        GameObject bossPrefab = bossPrefabs[Random.Range(0, bossPrefabs.Length)];
         GameObject bossObj = Instantiate(bossPrefab, pos, Quaternion.identity);
         Boss boss = bossObj.GetComponent<Boss>();
 
@@ -105,7 +112,6 @@ public class BossManager : MonoBehaviour
                     break;
                     
             }
-            // 修正：字段名 bossType，而不是 type
             activeBosses.Add(new ActiveBoss { obj = bossObj, bossType = boss.bossType });
         }
         BGMPlayer.PlayBoss();

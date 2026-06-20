@@ -65,11 +65,11 @@ using DG.Tweening;
         {
             HandleBulletHit();
         }
-        else if (collision.tag == "Wall")
+        if (collision.tag == "Wall")
             Destroy(gameObject);
     }
     public void HandleBulletHit()
-        {
+    {
             if (isDead) return;   // 防止重复触发
 
             // 1. 获取当前炮台等级 (0~4)
@@ -77,15 +77,13 @@ using DG.Tweening;
                                                         // 2. 查表得到该鱼的基础捕捉率（万分比）
             float baseCatchRate = FishDataConfig.CatchRates[fishID - 1, cannonLevel] / 10000f;
         // 3. 应用全局捕鱼加成（商人海盗、挑剔海盗等）
-        //float catchMultiplier = TotemManager.Instance != null ? TotemManager.Instance.CatchRateMultiplier : 1f;
-        //float catchMultiplier = 1f;
             float finalCatchRate = Mathf.Clamp01(baseCatchRate * CatchRateMultiplier);
 
             Debug.Log(baseCatchRate+"1" +finalCatchRate+"2"+ CatchRateMultiplier);
 
         // 4. 判断是否捕捉成功
         if (Random.value < finalCatchRate)
-            {
+        {
             if (TotemManager.Instance.huangjin)
             {
                 TotemManager.Instance?.TriggerEffectByName("黄金渔网");
@@ -115,15 +113,23 @@ using DG.Tweening;
                 TotemManager.Instance?.TriggerEffectByName("精兵");
             }
                 // 捕获成功 -> 死亡逻辑
+            // 如果已被锁定，通知锁定技能
+            if (LockSkill.Instance != null && LockSkill.Instance.IsLockModeActive && LockSkill.Instance.LockedTarget != null)
+            {
+                if (this != LockSkill.Instance.LockedTarget)
+                    return;   // 不是锁定目标，子弹/渔网无效
+            }
                 isDead = true;
-                col.enabled = false;
+            if (LockSkill.Instance != null)
+                LockSkill.Instance.OnTargetDied();
+            col.enabled = false;
                 StartCoroutine(DieAfterDelay(0.2f));
 
-                if (deathEffect != null)
-                {
+            if (deathEffect != null)
+            {
                     GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
                     Destroy(effect, deathEffectDuration);
-                }
+            }
                 SpawnCoinAndFly();
                 Coin100();
 
@@ -143,11 +149,10 @@ using DG.Tweening;
                         if (GFSkill.isUsed)
                         {
                             GameManager.AddCoin(Mathf.RoundToInt(GFSkill.fishCoin * getgoldMore));
-                            Debug.Log("222" + GFSkill.fishCoin);
+                           
                         }
                         else
                             GameManager.AddCoin(coin);
-                        Debug.Log("222" + coin);
                         break;
                     case FishType.CF:
                         if (CFSkill.isUsed)
@@ -195,13 +200,11 @@ using DG.Tweening;
                         break;
                         // return goldNum;
                 }
-            }
-            else
-            {
-                // 逃脱
-                StartCoroutine(EscapeRoutine());
-            Debug.Log("fish222");
-            }
+        }
+                else
+                {
+                    StartCoroutine(EscapeRoutine());
+                }
         }
 
         IEnumerator EscapeRoutine()
