@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -100,13 +100,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossType: FastShark
-  speed: 5
-  health: 12
+  speed: 1
   catchProbability: 0.8
-  stopDistance: 1.5
-  minStayDuration: 3
-  maxStayDuration: 5
+  rotationSmoothSpeed: 360
+  outOfScreenMargin: 0.22
+  isDead: 0
   bossDefeated: 0
+  catchRates: 0100000002000000030000000a000000c8000000
+  goldReward: 30000000
 --- !u!95 &-2922792865181371120
 Animator:
   serializedVersion: 5

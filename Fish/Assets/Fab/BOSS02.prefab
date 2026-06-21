@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.15}
+  m_LocalScale: {x: 0.22, y: 0.22, z: 0.11}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f3904d6d67e68eb4eb7e9b3f27239575, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c3124b1c94745c34b8f4c025d98e7bb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,12 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossType: FreezeTurtle
   speed: 1
-  health: 16
-  catchProbability: 0.8
-  stopDistance: 1.5
-  minStayDuration: 3
-  maxStayDuration: 5
+  catchProbability: 0.5
+  rotationSmoothSpeed: 360
+  outOfScreenMargin: 0.22
+  isDead: 0
   bossDefeated: 0
+  catchRates: 0100000002000000030000000a000000c8000000
+  goldReward: 35000000
 --- !u!95 &-7533001967050841424
 Animator:
   serializedVersion: 5
@@ -117,7 +118,7 @@ Animator:
   m_GameObject: {fileID: 7556482849136550777}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0d13f1fda3eccba4b8c286f6de0be9af, type: 2}
+  m_Controller: {fileID: 9100000, guid: ee44717409d6bc84cb68f3b0e1ab8b9d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -164,7 +165,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 15.17, y: 19.89}
+    oldSize: {x: 15.670001, y: 23.272053}
     newSize: {x: 0.8828125, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

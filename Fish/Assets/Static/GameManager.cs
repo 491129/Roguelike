@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
         ;
         Coin += amount;
         if (Instance != null && Instance.coinText != null)
-            Instance.coinText.text = "Coin£∫" + Coin;
-            Instance.coinText1.text = "Coin£∫" + Coin;
+            Instance.coinText.text = Coin.ToString();
+            Instance.coinText1.text = Coin.ToString();
     }
   
     public static bool SpendCoin(int amount)
@@ -55,16 +55,16 @@ public class GameManager : MonoBehaviour
         Instance = this;
         // ≥ı ºœ‘ æ
         if (coinText != null)
-            coinText.text = "Coin£∫" + Coin;
+            coinText.text = Coin.ToString();
         if (coinText1 != null)
-            coinText1.text = "Coin£∫" + Coin;
+            coinText1.text = Coin.ToString();
     }
     private static void UpdateUI()
     {
         if (Instance != null && Instance.coinText != null)
-            Instance.coinText.text = "Coin£∫" + Coin;
+            Instance.coinText.text = Coin.ToString();
         if (Instance != null && Instance.coinText1 != null)
-            Instance.coinText1.text = "Coin£∫" + Coin;
+            Instance.coinText1.text = Coin.ToString(); 
     }
 
 }

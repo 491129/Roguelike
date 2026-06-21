@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.21, y: 0.21, z: 0.21}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,12 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossType: KillerWhale
   speed: 1
-  health: 10
   catchProbability: 0.4
-  stopDistance: 1.5
-  minStayDuration: 3
-  maxStayDuration: 5
+  rotationSmoothSpeed: 360
+  outOfScreenMargin: 0.22
+  isDead: 0
   bossDefeated: 0
+  catchRates: 0100000002000000030000000a000000c8000000
+  goldReward: 45000000
 --- !u!95 &-7718350893325746411
 Animator:
   serializedVersion: 5

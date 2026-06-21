@@ -29,7 +29,7 @@ public class SkillButtonManager : MonoBehaviour
     /// <summary>
     /// 激活下一个技能按钮（购买普通技能时调用）
     /// </summary>
-    public bool ActivateNextSkill(Sprite skillSprite, System.Action skillEffect)
+    public bool ActivateNextSkill(Sprite skillSprite, System.Action skillEffect, string skillID)
     {
         if (AllActivated)
         {
@@ -40,6 +40,7 @@ public class SkillButtonManager : MonoBehaviour
         SkillButton btn = skillButtons[nextActivateIndex];
         btn.Activate(skillSprite);
         btn.OnSkillUsed = skillEffect;
+        btn.skillID = skillID;
         nextActivateIndex++;
         return true;
     }
@@ -68,6 +69,61 @@ public class SkillButtonManager : MonoBehaviour
         }
         return true;
     }
+    public System.Action<SkillButton> OnSkillRemoved;
 
+    public void RemoveSkill(SkillButton btn)
+    {
+        if (!btn.IsActive) return;
+
+        // 找到该按钮在数组中的索引
+        int removeIndex = -1;
+        for (int i = 0; i < skillButtons.Length; i++)
+        {
+            if (skillButtons[i] == btn)
+            {
+                removeIndex = i;
+                break;
+            }
+        }
+        if (removeIndex < 0) return;
+
+        // 清除按钮状态
+        btn.ClearSkill();
+
+        // 通知外部，传递按钮以便获取主技能ID
+        OnSkillRemoved?.Invoke(btn);
+
+        // 从移除位置开始，将后面的激活按钮向前移动
+        for (int i = removeIndex; i < skillButtons.Length - 1; i++)
+        {
+            // 如果下一个按钮是激活的，则把它的数据复制到当前按钮
+            if (skillButtons[i + 1].IsActive)
+            {
+                // 复制精灵和回调
+                skillButtons[i].Activate(skillButtons[i + 1].activeSprite);
+                skillButtons[i].OnSkillUsed = skillButtons[i + 1].OnSkillUsed;
+                skillButtons[i + 1].ClearSkill();
+            }
+            else
+            {
+                // 后面的未激活，直接清除当前按钮即可
+                skillButtons[i].ClearSkill();
+            }
+        }
+
+        // 更新 nextActivateIndex
+        int activeCount = 0;
+        for (int i = 0; i < skillButtons.Length; i++)
+        {
+            if (skillButtons[i].IsActive) activeCount++;
+        }
+        nextActivateIndex = activeCount;
+
+        // 隐藏超出容量的按钮（如果第4个按钮之前被激活但现在不需要了）
+        if (maxActiveSlots == 4 && activeCount < 4 && skillButtons[3].gameObject.activeSelf)
+        {
+            // 这里不立即隐藏，因为扩容是永久的，但槽位可以留空。如果希望严格对应容量，可以保留显示。
+        }
+    }
 
 }

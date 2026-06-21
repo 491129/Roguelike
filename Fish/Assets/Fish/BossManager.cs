@@ -88,7 +88,7 @@ public class BossManager : MonoBehaviour
                 case "FreezeTurtle":
                     cannon.ApplyDebuff("Freeze");
                     break;
-                case "ThreeHeadShark":
+                case "KillerWhale":
                     SkillButtonManager sm = SkillButtonManager.Instance;
                     if (sm == null) break;
 
@@ -128,7 +128,7 @@ public class BossManager : MonoBehaviour
         if (bossObj != null)
         {
             RemoveBossDebuff(bossObj);
-            Destroy(bossObj);
+           // Destroy(bossObj);
         }
         BGMPlayer.PlayNormal();
     }
@@ -152,7 +152,7 @@ public class BossManager : MonoBehaviour
             case "FreezeTurtle":
                 cannon.RemoveDebuff("Freeze");
                 break;
-            case "ThreeHeadShark":
+            case "KillerWhale":
                 if (disabledButton != null)
                 {
                     disabledButton.RestoreByBoss();

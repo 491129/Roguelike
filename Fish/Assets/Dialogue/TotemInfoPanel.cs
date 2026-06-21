@@ -28,4 +28,8 @@ public class TotemInfoPanel : MonoBehaviour
         TotemManager.Instance?.RemoveTotem(currentIndex);
         Hide();
     }
+    void Cancel()
+    {
+        Hide();
+    }
 }

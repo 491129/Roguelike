@@ -34,6 +34,9 @@ public class SkillShopManager : MonoBehaviour
 
         public GameObject totemGrayPrefab;     // 灰色底图预制体（世界空间，常驻显示）
         public GameObject totemEffectPrefab;   // 图腾对应的粒子特效预制体
+
+        [Header("刷新权重 (总比例10000)")]
+        public int refreshWeight = 100;
     }
     private HashSet<string> purchasedSkills = new HashSet<string>();
 
@@ -97,6 +100,10 @@ public class SkillShopManager : MonoBehaviour
     public int finalPriceNol;
     //
     public HashSet<string> purchasedItemNames = new HashSet<string>();
+
+    [Header("删除技能面板")]
+    [SerializeField] private DeleteSkillPanel deleteSkillPanel;   // 拖入面板
+
     private void Start()
     {
         shopRefreshCount00 = 0;
@@ -111,6 +118,7 @@ public class SkillShopManager : MonoBehaviour
         RefreshAllSlots();
         BJRefreshAllSlots();
         UpdateRefreshCostText();
+        SkillButtonManager.Instance.OnSkillRemoved += HandleSkillRemoved;
 
     }
     private void Update()
@@ -122,7 +130,70 @@ public class SkillShopManager : MonoBehaviour
         }
         
     }
-   
+    void HandleSkillRemoved(SkillButton btn)
+    {
+        string mainSkillID = btn.skillID;
+        if (string.IsNullOrEmpty(mainSkillID)) return;
+
+        // 1. 从 purchasedSkills 中移除主技能ID
+        purchasedSkills.Remove(mainSkillID);
+
+        // 2. 找到所有 requiredSkillID == mainSkillID 的加成商品，移除它们的购买记录
+        List<string> toRemove = new List<string>();
+        foreach (var item in allItems)
+        {
+            if (item.requiredSkillID == mainSkillID)
+            {
+                // 从 purchasedSkills 中移除（如果有）
+                purchasedSkills.Remove(item.skillID);
+                // 从 purchasedItemNames 中移除（如果记录为唯一购买）
+                purchasedItemNames.Remove(item.itemName);
+                // 如果该商品有对应的技能物体，尝试重置或禁用
+                // （可扩展，此处先忽略）
+            }
+        }
+
+        // 3. 禁用主技能物体并重置升级效果（可选）
+        // 通过 skillID 找到对应的技能物体，并调用 ResetSkill 方法
+        // 例如：冰冻技能可调用 CoolSkill.Instance.ResetUpgrades();
+        // 这里建议在各个技能脚本中添加 ResetUpgrades() 静态方法，或直接禁用物体。
+        // 如果没有，至少将技能物体 SetActive(false)
+        ResetMainSkillObject(mainSkillID);
+    }
+
+    void ResetMainSkillObject(string skillID)
+    {
+        // 根据技能ID，禁用对应的技能物体（使技能完全失效）
+        switch (skillID)
+        {
+            case "Skill1":
+                if (CoolSkill.Instance != null)
+                    CoolSkill.Instance.enabled = false;
+                    //CoolSkill.ResetUpgrades();
+                break;
+            case "Skill2":
+                if (DepthChargeSkill.Instance != null)
+                    DepthChargeSkill.Instance.enabled = false;
+                break;
+            case "Skill3":
+                if (VortexSkill.Instance != null)
+                    VortexSkill.Instance.enabled = false;
+                break;
+            case "Skill4":
+                if (StrengthenSkill.Instance != null)
+                    StrengthenSkill.Instance.enabled = false;
+                break;
+            case "Skill5":
+                if (LockSkill.Instance != null)
+                    LockSkill.Instance.enabled = false;
+                break;
+            case "Skill6":
+                if (LanserSkill.Instance != null)
+                    LanserSkill.Instance.enabled=false;
+                break;
+                // 如果有其他技能，继续添加 case
+        }
+    }
     public void CSSkill()
     {
         hasExtraSlot = true;
@@ -205,7 +276,7 @@ public class SkillShopManager : MonoBehaviour
     }
     public void MDSkill()
     {
-        Boss.skillDuration += 10;
+        Boss.passes += 2;
     }
     #endregion  
     public void RefreshAllSlots()
@@ -231,11 +302,13 @@ public class SkillShopManager : MonoBehaviour
             return;
         }
         // ----- 2. 构建加权候选池（同一商品出现多次）-----
+        // 构建加权池
         List<ShopItemData> weightedPool = new List<ShopItemData>();
         foreach (var item in available)
         {
-            int weight = 1;
-            // 装置大亨：类型2或3概率×2
+            int weight = item.refreshWeight;   // 使用配置的基础权重
+
+            // 装置大亨：装置类商品概率×2
             if (doubleType23Weight && item.isZZ)
                 weight *= 2;
             // 市场商人：市场券概率×2
@@ -244,7 +317,7 @@ public class SkillShopManager : MonoBehaviour
             // 大法师：图腾概率×2
             if (doubleTotemWeight && item.isTotem)
                 weight *= 2;
-            Debug.Log($"商品：{item.itemName}，基础权重：{weight}");
+
             for (int i = 0; i < weight; i++)
                 weightedPool.Add(item);
         }
@@ -421,7 +494,7 @@ public class SkillShopManager : MonoBehaviour
 
             if (onUse != null)
             {
-                SkillButtonManager.Instance.ActivateNextSkill(item.icon, onUse);
+                SkillButtonManager.Instance.ActivateNextSkill(item.icon, onUse,item.skillID);
 
                 // 绑定按钮给技能（需要绑定冷却控制的技能）
                 SkillButton lastBtn = SkillButtonManager.Instance.GetLastActivatedButton();

@@ -281,7 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7946527}
   - component: {fileID: 7946526}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DestoryL
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -485,6 +485,7 @@ MonoBehaviour:
   button: {fileID: 9868723}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
   activeSprite: {fileID: 0}
+  skillID: 
 --- !u!1 &13316301
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,6 +561,127 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13316301}
+  m_CullTransparentMesh: 1
+--- !u!1 &14682261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14682262}
+  - component: {fileID: 14682265}
+  - component: {fileID: 14682264}
+  - component: {fileID: 14682263}
+  m_Layer: 5
+  m_Name: Button (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &14682262
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14682261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1528866471}
+  m_Father: {fileID: 394092054}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -322}
+  m_SizeDelta: {x: 500, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &14682263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14682261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 14682264}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &14682264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14682261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &14682265
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14682261}
   m_CullTransparentMesh: 1
 --- !u!1 &14865550
 GameObject:
@@ -1133,6 +1255,139 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174941919}
   m_CullTransparentMesh: 1
+--- !u!1 &186529852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 186529853}
+  - component: {fileID: 186529856}
+  - component: {fileID: 186529855}
+  - component: {fileID: 186529854}
+  m_Layer: 5
+  m_Name: Cancel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &186529853
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186529852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 932927947}
+  m_Father: {fileID: 394092054}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 782, y: 397}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &186529854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186529852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 186529855}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TotemInfoPanel, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &186529855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186529852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &186529856
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186529852}
+  m_CullTransparentMesh: 1
 --- !u!1 &190802626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1610,7 @@ MonoBehaviour:
   button: {fileID: 217250644}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
   activeSprite: {fileID: 0}
+  skillID: 
 --- !u!1 &223019044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,6 +1839,139 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235737124}
+  m_CullTransparentMesh: 1
+--- !u!1 &252505430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252505431}
+  - component: {fileID: 252505434}
+  - component: {fileID: 252505433}
+  - component: {fileID: 252505432}
+  m_Layer: 5
+  m_Name: Cancel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &252505431
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252505430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1341378138}
+  m_Father: {fileID: 1256249397}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 782, y: 397}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &252505432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252505430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 252505433}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1256249400}
+        m_TargetAssemblyTypeName: TotemInfoPanel, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &252505433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252505430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &252505434
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252505430}
   m_CullTransparentMesh: 1
 --- !u!1 &286529959
 GameObject:
@@ -2130,6 +2519,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368849442}
   m_CullTransparentMesh: 1
+--- !u!1 &394092053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394092054}
+  - component: {fileID: 394092057}
+  - component: {fileID: 394092056}
+  - component: {fileID: 394092055}
+  m_Layer: 5
+  m_Name: Panel (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &394092054
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394092053}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1842889803}
+  - {fileID: 14682262}
+  - {fileID: 186529853}
+  m_Father: {fileID: 1264243542}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 693, y: -281}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &394092055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394092053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1302239215a564fa3c82b2cda694b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmButton: {fileID: 14682263}
+  cancelButton: {fileID: 186529854}
+--- !u!114 &394092056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394092053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.6949685, b: 0.6949685, a: 0.5568628}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &394092057
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394092053}
+  m_CullTransparentMesh: 1
 --- !u!1 &408815001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,7 +2973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4295,9 +4777,9 @@ MonoBehaviour:
   hasExtraSlot: 0
   allItems:
   - itemName: YF
-    price: 10
+    price: 1000
     icon: {fileID: 21300000, guid: efc5f331b1f3f934ba26577ec3e8747b, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01"
+    description: "\u5C0F\u9EC4\u9C7C\u6536\u8D2D\u4EF7\u589E\u52A0100\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4321,10 +4803,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 280
   - itemName: CF
-    price: 11
+    price: 1200
     icon: {fileID: 21300000, guid: 273ed2bc7c3ed3c46acd49d33b37b280, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(CF"
+    description: "\u5C0F\u4E11\u9C7C\u6536\u8D2D\u4EF7\u589E\u52A0100\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4344,14 +4827,15 @@ MonoBehaviour:
     requiredSkillID: 
     isZZ: 0
     isMarketTicket: 1
-    isTotem: 0
+    isTotem: 1
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 240
   - itemName: GB
-    price: 12
+    price: 2200
     icon: {fileID: 21300000, guid: c81cf011f6f09c94caeb0e77d2ea9b82, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GB"
+    description: "\u6CB3\u8C5A\u6536\u8D2D\u4EF7\u589E\u52A01000\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4375,10 +4859,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 192
   - itemName: GD
-    price: 13
+    price: 5000
     icon: {fileID: 21300000, guid: 7c5fc4e3321684841bde3b0670bce9ce, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GD"
+    description: "\u91D1\u9F99\u9C7C\u6536\u8D2D\u4EF7\u589E\u52A0200000\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4402,10 +4887,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: GF
-    price: 14
+    price: 2200
     icon: {fileID: 21300000, guid: 59c254ee57e226349b487513636c702d, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GF"
+    description: "\u6CB3\u8C5A\u6536\u8D2D\u4EF7\u589E\u52A01000\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4429,10 +4915,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 192
   - itemName: GF00
-    price: 17
+    price: 1400
     icon: {fileID: 21300000, guid: 83198ad1af9fd5543aa1fef2aaad5256, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(GF00"
+    description: "\u80D6\u5934\u91D1\u9C7C\u6536\u8D2D\u4EF7\u589E\u52A0200\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4456,10 +4943,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 224
   - itemName: MT
-    price: 15
+    price: 3800
     icon: {fileID: 21300000, guid: 54c9328bd29627f4884a043407961032, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01(MT"
+    description: "\u8760\u9CBC\u6536\u8D2D\u4EF7\u589E\u52A030000\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4483,10 +4971,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 180
   - itemName: "\u5F3A\u5316\u70AE\u7BA1"
-    price: 31
+    price: 2600
     icon: {fileID: 346390752, guid: 2ee3055afc2838c4dae59c229781bab6, type: 3}
-    description: "\u5F3A\u5316\u70AE\u7BA1\uFF1A\u6355\u9C7C\u6982\u7387\u63D0\u5347X%\r"
+    description: "\u8FD9\u95E8\u70AE\u73B0\u5728\u8FDE\u6D77\u5996\u90FD\u80FD\u8F70\u4E0B\u6765\u3002\n\u6548\u679C\uFF1A\u6355\u9C7C\u6982\u7387+25%\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4498,10 +4987,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 47600214465190543, guid: e2ab4f850a4efa045813349b004e1eb6, type: 3}
+    refreshWeight: 240
   - itemName: "\u5FEB\u901F\u586B\u88C5"
-    price: 32
+    price: 2400
     icon: {fileID: -1864364702, guid: 6def54620b4ea364ab4aae85eb37ecb8, type: 3}
-    description: "\u5FEB\u901F\u586B\u88C5\uFF1A\u653B\u51FB\u901F\u5EA6\u63D0\u5347X%\r\r"
+    description: "\u522B\u505C\u706B\uFF0C\u9C7C\u7FA4\u53EF\u4E0D\u4F1A\u7B49\u4F60\u88C5\u5F39\u3002\n\u6548\u679C\uFF1A\u653B\u51FB\u901F\u5EA6+15%\u3002\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4513,10 +5003,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 1574867152318486090, guid: 46b9a4b4e28cceb409c85338835c76ae, type: 3}
+    refreshWeight: 240
   - itemName: "\u5E7F\u57DF\u6E14\u7F51"
-    price: 33
+    price: 2200
     icon: {fileID: 1444264069, guid: 0d9b11ab12e1ea24da2aaa3b84236ad8, type: 3}
-    description: "\u5E7F\u57DF\u6E14\u7F51\uFF1A\u6E14\u7F51\u8303\u56F4\u63D0\u5347X%\r\r\r"
+    description: "\u66F4\u5927\u7684\u7F51\uFF0C\u603B\u80FD\u635E\u5230\u66F4\u591A\u5012\u9709\u86CB\u3002\n\u6548\u679C\uFF1A\u6E14\u7F51\u8303\u56F4+20%\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4528,10 +5019,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 3019431029857833379, guid: 112a38b799a84844eadd72ef43a8ace4, type: 3}
+    refreshWeight: 240
   - itemName: "\u7701\u94B1\u8FBE\u4EBA"
-    price: 34
+    price: 2300
     icon: {fileID: -1073586913, guid: f32a8edcfd74c8745aed4976d6fc2ca7, type: 3}
-    description: "\u7701\u94B1\u8FBE\u4EBA\uFF1A\u51CF\u5C11\u653B\u51FB\u82B1\u8D39X%\r\r\r\r"
+    description: "\u771F\u6B63\u7684\u8001\u6D77\u76D7\uFF0C\u8FDE\u70AE\u5F39\u94B1\u90FD\u8981\u7B97\u4E09\u904D\u3002\n\u6548\u679C\uFF1A\u653B\u51FB\u82B1\u8D39-10%\u3002\r\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4543,10 +5035,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 8259011797463591004, guid: 10acc1880d1f5754cb06868448c5bb8a, type: 3}
+    refreshWeight: 240
   - itemName: "\u8D85\u9891\u6838\u5FC3"
-    price: 35
+    price: 2500
     icon: {fileID: 1423791520, guid: 6126040ebbe9ed9429c830c84e95b8b6, type: 3}
-    description: "\u8D85\u9891\u6838\u5FC3\uFF1A\u6240\u6709\u6280\u80FD\u51B7\u5374\u51CF\u5C11X%\r\r\r\r\r"
+    description: "\u8B66\u544A\uFF1F\u8FC7\u70ED\uFF1F\u8239\u957F\u4ECE\u4E0D\u770B\u8BF4\u660E\u4E66\u3002\n\u6548\u679C\uFF1A\u6240\u6709\u6280\u80FD\u51B7\u5374-15%\u3002\r\r\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4558,10 +5051,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 2622576004519281138, guid: ae1781e661bb21d458526e2812e4d3da, type: 3}
+    refreshWeight: 240
   - itemName: "\u9EC4\u91D1\u6E14\u7F51"
-    price: 36
+    price: 3000
     icon: {fileID: 130133172, guid: 2e0a4136f22af7b4f8b45971ea3b2f5a, type: 3}
-    description: "\u9EC4\u91D1\u6E14\u7F51\uFF1A\u6355\u9C7C\u989D\u5916\u83B7\u5F97X%\u91D1\u5E01\r\r\r\r\r\r"
+    description: "\u503C\u94B1\u7684\u9C7C\uFF0C\u603B\u4F1A\u81EA\u5DF1\u6E38\u8FDB\u91D1\u7F51\u91CC\u3002\n\u6548\u679C\uFF1A\u91D1\u5E01\u6536\u76CA+30%\u3002\r\r\r\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4573,10 +5067,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 6347882572242843660, guid: b05380c544ca41548887e8ed2a15e927, type: 3}
+    refreshWeight: 200
   - itemName: "\u719F\u80FD\u751F\u5DE7"
-    price: 38
+    price: 2800
     icon: {fileID: 1976788743, guid: c54a17f92ca20d3418063bc73d12a387, type: 3}
-    description: "\u719F\u80FD\u751F\u5DE7\uFF1A\u6BCF\u6355\u63491\u6761\u9C7C\uFF0C\u6355\u6349\u9C7C\u540E\u83B7\u5F97\u7684\u91D1\u5E01\u52A010\r\r\r\r\r\r\r"
+    description: "\u8001\u8239\u957F\u95ED\u7740\u773C\u90FD\u77E5\u9053\u9C7C\u4F1A\u5F80\u54EA\u6E38\u3002\n\u6548\u679C\uFF1A\u6BCF\u6355\u83B7\u4E00\u6761\u9C7C\u989D\u5916\u83B7\u5F97100\u91D1\u5E01\u3002\r\r\r\r\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4588,10 +5083,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 3360426502974495632, guid: 8125aed8e53886940b05c990a4eb655b, type: 3}
+    refreshWeight: 200
   - itemName: "\u9886\u4F4E\u4FDD\u4E86"
-    price: 39
+    price: 2000
     icon: {fileID: -1793073976, guid: 64d04ffa93c67ff4eb4176ff9e7b8ac7, type: 3}
-    description: "\u9886\u4F4E\u4FDD\u4E86\uFF1A\u91D1\u5E01\u4F4E\u4E8E100\u65F6\uFF0C\u7ED9\u4E8810000\u91D1\u5E01\uFF0C\u4EC51\u6B21\u89E6\u53D1\u540E\u9500\u6BC1\r\r\r\r\r\r\r\r"
+    description: "\u8239\u957F\uFF0C\u6E2F\u53E3\u6551\u6D4E\u91D1\u5230\u8D26\u4E86\u2014\u2014\u81F3\u5C11\u4ECA\u5929\u4E0D\u7528\u7A7A\u7740\u7F51\u56DE\u5BB6\u3002\n\u6548\u679C\uFF1A\u4E00\u6B21\u6027\u83B7\u5F971000000\u91D1\u5E01\u3002\r\r\r\r\r\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4603,10 +5099,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 2618313603844527420, guid: 125ef75f4cacfd44b8cfb3fffbb275c0, type: 3}
+    refreshWeight: 240
   - itemName: "\u5438\u91D1\u6D77\u76D7"
-    price: 40
+    price: 3300
     icon: {fileID: 643460736, guid: 06518a1640c985c45986c47683ea2f72, type: 3}
-    description: "\u5438\u91D1\u6D77\u76D7\uFF1A\u6BCF\u62E5\u6709XXXX\u91D1\u5E01\u65F6\uFF0C\u6355\u9C7C\u6982\u7387\u63D0\u53471%\r\r\r\r\r\r\r\r\r"
+    description: "\u91D1\u5E01\u4F1A\u81EA\u5DF1\u6EDA\u8FDB\u771F\u6B63\u8D2A\u5A6A\u7684\u4EBA\u53E3\u888B\u91CC\u3002\n\u6548\u679C\uFF1A\u6BCF\u62E5\u670910\u4E07\u91D1\u5E01\uFF0C\u4F24\u5BB3+2%\u3002\r\r\r\r\r\r\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4618,10 +5115,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 1107397318289459049, guid: 9c6fcbeaf2ed5f94180dcaa9d7c9f9c4, type: 3}
+    refreshWeight: 200
   - itemName: "\u5148\u6B20\u7740"
-    price: 41
+    price: 2700
     icon: {fileID: -1617964661, guid: 936ed83092da5fa43b9c246c69f76c50, type: 3}
-    description: "\u5148\u6B20\u7740\uFF1A\u6700\u591A\u53EF\u4EE5\u8D1F\u503A10000\r\n\r\r\r\r\r\r"
+    description: "\u8D26\u5148\u8BB0\u5728\u6E2F\u53E3\u8001\u677F\u5934\u4E0A\uFF0C\u6D3B\u4E0B\u6765\u518D\u8FD8\u3002\n\u6548\u679C\uFF1A\u7ACB\u5373\u83B7\u5F971000000\u91D1\u5E01\u8D1F\u503A\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4633,10 +5131,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 8524469487410942737, guid: 256247255301ed1418fc10ea4926e7f9, type: 3}
+    refreshWeight: 200
   - itemName: "\u5546\u4EBA\u6D77\u76D7"
-    price: 42
+    price: 2900
     icon: {fileID: -1345887259, guid: 06acf5a7ce3037145b3bb8bfc12c75bc, type: 3}
-    description: "\u5546\u4EBA\u6D77\u76D7\uFF1A\u6BCF\u4F7F\u75281\u6B21\u5E02\u573A\u5238\uFF0C\u6355\u9C7C\u6982\u7387\u63D0\u53471%\r"
+    description: "\u6BCF\u6B21\u4EA4\u6613\uFF0C\u5978\u5546\u90FD\u4F1A\u987A\u624B\u5F80\u70AE\u91CC\u585E\u70B9\u706B\u836F\u3002\n\u6548\u679C\uFF1A\u6BCF\u4F7F\u7528\u4E00\u6B21\u5E02\u573A\u5238\uFF0C\u6355\u9C7C\u6982\u7387+10%\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4646,12 +5145,13 @@ MonoBehaviour:
     isMarketTicket: 0
     isTotem: 1
     isFore: 0
-    totemGrayPrefab: {fileID: 0}
+    totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 5313916989111861957, guid: a3c34dd6b9c6f794f887d830034939fc, type: 3}
+    refreshWeight: 200
   - itemName: "\u6311\u5254\u6D77\u76D7"
-    price: 43
+    price: 3100
     icon: {fileID: 305904263, guid: 220c9884ad23185438feeae58c484a4e, type: 3}
-    description: "\u6311\u5254\u6D77\u76D7\uFF1A\u6BCF\u5237\u65B01\u6B21\u5546\u57CE\u65F6\uFF0C\u6355\u9C7C\u6982\u7387\u63D0\u53471%\r\r"
+    description: "\u8FD9\u7834\u5546\u5E97\u5C31\u6CA1\u70B9\u50CF\u6837\u7684\u8D27\uFF1F\n\u6548\u679C\uFF1A\u6BCF\u5237\u65B0\u4E00\u6B21\u5546\u5E97\uFF0C\u4F24\u5BB3+10%\u3002\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4661,12 +5161,13 @@ MonoBehaviour:
     isMarketTicket: 0
     isTotem: 1
     isFore: 0
-    totemGrayPrefab: {fileID: 0}
+    totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 301971129043471001, guid: 9c2a3ef66fc996748a0853f8a92d0ae4, type: 3}
+    refreshWeight: 200
   - itemName: "\u5171\u4EAB\u56FE\u817E"
-    price: 43
+    price: 4000
     icon: {fileID: 1427899224, guid: d8def97a78b77d940897aad6d738f275, type: 3}
-    description: "\u5171\u4EAB\u56FE\u817E\uFF1A\u6BCF\u6709\u4E00\u4E2A\u56FE\u817E\uFF0C\u6355\u9C7C\u6982\u7387\u63D0\u534710%\r\r\r"
+    description: "\u4E00\u4E2A\u4EBA\u7684\u706B\u529B\uFF0C\u6574\u6761\u8239\u4E00\u8D77\u4EAB\u53D7\u3002\n\u6548\u679C\uFF1A\u6BCF\u62E5\u6709\u4E00\u4E2A\u56FE\u817E\uFF0C\u4F24\u5BB3+100%\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4676,12 +5177,13 @@ MonoBehaviour:
     isMarketTicket: 0
     isTotem: 1
     isFore: 0
-    totemGrayPrefab: {fileID: 0}
+    totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 1470712774416048455, guid: 3362542a6aacce04ab6cfd389c65e37d, type: 3}
+    refreshWeight: 180
   - itemName: "\u6211\u7238\u662F\u8239\u957F"
-    price: 44
+    price: 4000
     icon: {fileID: -1930448275, guid: 40392dab25d982f42b614f5255161219, type: 3}
-    description: "\u6211\u7238\u662F\u8239\u957F\uFF1A\u8D2D\u4E70\u6240\u6709\u5E02\u573A\u5238\u4E0D\u9700\u8981\u82B1\u8D39\u91D1\u5E01\r\r\r"
+    description: "\u89C4\u77E9\uFF1F\u8239\u957F\u5BB6\u7684\u5B69\u5B50\u4E0D\u7528\u6392\u961F\u3002\n\u6548\u679C\uFF1A\u5E02\u573A\u5238\u514D\u8D39\u4F7F\u7528\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4691,12 +5193,13 @@ MonoBehaviour:
     isMarketTicket: 0
     isTotem: 1
     isFore: 0
-    totemGrayPrefab: {fileID: 0}
+    totemGrayPrefab: {fileID: 6832342808597925549, guid: 1d43501051342f546a23b3b6db7c5fbe, type: 3}
     totemEffectPrefab: {fileID: 4344232630496504467, guid: c79e56cc44dffca4a88e6adb609a608e, type: 3}
+    refreshWeight: 180
   - itemName: "\u9ED1\u5FC3\u5546\u4EBA"
-    price: 45
+    price: 3800
     icon: {fileID: 1808077634, guid: fbc939caf52c78f49889eeeb695e26eb, type: 3}
-    description: "\u9ED1\u5FC3\u5546\u4EBA\uFF1A\u51FB\u8D25boss\u540E\u6536\u76CA\u63D0\u5347100%\r\r\r"
+    description: "Boss\u7684\u94B1\uFF0C\u8D5A\u8D77\u6765\u624D\u6700\u75DB\u5FEB\u3002\n\u6548\u679C\uFF1ABoss\u6536\u76CA+50%\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4708,10 +5211,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 1008490736422872507, guid: 50f03bd1a50666a429e3087a295f940f, type: 3}
+    refreshWeight: 180
   - itemName: "\u7CBE\u5175"
-    price: 46
+    price: 3500
     icon: {fileID: -800047342, guid: 9336bf46ab40c1946a66812d816c813d, type: 3}
-    description: "\u7CBE\u5175\uFF1A\u51CF\u53BB1\u4E2A\u56FE\u817E\u5751\u4F4D\uFF0C\u6355\u9C7C\u6982\u7387\u63D0\u534750%\uFF0C\u6355\u9C7C\u6536\u83B7\u63D0\u5347100%\r\r\r"
+    description: "\u7559\u4E0B\u6765\u7684\uFF0C\u90FD\u662F\u6700\u80FD\u6253\u7684\u3002\n\u6548\u679C\uFF1A\u4F24\u5BB3+80%\uFF0C\u91D1\u5E01\u6536\u76CA+150%\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4723,10 +5227,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 6468808600117434357, guid: 53aaf6555a6d1654ea803c46cbe29503, type: 3}
+    refreshWeight: 150
   - itemName: "\u84C4\u529B"
-    price: 47
+    price: 3400
     icon: {fileID: -199635534, guid: ed1294c44cb6dc249981ded9956aa385, type: 3}
-    description: "\u84C4\u529B\uFF1A\u6BCF\u7B2C6\u70AE\uFF0C\u6355\u9C7C\u6982\u7387\u6982\u7387\u63D0\u534720%\r\r\r"
+    description: "\u5148\u5FCD\u7740\u2014\u2014\u4E0B\u4E00\u70AE\u4F1A\u5F88\u75BC\u3002\n\u6548\u679C\uFF1A\u6BCF\u7B2C6\u6B21\u653B\u51FB\u9020\u6210300%\u4F24\u5BB3\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4738,10 +5243,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 6793188741336774774, guid: 1e06b0a98b444fb4b9cb0a5b302e9040, type: 3}
     totemEffectPrefab: {fileID: 8056592610580463959, guid: 985a58629fd1923428384b061bc67b77, type: 3}
+    refreshWeight: 150
   - itemName: "\u51B0\u51BB"
-    price: 20
+    price: 1800
     icon: {fileID: -2132191432, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    description: "\u7ACB\u5373\u51BB\u7ED3\u5168\u5C4F\u9C7C\u7FA43\u79D2\uFF0C\u671F\u95F4\u9C7C\u65E0\u6CD5\u79FB\u52A8\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4753,10 +5259,11 @@ MonoBehaviour:
     isFore: 1
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 176
   - itemName: "\u51B7\u5374\u65F6\u95F4\u51CF\u5C11\uFF08\u51B0\u51BB\uFF09"
-    price: 15
+    price: 700
     icon: {fileID: 21300000, guid: 2048bb865b2eea64ebfe36f5f39d98f3, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01\uFF08coolChange00\uFF09"
+    description: "\u51B0\u51BB\u6280\u80FD\u51B7\u5374\u65F6\u95F4\u51CF\u5C1115%\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4780,10 +5287,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 112
   - itemName: "\u6301\u7EED\u65F6\u95F4\u589E\u52A0\uFF08\u51B0\u51BB\uFF09"
-    price: 25
+    price: 1000
     icon: {fileID: 21300000, guid: 2048bb865b2eea64ebfe36f5f39d98f3, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01\uFF08coolChange01\uFF09"
+    description: "\u9C7C\u7FA4\u88AB\u51BB\u7ED3\u7684\u65F6\u95F4\u589E\u52A01s\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4807,10 +5315,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 107
   - itemName: "\u6DF1\u6C34\u70B8\u5F39"
-    price: 12
+    price: 2000
     icon: {fileID: -206226205, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
-    description: "\u6DF1\u6C34\u70B8\u5F39\uFF1A\u5411\u533A\u57DF\u6295\u63B7\u70B8\u5F39\u5E76\u9020\u6210\u8303\u56F4\u7206\u70B8\r"
+    description: "\u5411\u968F\u673A\u533A\u57DF\u6295\u63B7\u70B8\u5F39\uFF0C\u77ED\u6682\u5EF6\u8FDF\u540E\u9020\u6210\u8303\u56F4\u7206\u70B8\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4822,10 +5331,11 @@ MonoBehaviour:
     isFore: 1
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 200
   - itemName: "\u51B7\u5374\u65F6\u95F4\u51CF\u5C11\uFF08\u70B8\u5F39\uFF09"
-    price: 11
+    price: 800
     icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    description: "\u70B8\u5F39\u7206\u70B8\u51B7\u5374\u65F6\u95F4\u51CF\u5C11"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4849,10 +5359,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u589E\u52A0\u7206\u70B8\u8303\u56F4\uFF08\u70B8\u5F39\uFF09"
-    price: 13
+    price: 800
     icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    description: "\u70B8\u5F39\u7206\u70B8\u8986\u76D6\u533A\u57DF\u6269\u592730%\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4876,10 +5387,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 102
   - itemName: "\u7206\u70B8\u540E\u7559\u4E0B\u6301\u7EED\u4F24\u5BB3\u533A\u57DF\uFF08\u70B8\u5F39\uFF09"
-    price: 13
+    price: 1200
     icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    description: "\u70B8\u5F39\u989D\u5916\u8FFD\u52A0\u707C\u70E7\u533A\u57DF\u3002\u6301\u7EED2s"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4903,10 +5415,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 97
   - itemName: "\u589E\u52A0\u7206\u70B8\u6B21\u6570\uFF08\u70B8\u5F39\uFF09"
     price: 13
     icon: {fileID: 21300000, guid: c93b8493d7989924f8ee68e8a058bd72, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    description: "\u70B8\u5F39\u989D\u5916\u8FFD\u52A0\u7206\u70B8\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4930,10 +5443,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 107
   - itemName: "\u7535\u78C1\u6F29\u6DA1"
-    price: 13
+    price: 2000
     icon: {fileID: -882172376, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
-    description: "\u8FD9\u662F\u4E00\u4E2A\u4ECB\u7ECD\uFF01\uFF01\uFF01"
+    description: "\u751F\u6210\u6301\u7EED\u65CB\u8F6C\u7684\u7535\u78C1\u6F29\u6DA1\uFF0C\u5C06\u9644\u8FD1\u9C7C\u7FA4\u5438\u5411\u4E2D\u5FC3\u5E76\u6301\u7EED\u9020\u6210\u4F24\u5BB3\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -4945,10 +5459,11 @@ MonoBehaviour:
     isFore: 1
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 200
   - itemName: "\u51CF\u5C11\u51B7\u5374 \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
-    price: 13
+    price: 800
     icon: {fileID: 21300000, guid: 1c9d985170fc9a44182307962736375d, type: 3}
-    description: "\u51CF\u5C11\u51B7\u5374 \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    description: "\u7535\u78C1\u6F29\u6DA1\u7684\u51B7\u5374\u51CF\u5C1125%\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4972,10 +5487,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u589E\u52A0\u5438\u9644\u8303\u56F4  \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
-    price: 13
+    price: 800
     icon: {fileID: 21300000, guid: 1c9d985170fc9a44182307962736375d, type: 3}
-    description: "\u589E\u52A0\u5438\u9644\u8303\u56F4 \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    description: "\u6F29\u6DA1\u8303\u56F4\u6269\u592740%\u80FD\u5F71\u54CD\u66F4\u8FDC\u7684\u9C7C\u7FA4\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -4999,10 +5515,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4  \uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
-    price: 13
+    price: 800
     icon: {fileID: 21300000, guid: 1c9d985170fc9a44182307962736375d, type: 3}
-    description: "\u51CF\u5C11\u51B7\u5374\uFF08\u7535\u78C1\u6F29\u6DA1\uFF09"
+    description: "\u6F29\u6DA1\u5B58\u5728\u65F6\u95F4\u589E\u52A02s\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5026,8 +5543,9 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u5F3A\u5316"
-    price: 13
+    price: 2200
     icon: {fileID: -1634698085, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
     description: "\u5F3A\u5316\uFF1AX\u79D2\u5185\u5927\u5E45\u5F3A\u5316\u6355\u9C7C\u6982\u7387\u4E0E\u653B\u51FB\u901F\u5EA6"
     onPurchase:
@@ -5041,6 +5559,7 @@ MonoBehaviour:
     isFore: 1
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u51CF\u5C11\u51B7\u5374 \uFF08\u5F3A\u5316\uFF09"
     price: 13
     icon: {fileID: 21300000, guid: 33f524f44a631404697a235111944993, type: 3}
@@ -5068,10 +5587,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4 \uFF08\u5F3A\u5316\uFF09"
-    price: 13
+    price: 900
     icon: {fileID: 21300000, guid: 33f524f44a631404697a235111944993, type: 3}
-    description: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4"
+    description: "\u5F3A\u5316\u72B6\u6001\u65F6\u957F\u589E\u52A02s\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5095,11 +5615,12 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u589E\u52A0X%\u6355\u9C7C\u6982\u7387\u4E0E\u653B\u51FB\u901F\u5EA6 
       \uFF08\u5F3A\u5316\uFF09"
-    price: 13
+    price: 1000
     icon: {fileID: 21300000, guid: 33f524f44a631404697a235111944993, type: 3}
-    description: "\u589E\u52A0X%\u6355\u9C7C\u6982\u7387\u4E0E\u653B\u51FB\u901F\u5EA6\r\n"
+    description: "\u5F3A\u5316\u671F\u95F4\u63D0\u5347\u653B\u901F\u52A0\u621010%\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5123,10 +5644,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u9501\u5B9A"
-    price: 13
+    price: 1800
     icon: {fileID: 390497927, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
-    description: "\u9501\u5B9A\uFF1AX\u79D2\u5185\u53EF\u70B9\u51FB\u9501\u5B9A\u5355\u4E00\u76EE\u6807\uFF0C\u6E14\u7F51\u4E0D\u4F1A\u88AB\u5176\u4ED6\u9C7C\u6321\u4F4F"
+    description: "\u6301\u7EED\u9501\u5B9A\u5355\u4E00\u76EE\u6807\uFF0C\u6E14\u7F51\u4F1A\u81EA\u52A8\u7A7F\u8FC7\u5176\u4ED6\u9C7C\u5E76\u4F18\u5148\u547D\u4E2D\u76EE\u6807\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -5138,10 +5660,11 @@ MonoBehaviour:
     isFore: 1
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 200
   - itemName: "\u51CF\u5C11\u51B7\u5374 \uFF08\u9501\u5B9A\uFF09"
-    price: 13
+    price: 900
     icon: {fileID: 21300000, guid: f305a19242e52a4418c781979d015d40, type: 3}
-    description: "\u51CF\u5C11\u51B7\u5374\r\n"
+    description: "\u9501\u5B9A\u7CFB\u7EDF\u51B7\u5374\u51CF\u5C1120%\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5165,10 +5688,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4 \uFF08\u9501\u5B9A\uFF09"
-    price: 13
+    price: 800
     icon: {fileID: 21300000, guid: f305a19242e52a4418c781979d015d40, type: 3}
-    description: "\u5EF6\u957F\u6301\u7EED\u65F6\u95F4\r"
+    description: "\u589E\u52A0\u76EE\u6807\u88AB\u9501\u5B9A\u65F6\u957F2s\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5192,10 +5716,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u6FC0\u5149"
-    price: 13
+    price: 1800
     icon: {fileID: 1802157682, guid: f679f2a1c9f6d574dbca34662b9f086f, type: 3}
-    description: "\u6FC0\u5149\r"
+    description: "\u5411\u5F53\u524D\u65B9\u5411\u53D1\u5C04\u4E00\u9053\u6301\u7EED\u6FC0\u5149\uFF0C\u5BF9\u8DEF\u5F84\u4E0A\u7684\u9C7C\u6301\u7EED\u9020\u6210\u4F24\u5BB3\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -5207,6 +5732,7 @@ MonoBehaviour:
     isFore: 1
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 176
   - itemName: "\u51CF\u5C11\u51B7\u5374\uFF08\u6FC0\u5149\uFF09"
     price: 13
     icon: {fileID: 21300000, guid: c48f334bee0378c4a98f3ba83d46a0ed, type: 3}
@@ -5234,10 +5760,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u589E\u52A0\u6FC0\u5149\u5BBD\u5EA6\uFF08\u6FC0\u5149\uFF09"
-    price: 13
+    price: 700
     icon: {fileID: 21300000, guid: c48f334bee0378c4a98f3ba83d46a0ed, type: 3}
-    description: "\u589E\u52A0\u6FC0\u5149\u5BBD\u5EA6\r"
+    description: "\u6FC0\u5149\u8986\u76D6\u8303\u56F4\u6269\u592740%\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5261,10 +5788,11 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 100
   - itemName: "\u589E\u52A0\u6FC0\u5149\u6301\u7EED\u65F6\u95F4 \uFF08\u6FC0\u5149\uFF09"
-    price: 13
+    price: 700
     icon: {fileID: 21300000, guid: c48f334bee0378c4a98f3ba83d46a0ed, type: 3}
-    description: "\u589E\u52A0\u6FC0\u5149\u6301\u7EED\u65F6\u95F4\r\n\r"
+    description: "\u6FC0\u5149\u5B58\u5728\u65F6\u95F4\u5EF6\u957F1s"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5288,6 +5816,7 @@ MonoBehaviour:
     isFore: 0
     totemGrayPrefab: {fileID: 0}
     totemEffectPrefab: {fileID: 0}
+    refreshWeight: 112
   slotImages:
   - {fileID: 1037107797}
   - {fileID: 105243509}
@@ -5309,9 +5838,9 @@ MonoBehaviour:
   confirmPanel: {fileID: 1543902557}
   allItems00:
   - itemName: "\u5C0F\u578B\u6CD5\u9635"
-    price: 16
+    price: 60000
     icon: {fileID: -262185616, guid: db0cd7a8c6f87ea47a6e87f7201d2094, type: 3}
-    description: "\u56FE\u817E+1"
+    description: "\u8239\u8231\u8FD8\u80FD\u518D\u585E\u70B9\u4E1C\u897F\u8FDB\u53BB\u3002\n\u6548\u679C\uFF1A\u56FE\u817E\u69FD\u4F4D+1\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5329,9 +5858,9 @@ MonoBehaviour:
           m_CallState: 2
     skillID: 
   - itemName: "\u6D77\u76D7\u6765\u88AD"
-    price: 17
+    price: 120000
     icon: {fileID: 21300000, guid: 6c233edc5d0aad548a18a67651d653aa, type: 3}
-    description: "\u6D77\u76D7\u6765\u88AD\uFF1A\u8239\u5E02\u5546\u54C1\u964D\u4F4E20%"
+    description: "\u6E2F\u53E3\u88AB\u6D77\u76D7\u6D17\u52AB\u540E\uFF0C\u4E1C\u897F\u53CD\u800C\u66F4\u4FBF\u5B9C\u4E86\u3002\n\u6548\u679C\uFF1A\u5546\u5E97\u5546\u54C1\u4EF7\u683C\u964D\u4F4E20%\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5349,9 +5878,9 @@ MonoBehaviour:
           m_CallState: 2
     skillID: 
   - itemName: "\u518D\u6362\u4E00\u6CE2"
-    price: 21
+    price: 25000
     icon: {fileID: 21300000, guid: b716f870afc074b4a9e7183cfac2fb0b, type: 3}
-    description: "\u518D\u6362\u4E00\u6CE2\uFF1A\u51CF\u5C11\u5237\u65B0\u5546\u54C1\u6240\u9700\u8981\u7684\u91D1\u5E0120%"
+    description: "\u8001\u677F\uFF0C\u518D\u628A\u540E\u9762\u7684\u8D27\u62AC\u4E0A\u6765\u770B\u770B\u3002\n\u6548\u679C\uFF1A\u5237\u65B0\u5546\u5E97\u6240\u9700\u91D1\u5E01\u51CF\u5C1120%\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5369,10 +5898,9 @@ MonoBehaviour:
           m_CallState: 2
     skillID: 
   - itemName: "\u88C5\u7F6E\u5927\u4EA8"
-    price: 22
+    price: 45000
     icon: {fileID: 21300000, guid: 1ff7cd4ede1ba6241a41e475a5732c74, type: 3}
-    description: "\u88C5\u7F6E\u5927\u4EA8\uFF1A\u88C5\u7F6E\u76F8\u5173\u5546\u54C1(\u7C7B\u578B2
-      \u30013\uFF09\u51FA\u73B0\u6982\u7387\xD72\r\n"
+    description: "\u771F\u6B63\u8D5A\u94B1\u7684\uFF0C\u4ECE\u6765\u4E0D\u662F\u9C7C\uFF0C\u662F\u673A\u5668\u3002\n\u6548\u679C\uFF1A\u88C5\u7F6E\u7C7B\u5546\u54C1\u51FA\u73B0\u6982\u7387\xD72\u3002"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5390,9 +5918,9 @@ MonoBehaviour:
           m_CallState: 2
     skillID: 
   - itemName: "\u5E02\u573A\u5546\u4EBA"
-    price: 23
+    price: 35000
     icon: {fileID: 21300000, guid: a0e4ce46d6e6c0848b0020d9ecbc72a2, type: 3}
-    description: "\u5E02\u573A\u5546\u4EBA\uFF1A\u5E02\u573A\u5238\u51FA\u73B0\u6982\u7387\xD72\r"
+    description: "\u548C\u6E2F\u53E3\u7684\u4EBA\u6DF7\u719F\u4E86\uFF0C\u5E02\u573A\u5238\u81EA\u7136\u6765\u5F97\u66F4\u591A\u3002\n\u6548\u679C\uFF1A\u5E02\u573A\u5238\u51FA\u73B0\u6982\u7387\xD72\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5410,9 +5938,9 @@ MonoBehaviour:
           m_CallState: 2
     skillID: 
   - itemName: "\u5927\u6CD5\u5E08"
-    price: 24
+    price: 45000
     icon: {fileID: 21300000, guid: f89995ee7dd3e8c46b08afd2dc0029a4, type: 3}
-    description: "\u5927\u6CD5\u5E08\uFF1A\u56FE\u817E\u51FA\u73B0\u6982\u7387\xD72\r"
+    description: "\u542C\u8BF4\u8FD9\u7247\u6D77\u91CC\uFF0C\u56FE\u817E\u4F1A\u81EA\u5DF1\u56DE\u5E94\u5F3A\u8005\u3002\n\u6548\u679C\uFF1A\u56FE\u817E\u51FA\u73B0\u6982\u7387\xD72\u3002\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5430,17 +5958,17 @@ MonoBehaviour:
           m_CallState: 2
     skillID: 
   - itemName: "\u6362\u6761\u5927\u8239"
-    price: 27
+    price: 150000
     icon: {fileID: 21300000, guid: aaf25203df4ae8c43b037ac78800ef27, type: 3}
-    description: "\u6362\u6761\u5927\u8239\uFF1A\u6280\u80FD\u683C\u5B50\uFF0B1\r\r"
+    description: "\u65E7\u8239\u88C5\u4E0D\u4E0B\u66F4\u591A\u706B\u529B\u4E86\u3002\n\u6548\u679C\uFF1A\u6280\u80FD\u683C\u5B50+1\u3002\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
     skillID: ExpandSlot
   - itemName: "\u6162\u70B9\u6E38"
-    price: 29
+    price: 200000
     icon: {fileID: 21300000, guid: 8a78071ec82954242b8fbfd473385b5d, type: 3}
-    description: "\u6162\u70B9\u6E38\uFF1Aboss\u505C\u7559\u65F6\u95F4\u589E\u52A010s\r\r\r"
+    description: "\u522B\u6025\u7740\u8DD1\uFF0C\u5927\u5BB6\u90FD\u6709\u4EFD\u3002\n\u6548\u679C\uFF1ABoss\u505C\u7559\u65F6\u95F4\u589E\u52A010\u79D2\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls:
@@ -5458,9 +5986,9 @@ MonoBehaviour:
           m_CallState: 2
     skillID: 
   - itemName: "\u7A7A\u767D"
-    price: 9
+    price: 5000
     icon: {fileID: 21300000, guid: abed96e5cd416ac4db69f4288ef302ec, type: 3}
-    description: "\u7A7A\u767D\uFF1A\u65E0\u4F5C\u7528\r\r\r"
+    description: "\u8FD9\u4E1C\u897F\u2026\u2026\u597D\u50CF\u4EC0\u4E48\u90FD\u6CA1\u6709\u3002\n\u6548\u679C\uFF1A\u65E0\u4F5C\u7528\u3002\r\r\r"
     onPurchase:
       m_PersistentCalls:
         m_Calls: []
@@ -5473,6 +6001,7 @@ MonoBehaviour:
   finalPriceZZ: 0
   finalPrice: 0
   finalPriceNol: 0
+  deleteSkillPanel: {fileID: 394092055}
 --- !u!114 &764058473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6268,7 +6797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 819024163}
   - component: {fileID: 819024162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DestoryUP
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6870,7 +7399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -268}
+  m_AnchoredPosition: {x: 0, y: -322}
   m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &917615833
@@ -7087,6 +7616,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924153287}
+  m_CullTransparentMesh: 1
+--- !u!1 &932927946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 932927947}
+  - component: {fileID: 932927949}
+  - component: {fileID: 932927948}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &932927947
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932927946}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 186529853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &932927948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932927946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 90
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 90
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: X
+--- !u!222 &932927949
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932927946}
   m_CullTransparentMesh: 1
 --- !u!1 &935721504
 GameObject:
@@ -7361,7 +7969,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: -3, z: 0, w: -20}
+  m_RaycastPadding: {x: 0, y: 10, z: 0, w: -20}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7937,7 +8545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000076293945, y: 205.36}
+  m_AnchoredPosition: {x: -0.000076293945, y: 94}
   m_SizeDelta: {x: 1601.349, y: 410.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1072127742
@@ -8822,6 +9430,7 @@ RectTransform:
   m_Children:
   - {fileID: 1072127741}
   - {fileID: 917615832}
+  - {fileID: 252505431}
   m_Father: {fileID: 1264243542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8986,6 +9595,7 @@ RectTransform:
   - {fileID: 235737125}
   - {fileID: 605558408}
   - {fileID: 1256249397}
+  - {fileID: 394092054}
   - {fileID: 232207709}
   - {fileID: 1305678698}
   - {fileID: 764058471}
@@ -9254,6 +9864,7 @@ MonoBehaviour:
   button: {fileID: 1282311576}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
   activeSprite: {fileID: 0}
+  skillID: 
 --- !u!1 &1293766762
 GameObject:
   m_ObjectHideFlags: 0
@@ -9402,7 +10013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1305678698
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9687,6 +10298,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337389278}
+  m_CullTransparentMesh: 1
+--- !u!1 &1341378137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1341378138}
+  - component: {fileID: 1341378140}
+  - component: {fileID: 1341378139}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1341378138
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341378137}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 252505431}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1341378139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341378137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 90
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 90
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: X
+--- !u!222 &1341378140
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341378137}
   m_CullTransparentMesh: 1
 --- !u!1 &1367180325
 GameObject:
@@ -10399,6 +11089,85 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2117496162}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!1 &1528866470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1528866471}
+  - component: {fileID: 1528866473}
+  - component: {fileID: 1528866472}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1528866471
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528866470}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 14682262}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1528866472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528866470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 100
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u5220\u9664"
+--- !u!222 &1528866473
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528866470}
+  m_CullTransparentMesh: 1
 --- !u!1 &1541924511
 GameObject:
   m_ObjectHideFlags: 0
@@ -10548,6 +11317,7 @@ MonoBehaviour:
   button: {fileID: 1541924513}
   defaultGray: {fileID: 21300000, guid: ce9fdc7c1a234f748a7fbe0ff04fffb9, type: 3}
   activeSprite: {fileID: 0}
+  skillID: 
 --- !u!1 &1543902553
 GameObject:
   m_ObjectHideFlags: 0
@@ -10651,7 +11421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584640936}
   - component: {fileID: 1584640935}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DestoryDown
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10917,7 +11687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1608250439}
   - component: {fileID: 1608250438}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DestoryR
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11907,6 +12677,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816370306}
+  m_CullTransparentMesh: 1
+--- !u!1 &1842889802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1842889803}
+  - component: {fileID: 1842889805}
+  - component: {fileID: 1842889804}
+  m_Layer: 5
+  m_Name: Descrip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1842889803
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842889802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 394092054}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000076293945, y: 94}
+  m_SizeDelta: {x: 1601.349, y: 410.72}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1842889804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842889802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 100
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &1842889805
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842889802}
   m_CullTransparentMesh: 1
 --- !u!1 &1852114215
 GameObject:
@@ -13281,9 +14130,9 @@ Transform:
   m_GameObject: {fileID: 2116323689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1653024348}
   - {fileID: 1073562991}
@@ -13303,7 +14152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints:
-  - {fileID: 1653024348}
   - {fileID: 1073562991}
   - {fileID: 1734729529}
   centerPoint: {fileID: 2116323690}
@@ -13320,9 +14168,9 @@ MonoBehaviour:
   - {fileID: 3274055922356728128, guid: 3a6fb0cffcb63244ba9c36b2052ec436, type: 3}
   finalBossPrefab: {fileID: 3918916327517230343, guid: d1649d1e9fe0d51409028e59717e951f, type: 3}
   battleStartMinutes:
-  - 4
-  - 8.5
-  - 16
+  - 0.3
+  - 0.8
+  - 1
 --- !u!1 &2117496160
 GameObject:
   m_ObjectHideFlags: 0

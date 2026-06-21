@@ -110,7 +110,8 @@ public class Cannon : MonoBehaviour
         switch (bossType)
         {
             case "Freeze":
-                attackSpeedMultiplier *= 0.6f;
+                attackSpeedMultiplier *= 0.85f;
+                Debug.Log("冰冻中" + attackSpeedMultiplier);
                 break;
                 // 其他类型如攻速不影响，但可保留扩展
         }
@@ -122,7 +123,7 @@ public class Cannon : MonoBehaviour
         switch (bossType)
         {
             case "Freeze":
-                attackSpeedMultiplier /= 0.6f;
+                attackSpeedMultiplier /= 0.85f;
                 break;
         }
         fireRate = baseFireRate / attackSpeedMultiplier;

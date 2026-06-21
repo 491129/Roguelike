@@ -37,7 +37,6 @@ using DG.Tweening;
         [SerializeField] private float moveDuration = 0.5f;
 
         [Header("逃脱设置")]
-        //public static float escapeChance = 0.4f;
         public float escapeSpeedMultiplier = 2f;
         public float escapeDuration = 3f;
         public float CurrentSpeed { get; set; }   // 当前实际速度，逃脱时会变化

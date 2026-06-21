@@ -101,13 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossType: ThreeHeadShark
   speed: 1
-  health: 14
   catchProbability: 0.8
+  rotationSmoothSpeed: 360
+  outOfScreenMargin: 0.22
   isDead: 0
-  stopDistance: 1.5
-  minStayDuration: 3
-  maxStayDuration: 5
   bossDefeated: 0
+  catchRates: 0100000002000000030000000a000000c8000000
+  goldReward: 60000000
 --- !u!95 &-8827998583547996601
 Animator:
   serializedVersion: 5

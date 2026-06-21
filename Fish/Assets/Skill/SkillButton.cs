@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillButton : MonoBehaviour
+public class SkillButton : MonoBehaviour, IPointerClickHandler
 {
     [Header("UI 组件")]
     public Image iconImage;      // 显示技能图标的 Image
@@ -14,8 +16,6 @@ public class SkillButton : MonoBehaviour
     private bool isActive = false;                 // 是否已激活（购买后）
   
     public System.Action OnSkillUsed;
-    //public static float duration = 8f;
-    //public static float changeDuration=1f;  //改变冷却时间
     [Header("禁用")]
     private bool isTemporarilyDisabled = false;  // 是否被 Boss 临时禁用
     private Sprite originalActiveSprite;         // 保存原始技能图标
@@ -23,7 +23,7 @@ public class SkillButton : MonoBehaviour
     private bool isCooldown = false;               // 是否在冷却中
     private float cooldownTime = 8f;   // 冷却时间
     public static float changeDuration = 1f;  //改变冷却时间
-
+    public string skillID;// 主技能ID（用于删除时查找加成）
     private void Start()
     {
         // 自动绑定按钮点击事件，避免手动遗漏
@@ -105,4 +105,32 @@ public class SkillButton : MonoBehaviour
     {
         cooldownTime = newDuration;
     }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("右键点击检测");
+        if (DeleteSkillPanel.Instance == null)
+        {
+            Debug.LogError("DeleteSkillPanel 未初始化！");
+            return;
+        }
+        if (eventData.button == PointerEventData.InputButton.Right && IsActive)
+        {
+            // 打开删除面板
+            DeleteSkillPanel.Instance?.Show(this);
+        }
+    }
+
+    // 清除技能状态（由管理器调用）
+    public void ClearSkill()
+    {
+        // 执行技能撤销回调（如果有的话）
+        OnSkillUsed = null;   // 清空回调，防止误触
+        isActive = false;
+        iconImage.sprite = defaultGray;
+        button.interactable = false;
+        // 如果有正在进行的冷却，停止它
+        StopAllCoroutines();
+        isCooldown = false;
+    }
+ 
 }
