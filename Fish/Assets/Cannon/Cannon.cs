@@ -28,16 +28,27 @@ public class Cannon : MonoBehaviour
     private const int chargeInterval = 6; // 每6炮触发蓄力
 
     public GameObject NoCoin;
+    void OnEnable()
+    {
+        mainCam = Camera.main;
+        pool = ObjectPool.Instance;   // 对象池也建议重取，避免意外
+    }
     void Start()
     {
         baseFireRate = fireRate;
-        mainCam = Camera.main;
-        pool = ObjectPool.Instance;
         currentAngle = transform.eulerAngles.z;
+        // 原本的 mainCam 和 pool 初始化可移入 OnEnable，也可保留一份在 Start 作为备用
+        if (mainCam == null) mainCam = Camera.main;
+        if (pool == null) pool = ObjectPool.Instance;
     }
 
     void Update()
     {
+        if (LockSkill.Instance != null && LockSkill.Instance.IsLockModeActive && LockSkill.Instance.LockedTarget == null)
+        {
+            return;
+        }
+
         AimAtMouse();
         bool lockedButNoTarget = LockSkill.Instance != null
                              && LockSkill.Instance.IsLockModeActive
@@ -52,7 +63,21 @@ public class Cannon : MonoBehaviour
 
     void AimAtMouse()
     {
-        float mouseXPercent = Mathf.Clamp01(mainCam.ScreenToViewportPoint(Input.mousePosition).x);
+        // 直接使用 Camera.main，不依赖任何缓存，并保护空引用
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            Debug.LogError($"[{gameObject.name}] Camera.main 不存在！炮台无法旋转");
+            return;
+        }
+
+        Vector3 mouseViewport = cam.ScreenToViewportPoint(Input.mousePosition);
+        float mouseXPercent = Mathf.Clamp01(mouseViewport.x);
+
+        // 调试日志：每2秒输出一次，避免刷屏
+        if (Time.frameCount % 120 == 0)
+            Debug.Log($"[{gameObject.name}] mouseX={mouseXPercent:F2}, angle={Mathf.Lerp(80f, -80f, mouseXPercent):F1}");
+
         float angle = Mathf.Lerp(80f, -80f, mouseXPercent);
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
@@ -63,7 +88,6 @@ public class Cannon : MonoBehaviour
         float costMultiplier = TotemManager.Instance != null ? TotemManager.Instance.CostMultiplier : 1f;
 
         actualCost = Mathf.RoundToInt(originalCost * costMultiplier);
-        //int cost = ALLCannon.levelCosts[ALLCannon.currentLevel];
         if (!GameManager.SpendCoin(actualCost))
         {
             NoCoin.SetActive(true);
@@ -104,7 +128,7 @@ public class Cannon : MonoBehaviour
         if (bullet != null)
         {
             bullet.transform.position = firePoint.position;
-            bullet.transform.rotation = firePoint.rotation;
+            bullet.transform.rotation = transform.rotation;
             bullet.SetActive(true);
             // 播放开火音效
             AudioManager.PlayShoot();

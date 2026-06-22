@@ -386,20 +386,28 @@ public class SkillShopManager : MonoBehaviour
                  {
                     if (currentSlots[i].isMarketTicket && TotemManager.Instance.chuanzhang)
                     {
+                        Color c = slotImages[i].color;
+                        c.a = 1f;
+                        slotImages[i].color = c;
                         slotImages[i].sprite = currentSlots[i].icon;
-                        if (slotPriceTexts != null && slotPriceTexts.Length > i)
+
+                    if (slotPriceTexts != null && slotPriceTexts.Length > i)
                         slotPriceTexts[i].text = "0";
                         slotButtons[i].interactable = true;
                         slotImages[i].gameObject.SetActive(true); // 确保显示
                     }
                      else
                      {
+
+                        Color c = slotImages[i].color;
+                        c.a = 1f;
+                        slotImages[i].color = c;
                         slotImages[i].sprite = currentSlots[i].icon;
                         if (slotPriceTexts != null && slotPriceTexts.Length > i)
                         {
                             float sqrtMult = Mathf.Sqrt(shopRefreshCount00 + 1);   // √(N+1)
-                        int displayPrice = Mathf.RoundToInt(currentSlots[i].price * sqrtMult * priceMultiplier);
-                        slotPriceTexts[i].text = displayPrice.ToString();
+                            int displayPrice = Mathf.RoundToInt(currentSlots[i].price * sqrtMult * priceMultiplier);
+                            slotPriceTexts[i].text = displayPrice.ToString();
                         }
                         slotButtons[i].interactable = true;
                         slotImages[i].gameObject.SetActive(true); // 确保显示
@@ -425,13 +433,13 @@ public class SkillShopManager : MonoBehaviour
     {
         if (currentSlots00 != null)
         {
+
+            Color c = slotImages00.color;
+            c.a = 1f;
+            slotImages00.color = c;
             slotImages00.sprite = currentSlots00.icon;
             slotPriceTexts00.text = (currentSlots00.price * priceMultiplier).ToString("F0");
             slotButtons00.interactable = true;
-            Color c = slotImages00.color;
-            c.a = 0f;
-            slotImages00.color = c;
-            slotImages00.sprite = null;
             // 设置悬停数据
             SlotHover hover = slotImages00.GetComponent<SlotHover>();
             // 如果 SlotHover 挂在按钮上，也可从 slotButtons[i] 获取
@@ -441,6 +449,9 @@ public class SkillShopManager : MonoBehaviour
         }
         else
         {
+            Color c = slotImages00.color;
+            c.a = 0f;
+            slotImages00.color = c;
             slotImages00.sprite = null;
             slotButtons00.interactable = false;
         }
@@ -465,15 +476,21 @@ public class SkillShopManager : MonoBehaviour
     {
         if (item.isTotem)
         {
+            finalPrice = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
+            // 2. 先尝试扣钱（只扣一次！）
+            if (!GameManager.SpendCoin(finalPrice))
+            {
+                Debug.Log("金币不足，无法购买图腾");
+                return; // 扣款失败，后续都不会执行
+            }
+            // 3. 扣款成功后才放置图腾
             if (!TotemManager.Instance.PlaceTotem(item))
             {
-                Debug.Log("图腾购买失败（点位已满）");
+                // 放置失败（点位已满等）→ 退款
+                GameManager.AddCoin(finalPrice);
+                Debug.Log("图腾放置失败，已退款");
                 return;
             }
-            finalPrice = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
-            // 扣钱并执行绑定事件
-            if (!GameManager.SpendCoin(finalPrice)) { Debug.Log("金币不足"); return; }
-            GameManager.SpendCoin(item.price);
             item.onPurchase.Invoke();
             purchasedItemNames.Add(item.itemName);
 
@@ -498,10 +515,12 @@ public class SkillShopManager : MonoBehaviour
                 return;
             }
             finalPriceZZ = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
-            if (GameManager.Coin < finalPriceZZ) { Debug.Log("金币不足"); return; }
-
-            // 扣钱
-            GameManager.SpendCoin(finalPriceZZ);
+         
+            if (!GameManager.SpendCoin(finalPriceZZ))
+            {
+                Debug.Log("金币不足");
+                return;
+            }
             item.onPurchase.Invoke();   // 激活技能物体/效果
             purchasedItemNames.Add(item.itemName);
 
@@ -581,6 +600,7 @@ public class SkillShopManager : MonoBehaviour
                 purchasedSkills.Add(item.skillID);
             }
 
+            purchasedItemNames.Add(item.itemName);
             // 清空购买槽位
             for (int i = 0; i < currentSlots.Length; i++)
             {
@@ -594,10 +614,8 @@ public class SkillShopManager : MonoBehaviour
             return;
         }
         finalPriceNol = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
-        if (!GameManager.SpendCoin(finalPrice)) { Debug.Log("金币不足"); return; }
+        if (!GameManager.SpendCoin(finalPriceNol)) { Debug.Log("金币不足"); return; }
 
-
-        GameManager.SpendCoin(finalPrice);
         item.onPurchase.Invoke();
         purchasedItemNames.Add(item.itemName);
 
@@ -635,11 +653,9 @@ public class SkillShopManager : MonoBehaviour
                 Debug.Log("金币不足");
                 return;
             }
-            GameManager.SpendCoin(item.price);
             SkillButtonManager.Instance.ExpandSlot();
             return;
         }
-            GameManager.SpendCoin(item.price);
             item.onPurchase.Invoke();
             currentSlots00 = null;
         // 清空购买槽位

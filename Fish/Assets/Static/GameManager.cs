@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
 
     public static void AddCoin(int amount)
     {
-        if (TotemManager.Instance.heixin && Boss.Instance.bossDefeated) { amount *= 2; TotemManager.Instance?.TriggerEffectByName("黑心商人"); }
+        if (TotemManager.Instance.heixin && Boss.Instance.bossDefeated && Boss.Instance != null) { amount *= 2; TotemManager.Instance?.TriggerEffectByName("黑心商人"); }
         ;
         Coin += amount;
-        if (Instance != null && Instance.coinText != null)
-            Instance.coinText.text = Coin.ToString();
-        //Instance.coinText1.text = Coin.ToString();
+        if (Instance != null)
+        {
+            if (Instance.coinText != null) Instance.coinText.text = Coin.ToString();
+            if (Instance.coinText1 != null) Instance.coinText1.text = Coin.ToString();
+        }
+
         // 播放金币音效
         AudioManager.PlayCoin();
     }
