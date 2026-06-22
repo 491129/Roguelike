@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TotemClickHandler;
@@ -6,6 +7,8 @@ using static TotemClickHandler;
 
 public class TotemManager : MonoBehaviour
 {
+    [Header("黑雾特效（章鱼吐墨）")]
+    public GameObject inkEffectPrefab;   // 拖入黑雾预制体
     public static TotemManager Instance { get; private set; }
 
     [Header("图腾点位（按顺序，5个）")]
@@ -29,7 +32,7 @@ public class TotemManager : MonoBehaviour
     public bool xijin = false;              //吸金海盗
 
     public bool canDebt = false;          // 负债
-    public int debtLimit = 10000;
+    public int debtLimit = 1000000;
 
     public bool hasMerchantPirate = false;    // 商人海盗
     public bool hasPickyPirate = false;       // 挑剔海盗
@@ -55,6 +58,7 @@ public class TotemManager : MonoBehaviour
         public GameObject grayObj;   // 常驻灰色底图
         public int triggerCount;
         public TotemClickHandler clickHandler; // 用于右键交互
+        public bool enabled = true;
     }
     [System.Serializable]
     public class TotemInfo
@@ -75,7 +79,7 @@ public class TotemManager : MonoBehaviour
             if (GameManager.Coin < 100)
             {
                 // 触发：给予金币，销毁特效，效果作废
-                GameManager.AddCoin(10000);
+                GameManager.AddCoin(1000000);
                 TotemManager.Instance?.TriggerEffectByName("领低保了");
                 Debug.Log("领低保了触发：金币+10000");
 
@@ -141,6 +145,7 @@ public class TotemManager : MonoBehaviour
             clickHandler = gray?.GetComponent<TotemClickHandler>()
         };
         totemSlots.Add(slot);
+        slot.enabled = true;
         // 应用加成效果
         ApplyTotemEffect(item.itemName, activeCount);
         activeCount++;
@@ -252,7 +257,7 @@ public class TotemManager : MonoBehaviour
         switch (itemName)
         {
             case "强化炮管"://2222222222222222222
-                FishAttrbute.CatchRateMultiplier += 0.2f;//11111111111111111111111
+                FishAttrbute.CatchRateMultiplier += 0.25f;//11111111111111111111111
                 qianghua = true;
                 Debug.Log(FishAttrbute.CatchRateMultiplier);
                 break;
@@ -267,17 +272,17 @@ public class TotemManager : MonoBehaviour
                 break;
             case "省钱达人"://222222222222222222222
                 shengqian = true;
-                CostMultiplier *= 0.8f;   // 花费变为20%
+                CostMultiplier *= 0.9f;   // 花费变为20%
                 Debug.Log("shengqian");
                 break;
             case "超频核心"://2222222222222
                 chaopin = true;
-                SkillButton.changeDuration *= 0.8f;
+                SkillButton.changeDuration *= 0.85f;
                 Debug.Log("冷却时间："+SkillButton.changeDuration);
                 break;
             case "黄金渔网"://22222222222
                 huangjin=true;
-                FishAttrbute.getgoldMore *= 1.25f;
+                FishAttrbute.getgoldMore *= 1.3f;
                 break;
             case "熟能生巧"://22222222222
                 get100 = true;
@@ -325,6 +330,41 @@ public class TotemManager : MonoBehaviour
                 lingDiBaoTriggered = false;
                 Debug.Log("领低保了图腾已放置，等待触发");
                 break;
+        }
+    }
+    // 随机禁用一个激活的图腾，duration秒后恢复
+    public void DisableRandomTotem(float duration)
+    {
+        List<int> enabledIndices = new List<int>();
+        for (int i = 0; i < totemSlots.Count; i++)
+        {
+            if (totemSlots[i].enabled)
+                enabledIndices.Add(i);
+        }
+        if (enabledIndices.Count == 0) return;
+
+        int idx = enabledIndices[UnityEngine.Random.Range(0, enabledIndices.Count)];
+        TotemSlot slot = totemSlots[idx];
+        slot.enabled = false;
+
+        // 黑雾特效覆盖点位
+        if (inkEffectPrefab != null && slot.point != null)
+        {
+            GameObject ink = Instantiate(inkEffectPrefab, slot.point.position, Quaternion.identity, slot.point);
+            Destroy(ink, duration);
+        }
+
+        RecalculateAllBonuses();   // 立即移除该图腾的加成
+        StartCoroutine(RestoreTotemCoroutine(idx, duration));
+    }
+
+    IEnumerator RestoreTotemCoroutine(int idx, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        if (idx < totemSlots.Count)
+        {
+            totemSlots[idx].enabled = true;
+            RecalculateAllBonuses();
         }
     }
 }

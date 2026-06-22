@@ -8,7 +8,7 @@ public class FishnetManager : MonoBehaviour
     [SerializeField] private float[] baseRadii = { 2f, 2.8f, 3.6f, 4.4f, 5f };
 
     [Header("广域渔网加成倍率")]
-    [SerializeField] private float rangeMultiplier = 1.3f;   // 与图腾一致
+    [SerializeField] private float rangeMultiplier = 1.2f;   // 与图腾一致
 
     private int currentLevel = 0;       // 当前渔网等级（0~4）
     public bool hasRangeBonus = false; // 是否购买了广域渔网

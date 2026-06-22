@@ -232,9 +232,17 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4487503606908973847, guid: c7513a0b839b4194eb87e480c59e1e44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4497145097371316551, guid: c7513a0b839b4194eb87e480c59e1e44, type: 3}
       propertyPath: m_SortingOrder
       value: -32760
+      objectReference: {fileID: 0}
+    - target: {fileID: 4728393758410431247, guid: c7513a0b839b4194eb87e480c59e1e44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5073677116938739672, guid: c7513a0b839b4194eb87e480c59e1e44, type: 3}
       propertyPath: m_LocalScale.x

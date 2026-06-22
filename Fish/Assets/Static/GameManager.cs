@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
         Coin += amount;
         if (Instance != null && Instance.coinText != null)
             Instance.coinText.text = Coin.ToString();
-            Instance.coinText1.text = Coin.ToString();
+        //Instance.coinText1.text = Coin.ToString();
+        // ≤•∑≈Ω±““Ù–ß
+        AudioManager.PlayCoin();
     }
   
     public static bool SpendCoin(int amount)

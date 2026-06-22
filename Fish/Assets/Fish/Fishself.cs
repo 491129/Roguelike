@@ -6,18 +6,22 @@ public class Fishself : MonoBehaviour
 {
     private FishAttrbute attr;
     public static bool IsFrozen;
-
+    private Vector2 moveDirection = Vector2.right;   // Ä¬ÈÏÏòÓÒ
     void Start()
     {
         attr = GetComponent<FishAttrbute>();
     }
-
+    public void SetDirection(Vector2 dir)
+    {
+        moveDirection = dir.normalized;
+    }
     void Update()
     {
         if (IsFrozen) return;
         if (attr != null && attr.isDead) return;
         float speed = attr.CurrentSpeed;
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        //transform.Translate(Vector3.right * speed * Time.deltaTime);
+        transform.Translate(moveDirection * speed * Time.deltaTime);
         //Ïú»Ù
         Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
         if (viewPos.x < -0.15f || viewPos.x > 1.15f || viewPos.y < -0.15f || viewPos.y > 1.15f)

@@ -10,12 +10,13 @@ public class ConfirmPanel : MonoBehaviour
     private ShopItemData currentItem;
     private ShopItemData00 currentItem00;
     private bool isBossItem = false;
-
+    public static ConfirmPanel Instance { get; private set; }
     private void Awake()
     {
         confirmButton.onClick.AddListener(OnConfirm);
         cancelButton.onClick.AddListener(Hide);
         gameObject.SetActive(false);
+        Instance = this;
     }
 
     public void Show(ShopItemData item)
@@ -32,7 +33,7 @@ public class ConfirmPanel : MonoBehaviour
     }
     public void Hide() => gameObject.SetActive(false);
 
-    private void OnConfirm()
+    public void OnConfirm()
     {
         if (isBossItem)
         {

@@ -16,7 +16,11 @@ using DG.Tweening;
             GD,
             GF,
             MT,
-            LF
+            LF,
+            ST,
+            Tuna,
+            JF,
+            SF
         }
         public FishType fishType;
         public int fishNumber = 0;
@@ -193,7 +197,23 @@ using DG.Tweening;
                         else
                             GameManager.AddCoin(coin);
                         break;
-                    default:
+                    case FishType.ST:
+                        if (STSkill.isUsed)
+                        {
+                        GameManager.AddCoin(Mathf.RoundToInt(STSkill.fishCoin * getgoldMore));
+                        }
+                        else
+                        GameManager.AddCoin(coin);
+                        break;
+                case FishType.LF:
+                    if (LFSkill.isUsed)
+                    {
+                        GameManager.AddCoin(Mathf.RoundToInt(LFSkill.fishCoin * getgoldMore));
+                    }
+                    else
+                        GameManager.AddCoin(coin);
+                    break;
+                default:
                         Debug.Log("N" + goldNum);
                         GameManager.AddCoin(coin);
                         break;

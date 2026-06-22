@@ -30,6 +30,18 @@ public class Boss : MonoBehaviour
     public int[] catchRates = new int[5] { 8000, 8500, 9000, 9500, 9800 };
     public int goldReward = 30000000;
 
+    [Header("最终Boss（章鱼）")]
+    public bool isFinalBoss = false;
+    public GameObject inkEffectPrefab;          // 吐墨特效（实际已移到TotemManager，可忽略）
+    public GameObject attackEffectPrefab;       // 触手攻击特效（在炮台附近播放）
+    public float inkDuration = 5f;
+    public float slowPercent = 0.2f;
+    public float slowDuration = 5f;
+    public Transform[] fishSpawnPoints;         // 两个出生点
+    public int summonCount = 8;
+    public int[] effectWeights = new int[] { 3, 3, 4 };  // 权重
+
+    private bool effectTriggeredThisPass = false;
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -143,6 +155,8 @@ public class Boss : MonoBehaviour
                 targetX = Camera.main.ViewportToWorldPoint(new Vector3(0.05f, 0.5f, 0)).x;
             }
             UpdateTargetDirection();
+            if (isFinalBoss)
+                effectTriggeredThisPass = false;
             Debug.Log($"[Boss] 进入 Shuttling, targetX={targetX}, movingRight={movingRight}");
         }
     }
@@ -169,6 +183,12 @@ public class Boss : MonoBehaviour
         // 检查是否到达目标边界附近，准备向外离开
         if (Mathf.Abs(transform.position.x - targetX) < 0.2f)
         {
+            if (isFinalBoss && !effectTriggeredThisPass)
+            {
+                TriggerFinalBossEffect();
+                effectTriggeredThisPass = true;
+            }
+
             isExiting = true;
             moveDirection = new Vector2(movingRight ? 1f : -1f, 0f);
             Debug.Log($"[Boss] 到达边界，开始向外离开，方向={moveDirection}");
@@ -216,6 +236,7 @@ public class Boss : MonoBehaviour
         if (LockSkill.Instance != null) LockSkill.Instance.OnTargetDied();
         col.enabled = false;
         GameManager.AddCoin(goldReward);
+
         if (BossManager.Instance != null) BossManager.Instance.OnBossDefeated(this);
         SkillShopManager.Instance.BJRefreshAllSlots();
         StartCoroutine(DieAfterDelay(0.5f));
@@ -225,5 +246,55 @@ public class Boss : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
+    }
+
+    void TriggerFinalBossEffect()
+    {
+        // 根据权重随机
+        int totalWeight = 0;
+        foreach (int w in effectWeights) totalWeight += w;
+        int rand = Random.Range(0, totalWeight);
+        int cumulative = 0;
+        for (int i = 0; i < effectWeights.Length; i++)
+        {
+            cumulative += effectWeights[i];
+            if (rand < cumulative)
+            {
+                switch (i)
+                {
+                    case 0: InkEffect(); break;
+                    case 1: TentacleAttack(); break;
+                    case 2: SummonFish(); break;
+                }
+                break;
+            }
+        }
+    }
+    void InkEffect()
+    {
+        if (TotemManager.Instance != null)
+            TotemManager.Instance.DisableRandomTotem(inkDuration);
+    }
+
+    void TentacleAttack()
+    {
+        // 播放攻击动画（在炮台附近）
+        if (attackEffectPrefab != null && Cannon.Instance != null)
+        {
+            Instantiate(attackEffectPrefab, Cannon.Instance.transform.position, Quaternion.identity);
+        }
+        // 降低攻速
+        if (Cannon.Instance != null)
+        {
+            Cannon.Instance.ApplyTempSpeedDebuff(1f - slowPercent, slowDuration);
+        }
+    }
+
+    void SummonFish()
+    {
+        if (BossManager.Instance != null && fishSpawnPoints.Length > 0)
+        {
+            BossManager.Instance.SpawnFishWave(fishSpawnPoints, summonCount);
+        }
     }
 }

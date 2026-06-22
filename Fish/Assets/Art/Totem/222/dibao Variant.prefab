@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -32760
       objectReference: {fileID: 0}
+    - target: {fileID: 2560511092948131646, guid: 1e06b0a98b444fb4b9cb0a5b302e9040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3874725363227376965, guid: 1e06b0a98b444fb4b9cb0a5b302e9040, type: 3}
       propertyPath: looping
       value: 0
@@ -395,6 +399,10 @@ PrefabInstance:
     - target: {fileID: 8715384029543313701, guid: 1e06b0a98b444fb4b9cb0a5b302e9040, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726558322189857312, guid: 1e06b0a98b444fb4b9cb0a5b302e9040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -4,10 +4,12 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.VolumeComponent;
 //using static UnityEditor.Progress;
 
 public class SkillShopManager : MonoBehaviour
 {
+    public Image image;
     public static SkillShopManager Instance;
     public bool hasExtraSlot = false;
     public static float priceMultiplier = 1.0f;
@@ -113,6 +115,7 @@ public class SkillShopManager : MonoBehaviour
         {
             int index = i;
             slotButtons[i].onClick.AddListener(() => OnSlotClicked(index));
+            //slotButtons[i].onClick.AddListener(() => confirmPanel.OnConfirm());
         }
         slotButtons00.onClick.AddListener(OnSlotClicked00);
         RefreshAllSlots();
@@ -242,7 +245,31 @@ public class SkillShopManager : MonoBehaviour
         GetComponent<MTSkill>().enabled = true;
         MTSkill.isUsed = true;
     }
-
+    public void JFskill()
+    {
+        GetComponent<JFSkill>().enabled = true;
+        JFSkill.isUsed = true;
+    }
+    public void STskill()
+    {
+        GetComponent<STSkill>().enabled = true;
+        STSkill.isUsed = true;
+    }
+    public void SFskill()
+    {
+        GetComponent<SFSkill>().enabled = true;
+        SFSkill.isUsed = true;
+    }
+    public void Tunaskill()
+    {
+        GetComponent<TunaSkill>().enabled = true;
+        TunaSkill.isUsed = true;
+    }
+    public void LFskill()
+    {
+        GetComponent<LFSkill>().enabled = true;
+        LFSkill.isUsed = true;
+    }
     public void HDSkill()
     {
         priceMultiplier = 0.8f;
@@ -379,7 +406,10 @@ public class SkillShopManager : MonoBehaviour
                      }
             }
                  else
-                 {
+            {
+                    Color c = slotImages[i].color;
+                    c.a = 0f;
+                    slotImages[i].color = c;
                     slotImages[i].sprite = null;
                     slotButtons[i].interactable = false;
                     slotPriceTexts[i].text = " ";
@@ -398,6 +428,16 @@ public class SkillShopManager : MonoBehaviour
             slotImages00.sprite = currentSlots00.icon;
             slotPriceTexts00.text = (currentSlots00.price * priceMultiplier).ToString("F0");
             slotButtons00.interactable = true;
+            Color c = slotImages00.color;
+            c.a = 0f;
+            slotImages00.color = c;
+            slotImages00.sprite = null;
+            // 设置悬停数据
+            SlotHover hover = slotImages00.GetComponent<SlotHover>();
+            // 如果 SlotHover 挂在按钮上，也可从 slotButtons[i] 获取
+            if (hover == null) hover = slotButtons00.GetComponent<SlotHover>();
+            if (hover != null)
+                hover.SetItem(currentSlots00);
         }
         else
         {
@@ -410,17 +450,15 @@ public class SkillShopManager : MonoBehaviour
     //确认弹窗
     void OnSlotClicked(int index)
     {
-        if (currentSlots[index] != null)
-            confirmPanel.Show(currentSlots[index]);
-        confirmPanel.gameObject.SetActive(true);
-        //confirmPanel.Show(currentSlots[index]);
+        TryPurchase(currentSlots[index]);
 
     }
     void OnSlotClicked00()
     {
-        if (currentSlots00 != null)
-            confirmPanel00.Show(currentSlots00);
-        confirmPanel00.gameObject.SetActive(true);
+        //if (currentSlots00 != null)
+        //    confirmPanel00.Show(currentSlots00);
+        //confirmPanel00.gameObject.SetActive(true);
+        TryPurchase00(currentSlots00);
     }
     //普通商品购买，确认弹窗调用
     public void TryPurchase(ShopItemData item)
@@ -555,8 +593,6 @@ public class SkillShopManager : MonoBehaviour
             UpdateSlotUI();
             return;
         }
-        //  if (item.skillID == "Skill1"&& SkillButtonManager.Instance.AllActivated) { Debug.Log("满了"); return; }
-        //int finalPrice = Mathf.RoundToInt(item.price * priceMultiplier);
         finalPriceNol = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
         if (!GameManager.SpendCoin(finalPrice)) { Debug.Log("金币不足"); return; }
 

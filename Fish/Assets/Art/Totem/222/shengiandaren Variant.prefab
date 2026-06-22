@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 810699115764742161, guid: 9e431701583e13448a0bdde848965c0c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1479507677745020110, guid: 9e431701583e13448a0bdde848965c0c, type: 3}
       propertyPath: m_SortingOrder
       value: -32760
@@ -299,6 +303,10 @@ PrefabInstance:
     - target: {fileID: 4846991577106324885, guid: 9e431701583e13448a0bdde848965c0c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296049314496515838, guid: 9e431701583e13448a0bdde848965c0c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548731230872857360, guid: 9e431701583e13448a0bdde848965c0c, type: 3}
       propertyPath: looping

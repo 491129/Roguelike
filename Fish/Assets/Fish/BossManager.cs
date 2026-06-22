@@ -34,6 +34,11 @@ public class BossManager : MonoBehaviour
     [Header("Boss 阶段时间 (分钟)")]
     [SerializeField] private float[] battleStartMinutes = new float[] { 4f, 8.5f, 16f };
     private bool[] battleTriggered = new bool[3];   // 3个阶段
+
+    [Header("鱼群召唤")]
+    [SerializeField] private Transform fishParent;   // 与 fish 脚本中的 fishParent 相同
+    [SerializeField] private GameObject[] commonFishPrefabs;  // 拖入几种常用鱼预制体
+
     class ActiveBoss
     {
         public GameObject obj;
@@ -177,5 +182,30 @@ public class BossManager : MonoBehaviour
         Vector3 center = centerPoint != null ? centerPoint.position : Vector3.zero;
         Vector2 dir = (center - spawnPos).normalized;
         return (spawnPos, dir);
+    }
+    public void SpawnFishWave(Transform[] spawnPoints, int count)
+    {
+        StartCoroutine(SpawnWaveRoutine(spawnPoints, count));
+    }
+
+    IEnumerator SpawnWaveRoutine(Transform[] points, int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Transform sp = points[Random.Range(0, points.Length)];
+            GameObject prefab = commonFishPrefabs[Random.Range(0, commonFishPrefabs.Length)];
+            GameObject fishObj = Instantiate(prefab, sp.position, Quaternion.identity);
+            fishObj.transform.SetParent(fishParent);
+
+            // 设置鱼的初始移动方向（根据出生点朝向）
+            Fishself fishMove = fishObj.GetComponent<Fishself>();
+            if (fishMove != null)
+            {
+                // 假设出生点的右方向为移动方向
+                fishMove.SetDirection(sp.right);
+            }
+
+            yield return new WaitForSeconds(0.15f); // 快速生成
+        }
     }
 }

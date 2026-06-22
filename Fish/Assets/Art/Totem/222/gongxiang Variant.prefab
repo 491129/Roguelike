@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -32760
       objectReference: {fileID: 0}
+    - target: {fileID: 2362928971329581689, guid: 89f1228f3236e634b95a55428d99650c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198544178394938120, guid: 89f1228f3236e634b95a55428d99650c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4502280531295924238, guid: 89f1228f3236e634b95a55428d99650c, type: 3}
       propertyPath: m_Name
       value: gongxiang Variant

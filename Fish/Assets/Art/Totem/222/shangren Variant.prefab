@@ -88,6 +88,14 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1711590070347596871, guid: d9a5d55adc07dab45a58c7bd00363838, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2758991410512362018, guid: d9a5d55adc07dab45a58c7bd00363838, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2841356363470296507, guid: d9a5d55adc07dab45a58c7bd00363838, type: 3}
       propertyPath: looping
       value: 0

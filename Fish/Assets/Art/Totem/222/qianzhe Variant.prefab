@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7002483046021567488, guid: 74b4b2f2ea121034f9390613a3c5939d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7170801505263325151, guid: 74b4b2f2ea121034f9390613a3c5939d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -251,6 +255,10 @@ PrefabInstance:
     - target: {fileID: 7170801505263325151, guid: 74b4b2f2ea121034f9390613a3c5939d, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437732363860658072, guid: 74b4b2f2ea121034f9390613a3c5939d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8278337582685654975, guid: 74b4b2f2ea121034f9390613a3c5939d, type: 3}
       propertyPath: looping

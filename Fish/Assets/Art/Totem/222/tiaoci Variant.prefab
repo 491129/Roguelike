@@ -156,6 +156,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3504920940207336909, guid: 8838fa310a8eff941b1967ef0ebcbef5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3514417957305787445, guid: 8838fa310a8eff941b1967ef0ebcbef5, type: 3}
       propertyPath: m_Name
       value: tiaoci Variant
@@ -255,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 4406413468425510075, guid: 8838fa310a8eff941b1967ef0ebcbef5, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5666125924243318576, guid: 8838fa310a8eff941b1967ef0ebcbef5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7435753387549278986, guid: 8838fa310a8eff941b1967ef0ebcbef5, type: 3}
       propertyPath: m_LocalScale.x

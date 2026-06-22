@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Cannon : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class Cannon : MonoBehaviour
     private Camera mainCam;
     private ObjectPool pool;
     private float currentAngle;
-    public Text NoCoin;
+   // public Text NoCoin;
     public int actualCost;
 
     public static Cannon Instance;
@@ -24,6 +26,8 @@ public class Cannon : MonoBehaviour
 
     private int shotCount = 0;            // 开火计数
     private const int chargeInterval = 6; // 每6炮触发蓄力
+
+    public GameObject NoCoin;
     void Start()
     {
         baseFireRate = fireRate;
@@ -62,12 +66,12 @@ public class Cannon : MonoBehaviour
         //int cost = ALLCannon.levelCosts[ALLCannon.currentLevel];
         if (!GameManager.SpendCoin(actualCost))
         {
-            NoCoin.text = "金币不足!无法发射!";
+            NoCoin.SetActive(true);
             return;
         }
         else
         {
-            NoCoin.text = " ";
+            NoCoin.SetActive (false);
         }
         if ( TotemManager.Instance.xuli)
         {
@@ -102,6 +106,8 @@ public class Cannon : MonoBehaviour
             bullet.transform.position = firePoint.position;
             bullet.transform.rotation = firePoint.rotation;
             bullet.SetActive(true);
+            // 播放开火音效
+            AudioManager.PlayShoot();
         }
 
     }
@@ -130,7 +136,7 @@ public class Cannon : MonoBehaviour
     }
     public void ApplyDebuffCAnnon()
     {
-        attackSpeedMultiplier *= 1.2f;
+        attackSpeedMultiplier *= 1.15f;
         fireRate = baseFireRate / attackSpeedMultiplier;
     }
     public int GetActualCost()
@@ -138,5 +144,15 @@ public class Cannon : MonoBehaviour
         int baseCost = ALLCannon.levelCosts[ALLCannon.currentLevel];
         float multiplier = TotemManager.Instance != null ? TotemManager.Instance.CostMultiplier : 1f;
         return Mathf.RoundToInt(baseCost * multiplier);
+    }
+    public void ApplyTempSpeedDebuff(float multiplier, float duration)
+    {
+        attackSpeedMultiplier *= multiplier;
+        StartCoroutine(RemoveTempSpeedDebuff(multiplier, duration));
+    }
+    IEnumerator RemoveTempSpeedDebuff(float multiplier, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        attackSpeedMultiplier /= multiplier;
     }
 }
