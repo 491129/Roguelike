@@ -5,34 +5,44 @@ public class GameProgressManager : MonoBehaviour
     public static GameProgressManager Instance { get; private set; }
 
     [SerializeField] private TimerUI timerUI;   // 你的倒计时脚本
+    private float scaleFactor = 8f / 17.5f;
+    private (float startMin, int count, float interval)[] stages;
 
-    // 阶段定义 (开始时间分钟，每波鱼数量，刷新间隔秒)
-    private (float startMin, int count, float interval)[] stages = new (float, int, float)[]
+    void Awake()
     {
-        (0f,    18, 1.5f),
-        (1f,    16, 1.8f),
-        (3f,    14, 2f),
-        (3.5f,  12, 2.2f),   // BOSS1预警 3:30=3.5
-        (4f,    8,  2.5f),   // BOSS1战中
-        (4.5f,  10, 2.3f),   // BOSS1收尾
-        (5f,    14, 2f),
-        (8f,    12, 2.2f),   // BOSS2预警
-        (8.5f,  8,  2.5f),
-        (9f,    10, 2.3f),
-        (9.5f,  16, 1.8f),
-        (14f,   14, 2f),
-        (15.5f, 10, 2.5f),   // 最终预警 15:30=15.5
-        (16f,   6,  3f)      // 最终BOSS
-    };
+        Instance = this;
+        InitializeStages();
+    }
+    // 阶段定义 (开始时间分钟，每波鱼数量，刷新间隔秒)
+    void InitializeStages()
+    {
+        stages = new (float, int, float)[]
+        {
+            // 原数据乘以 scaleFactor，开始分钟和间隔都缩放
+            (0f,               18, 1.5f * scaleFactor),
+            (1f * scaleFactor, 16, 1.8f * scaleFactor),
+            (3f * scaleFactor, 14, 2f   * scaleFactor),
+            (3.5f * scaleFactor, 12, 2.2f * scaleFactor),
+            (4f * scaleFactor, 8,  2.5f * scaleFactor),
+            (4.5f * scaleFactor, 10, 2.3f * scaleFactor),
+            (5f * scaleFactor, 14, 2f   * scaleFactor),
+            (8f * scaleFactor, 12, 2.2f * scaleFactor),
+            (8.5f * scaleFactor, 8,  2.5f * scaleFactor),
+            (9f * scaleFactor, 10, 2.3f * scaleFactor),
+            (9.5f * scaleFactor, 16, 1.8f * scaleFactor),
+            (14f * scaleFactor, 14, 2f   * scaleFactor),
+            (15.5f * scaleFactor, 10, 2.5f * scaleFactor),
+            (16f * scaleFactor, 6,  3f   * scaleFactor)
+        };
+    }
 
-    void Awake() => Instance = this;
 
     /// <summary>
     /// 根据当前游戏时间返回 (每波数量, 刷新间隔)
     /// </summary>
     public (int count, float interval) GetCurrentWaveParams()
     {
-        float minutes = timerUI.TimeElapsed / 60f;   // TimerUI 需要暴露 TimeElapsed（总秒数）
+        float minutes = timerUI.TimeElapsed / 60f;
         for (int i = stages.Length - 1; i >= 0; i--)
         {
             if (minutes >= stages[i].startMin)

@@ -10,6 +10,8 @@ public class fish : MonoBehaviour
     public GameObject[] fishPres;      // 12个预制体，索引0~11对应鱼1~12
     public Transform[] fishMakers;
     public Transform fishParent;
+    private int fishSortingOrder = 500;          // 初始排序值
+    public static int AliveFishCount { get; private set; }
 
     private void Awake() => _instance = this;
 
@@ -33,7 +35,7 @@ public class fish : MonoBehaviour
         for (int i = 0; i < totalCount; i++)
         {
             SpawnRandomFish();
-            yield return new WaitForSeconds(0.2f);   // 每条鱼之间的生成间隔（可调）
+            yield return new WaitForSeconds(0.3f);   // 每条鱼之间的生成间隔（可调）
         }
     }
 
@@ -70,6 +72,23 @@ public class fish : MonoBehaviour
             GameObject fishObj = Instantiate(fishPres[fishPre]);
             fishObj.transform.position = fishMakers[fishPoint].position;
             fishObj.transform.SetParent(fishParent, false);
+
+            // 设置鱼本身的排序值
+            SpriteRenderer fishSr = fishObj.GetComponent<SpriteRenderer>();
+            fishSr.sortingOrder = fishSortingOrder;
+
+            // 动态设置阴影排序值（阴影子物体必须命名为 "Shadow"）
+            Transform shadow = fishObj.transform.Find("shadow");
+            if (shadow != null)
+            {
+                SpriteRenderer shadowSr = shadow.GetComponent<SpriteRenderer>();
+                if (shadowSr != null) shadowSr.sortingOrder = fishSortingOrder - 1;
+            }
+
+            fishSortingOrder--;         // 下一条鱼更低
+            AliveFishCount++;
+
+
             fishObj.GetComponent<SpriteRenderer>().sortingOrder += i;
             fishObj.transform.rotation = Quaternion.Euler(0, 0, fishMakers[fishPoint].eulerAngles.z + angle);
 
@@ -77,7 +96,17 @@ public class fish : MonoBehaviour
             float normalizedZ = eulerZ > 180 ? eulerZ - 360 : eulerZ;
             fishObj.GetComponent<SpriteRenderer>().flipY = !(normalizedZ > -90 && normalizedZ < 90);
 
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.4f);
+        }
+    }
+    public static void OnFishDied()
+    {
+        AliveFishCount--;
+        if (AliveFishCount <= 0 && instance != null)
+        {
+            AliveFishCount = 0;   // 防止负数
+            // 重置排序计数器，让新鱼重新从高处开始
+            instance.fishSortingOrder = 500;
         }
     }
 }

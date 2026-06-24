@@ -15,9 +15,12 @@ public class TotemManager : MonoBehaviour
     [SerializeField] private Transform[] totemPoints;
     [SerializeField] private TotemInfoPanel infoPanel;   // 拖入信息面板
 
+    [Header("jingbing")]
+    public int startIndex = 0;
+
     // 当前已激活的图腾数量（也对应下一个空闲点位的索引）
-    private int activeCount = 0;            // 当前已放置图腾数量
-    private int maxSlots = 4;               // 初始最多放4个
+    public int activeCount = 0;            // 当前已放置图腾数量
+    public int maxSlots = 4;               // 初始最多放4个
     // 存储每个已放置图腾的信息
     private List<TotemSlot> totemSlots = new List<TotemSlot>();
     public bool isPlace;
@@ -51,6 +54,7 @@ public class TotemManager : MonoBehaviour
 
     // 存储每个点位生成的特效实例，用于后续销毁
     private List<GameObject> activeEffects = new List<GameObject>();
+
     class TotemSlot
     {
         public Transform point;
@@ -71,17 +75,17 @@ public class TotemManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        if (totemPoints.Length >= 5)
+            totemPoints[4].gameObject.SetActive(false);
     }
     private void Update()
     {
         if (!lingDiBaoTriggered && lingDiBaoIndex >= 0)
         {
-            if (GameManager.Coin < 100)
-            {
                 // 触发：给予金币，销毁特效，效果作废
                 GameManager.AddCoin(1000000);
                 TotemManager.Instance?.TriggerEffectByName("领低保了");
-                Debug.Log("领低保了触发：金币+10000");
+                Debug.Log("领低保了触发：金币+1000000");
 
                 // 销毁对应特效
                 if (lingDiBaoIndex < activeEffects.Count && activeEffects[lingDiBaoIndex] != null)
@@ -93,7 +97,7 @@ public class TotemManager : MonoBehaviour
                 // 标记已触发，后续不再检测
                 lingDiBaoTriggered = true;
                 // 注意：activeCount 不减少，点位仍被占用（特效已消失）
-            }
+            
         }
     }
     /// <summary>
@@ -102,32 +106,19 @@ public class TotemManager : MonoBehaviour
 
     public bool PlaceTotem(SkillShopManager.ShopItemData item)
     {
-        if (activeCount >= maxSlots)
+        if (activeCount >= maxSlots - startIndex)  // 注意：可用槽位总数 = maxSlots - startIndex
         {
-            Debug.Log("图腾点位已满，无法放置");
+            Debug.Log("图腾点位已满");
             return false;
         }
-        if (hasJingbing)
-        {
-                if (maxSlots <= 0)
-                {
-                Debug.Log("没有可牺牲的图腾坑位");
-                return false;
-                }
+        int pointIndex = startIndex + activeCount;
+        Transform point = totemPoints[pointIndex];
 
-                hasJingbing = true;
-                maxSlots--;                    // 牺牲一个坑位
-                ApplyTotemEffect(item.itemName, -1);   // 不占用点位
-                Debug.Log($"精兵生效：图腾坑位减少1，当前最大容量 {maxSlots}");
-                return true;
-        }
-        
         if (hasTotemPirate)
         {
             TotemNum++;
             FishAttrbute.CatchRateMultiplier += 0.01f * TotemNum;//11111111111111111111111111111111111111111
         }
-        Transform point = totemPoints[activeCount];
         GameObject gray = null;
         if (item.totemGrayPrefab != null)
         {
@@ -193,6 +184,8 @@ public class TotemManager : MonoBehaviour
         }
         maxSlots++;
         // 如果需要激活第5个点位的视觉效果，可以在这里处理，比如显示底座等
+        if (maxSlots == 5)
+            totemPoints[4].gameObject.SetActive(true);
         return true;
     }
 
@@ -216,6 +209,15 @@ public class TotemManager : MonoBehaviour
         if (index < 0 || index >= totemSlots.Count) return false;
 
         TotemSlot slot = totemSlots[index];
+        // 如果是精兵，恢复坑位和点位
+        if (slot.itemData.itemName == "精兵")
+        {
+            maxSlots++;                     // 恢复减少的坑位
+            startIndex = 0;                 // 恢复起始索引
+            totemPoints[3].gameObject.SetActive(true);  // 重新显示第一个点位（索引0）
+                                                        // 注意：如果还有其他因精兵隐藏的点位，也在这里恢复，例如你代码中误隐藏了索引3，若需要恢复可加上：
+                                                        // totemPoints[3].gameObject.SetActive(true);
+        }
         if (slot.grayObj != null) Destroy(slot.grayObj);
 
         // 从已购技能中移除（允许重新购买）
@@ -242,12 +244,29 @@ public class TotemManager : MonoBehaviour
     void RecalculateAllBonuses()
     {
         // 重置所有加成
-       
-        // 重置其他bool...
-
-        // 重新应用所有剩余图腾
+        //FishAttrbute.CatchRateMultiplier = 1f;
+        CostMultiplier = 1f;
+        get100 = false;
+        xijin = false;
+        canDebt = false;
+        hasMerchantPirate = false;
+        hasPickyPirate = false;
+        hasTotemPirate = false;
+        qianghua = false;
+        kuaisu = false;
+        shengqian = false;
+        chaopin = false;
+        huangjin = false;
+        chuanzhang = false;
+        heixin = false;
+        hasJingbing = false;
+        xuli = false;
+        // ===== 重新应用所有剩余图腾的效果 =====
         foreach (var slot in totemSlots)
-            ApplyTotemEffect(slot.itemData.itemName);
+        {
+            if (slot.enabled)   // 只应用未被禁用的图腾
+                ApplyTotemEffect(slot.itemData.itemName);
+        }
     }
 
     public bool CanExpandSlots => maxSlots < totemPoints.Length;
@@ -312,8 +331,13 @@ public class TotemManager : MonoBehaviour
                 break;
             case "精兵"://22222222222
                 hasJingbing= true;
-                FishAttrbute.CatchRateMultiplier *= 1.5f;//11111111111111111111111111111111111111111
-                FishAttrbute.getgoldMore *= 2f;
+                FishAttrbute.CatchRateMultiplier *= 1.8f;//11111111111111111111111111111111111111111
+                FishAttrbute.getgoldMore *= 2.5f;
+                maxSlots--;
+               // totemPoints[0].gameObject.SetActive(false);
+                startIndex = 1;
+                if (totemPoints.Length > 3)
+                    totemPoints[3].gameObject.SetActive(false);
                 break;
             case "蓄力"://222222222222
                 xuli=true;

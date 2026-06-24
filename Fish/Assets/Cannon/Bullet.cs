@@ -15,17 +15,27 @@ public class Bullet : MonoBehaviour
     private Collider2D col;
     private bool isHitting;
 
+    private Vector2 fireDirection;   // 由外部在激活前设置
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
+    public void SetDirection(Vector2 dir)
+    {
+        fireDirection = dir.normalized;
+    }
+
 
     void OnEnable()
     {
         isHitting = false;
         col.enabled = true;
-        rb.velocity = transform.up * speed;
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.velocity = fireDirection * speed;
         CancelInvoke();
         Invoke(nameof(Deactivate), lifeTime);
     }
@@ -33,6 +43,7 @@ public class Bullet : MonoBehaviour
     void OnDisable()
     {
         if (rb) rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
         CancelInvoke();
     }
 
@@ -52,9 +63,6 @@ public class Bullet : MonoBehaviour
                 if (fish != null && fish != locked) return;
                 if (boss != null && boss != locked) return;
 
-                //Debug.Log($"锁定模式激活，当前目标: {(LockSkill.Instance.LockedTarget != null ? LockSkill.Instance.LockedTarget.name : "null")}");
-                //if (fish != LockSkill.Instance.LockedTarget)
-                //    return;
             }
             // 正常处理命中
             isHitting = true;

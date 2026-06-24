@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossManager : MonoBehaviour
 {
@@ -15,6 +17,11 @@ public class BossManager : MonoBehaviour
     [SerializeField] private Cannon cannon;
     [SerializeField] private ALLCannon AllCannon;
     [SerializeField] private GameObject warningUI;
+    [Header("预警 UI（三张图）")]
+    [SerializeField] private Image warningImage1;       // 第一张图
+    [SerializeField] private Image warningImage2;       // 第二张图
+    [SerializeField] private Image warningImage3;       // 第三张图
+    [SerializeField] private Text warningText;          // 第二张图上的文字（子物体）
 
     [Header("设置")]
     [SerializeField] private float warningDuration = 30f;
@@ -35,9 +42,13 @@ public class BossManager : MonoBehaviour
     [SerializeField] private float[] battleStartMinutes = new float[] { 4f, 8.5f, 16f };
     private bool[] battleTriggered = new bool[3];   // 3个阶段
 
-    [Header("鱼群召唤")]
-    [SerializeField] private Transform fishParent;   // 与 fish 脚本中的 fishParent 相同
-    [SerializeField] private GameObject[] commonFishPrefabs;  // 拖入几种常用鱼预制体
+    [Header("最终Boss鱼群生成")]
+    public Transform fishParent;               // 与 fish.cs 中的 fishParent 相同
+    public GameObject[] commonFishPrefabs;     // 拖入几种普通鱼预制体
+    [Header("最终Boss出生点")]
+    [SerializeField] private Transform finalBossSpawnPoint;   // 拖入屏幕上方中间的出生点
+    [Header("最终Boss鱼群出生点")]
+    [SerializeField] private Transform[] finalBossFishSpawnPoints;  // 拖入场景中放在屏幕左边的空物体
 
     class ActiveBoss
     {
@@ -50,33 +61,43 @@ public class BossManager : MonoBehaviour
         Instance = this;
     }
 
+    //void Update()
+    //{
+    //    float elapsedMinutes = timerUI.TimeElapsed / 60f;
+
+    //    for (int i = 0; i < battleStartMinutes.Length; i++)
+    //    {
+    //        if (battleTriggered[i]) continue;
+    //        if (elapsedMinutes >= battleStartMinutes[i])
+    //        {
+    //            battleTriggered[i] = true;
+    //            StartCoroutine(FinalBossSequence());
+    //        }
+    //    }
+    //}
     void Update()
     {
         float elapsedMinutes = timerUI.TimeElapsed / 60f;
-
         for (int i = 0; i < battleStartMinutes.Length; i++)
         {
             if (battleTriggered[i]) continue;
             if (elapsedMinutes >= battleStartMinutes[i])
             {
                 battleTriggered[i] = true;
-                StartCoroutine(BossSequence(i));
+                if (i == battleStartMinutes.Length - 1)   // 最后一个元素是最终Boss
+                    StartCoroutine(FinalBossSequence());
+                else
+                    StartCoroutine(BossSequence(i));
             }
         }
     }
-
     IEnumerator BossSequence(int index)
     {
-        // 预警动画...
-        warningUI.SetActive(true);
-        yield return new WaitForSeconds(warningDuration);
-        warningUI.SetActive(false);
-
+        Debug.Log($"[BossManager] 开始生成 Boss，index={index}");
+        yield return StartCoroutine(WarningSequence(warningDuration));
+        yield return new WaitForSeconds(3f);
         GameObject bossPrefab;
-        if (index == 2)   // 最终Boss
-            bossPrefab = finalBossPrefab;
-        else
-            bossPrefab = normalBossPrefabs[Random.Range(0, normalBossPrefabs.Length)];
+        bossPrefab = normalBossPrefabs[Random.Range(0, normalBossPrefabs.Length)];
 
         var (pos, dir) = GetRandomSpawnData();
         GameObject bossObj = Instantiate(bossPrefab, pos, Quaternion.identity);
@@ -136,6 +157,35 @@ public class BossManager : MonoBehaviour
            // Destroy(bossObj);
         }
         BGMPlayer.PlayNormal();
+        Debug.Log($"[BossManager] Boss 生成位置：{pos}，方向：{dir}");
+    }
+    IEnumerator FinalBossSequence()
+    {
+        yield return StartCoroutine(WarningSequence(warningDuration));
+        yield return new WaitForSeconds(3f);
+        Vector3 spawnPos = finalBossSpawnPoint.position;
+        Vector2 dir = Vector2.down;  // 最终Boss强制向下
+
+        GameObject bossObj = Instantiate(finalBossPrefab, spawnPos, Quaternion.identity);
+        Boss boss = bossObj.GetComponent<Boss>();
+        if (boss != null)
+        {
+            boss.Init(dir);
+            boss.SetCenter(centerPoint);
+            // 应用Debuff等（章鱼没有Debuff，可跳过）
+            // 动态赋值鱼群出生点（关键！）
+            if (finalBossFishSpawnPoints.Length > 0)
+                boss.fishSpawnPoints = finalBossFishSpawnPoints;
+
+        }
+
+        BGMPlayer.PlayBoss();
+
+        // 等待Boss被击败或离开
+        while (bossObj != null && boss != null && !boss.bossDefeated)
+            yield return null;
+
+        BGMPlayer.PlayNormal();
     }
     /// <summary>
     /// 当 Boss 被玩家击败时调用，立即移除负面效果
@@ -183,29 +233,70 @@ public class BossManager : MonoBehaviour
         Vector2 dir = (center - spawnPos).normalized;
         return (spawnPos, dir);
     }
-    public void SpawnFishWave(Transform[] spawnPoints, int count)
+    public void SpawnFishWave(Transform[] points, int count)
     {
-        StartCoroutine(SpawnWaveRoutine(spawnPoints, count));
+        Debug.Log($"[BossManager] SpawnFishWave count={count}");
+        StartCoroutine(SpawnWaveRoutine(points, count));
     }
 
     IEnumerator SpawnWaveRoutine(Transform[] points, int count)
     {
         for (int i = 0; i < count; i++)
         {
+            Debug.Log($"[BossManager] 生成第 {i + 1} 条鱼");
+            if (points == null || points.Length == 0) break;
             Transform sp = points[Random.Range(0, points.Length)];
+            if (sp == null) continue;
+            if (commonFishPrefabs.Length == 0) continue;
             GameObject prefab = commonFishPrefabs[Random.Range(0, commonFishPrefabs.Length)];
+            if (prefab == null) continue;
+
             GameObject fishObj = Instantiate(prefab, sp.position, Quaternion.identity);
             fishObj.transform.SetParent(fishParent);
 
-            // 设置鱼的初始移动方向（根据出生点朝向）
             Fishself fishMove = fishObj.GetComponent<Fishself>();
-            if (fishMove != null)
-            {
-                // 假设出生点的右方向为移动方向
-                fishMove.SetDirection(sp.right);
-            }
+            fishMove?.SetDirection(Vector2.right);
 
-            yield return new WaitForSeconds(0.15f); // 快速生成
+            yield return new WaitForSeconds(0.15f);
         }
+    }
+    IEnumerator WarningSequence(float totalDuration)
+    {
+        float segmentTime = totalDuration / 3f;
+        // 初始状态：全部隐藏，透明度为0
+        warningImage1.gameObject.SetActive(true);
+        warningImage2.gameObject.SetActive(true);
+        warningImage3.gameObject.SetActive(true);
+        warningText.gameObject.SetActive(true);
+
+        warningImage1.color = new Color(1, 1, 1, 0);
+        warningImage2.color = new Color(1, 1, 1, 0);
+        warningImage3.color = new Color(1, 1, 1, 0);
+        warningText.color = new Color(1, 1, 1, 0);
+
+        // 第一阶段：第一张图淡入（0.5秒） -> 持续1秒 -> 淡出（0.5秒）
+        warningImage1.DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(1.2f);   // 0.5淡入 + 1秒停留
+        warningImage1.DOFade(0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+
+        // 第二阶段：第二张图 + 文字淡入（0.5秒）
+        warningImage2.DOFade(1f, 0.5f);
+        warningText.DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(1.5f);     // 显示1秒
+
+        // 第三阶段：第二张图淡出（0.5秒），同时第三张图淡入（0.5秒）
+        warningImage2.DOFade(0f, 0.5f);
+        warningText.DOFade(0f, 0.5f);
+        warningImage3.DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(0.8f);     // 第三张图展示1秒
+
+        // 全部隐藏，准备下一次预警
+        warningImage3.DOFade(0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        warningImage1.gameObject.SetActive(false);
+        warningImage2.gameObject.SetActive(false);
+        warningImage3.gameObject.SetActive(false);
+        warningText.gameObject.SetActive(false);
     }
 }

@@ -19,7 +19,7 @@ public class Boss : MonoBehaviour
     public bool isDead = false;
 
     private Transform centerPoint;
-    private enum MoveState { Entering, Shuttling, Leaving }
+    private enum MoveState { Entering, Shuttling, Leaving, Staying }
     private MoveState currentState = MoveState.Entering;
     private int tripCounter = 0;
     private float targetX;
@@ -29,23 +29,29 @@ public class Boss : MonoBehaviour
     public bool bossDefeated = false;
     public int[] catchRates = new int[5] { 8000, 8500, 9000, 9500, 9800 };
     public int goldReward = 30000000;
+    [Header("最终Boss (章鱼)")]
+    public bool isFinalBoss = false;         // 在预制体 Inspector 中勾选
+    public float stayDuration = 60f;         // 停留总时间
+    public float skillInterval = 10f;        // 技能触发间隔
+    public int[] effectWeights = { 3, 3, 4 }; // 三种效果的权重
 
-    [Header("最终Boss（章鱼）")]
-    public bool isFinalBoss = false;
-    public GameObject inkEffectPrefab;          // 吐墨特效（实际已移到TotemManager，可忽略）
-    public GameObject attackEffectPrefab;       // 触手攻击特效（在炮台附近播放）
-    public float inkDuration = 5f;
-    public float slowPercent = 0.2f;
+    [Header("技能预制体/引用")]
+    public Transform[] fishSpawnPoints;      // 左边出生点（至少1个）
+    public int summonCount = 50;              // 每次召唤鱼的数量
+
+    [Header("炮台攻速降低")]
+    private Animator anim;
+    public float slowPercent = 0.2f;         // 降低20%
     public float slowDuration = 5f;
-    public Transform[] fishSpawnPoints;         // 两个出生点
-    public int summonCount = 8;
-    public int[] effectWeights = new int[] { 3, 3, 4 };  // 权重
+    private bool isPerformingSkill = false;
+
 
     private bool effectTriggeredThisPass = false;
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +59,13 @@ public class Boss : MonoBehaviour
         if (isDead) return;
         if (collision.CompareTag("Wall"))
         {
+            // 最终Boss在离开阶段允许穿墙，直接销毁
+            if (isFinalBoss && currentState == MoveState.Leaving)
+            {
+                Debug.Log("[Boss] 最终Boss离开时碰到Wall，直接销毁");
+                Destroy(gameObject);
+                return;
+            }
             Debug.Log("Boss 撞墙死亡");
             Die();
         }
@@ -77,6 +90,7 @@ public class Boss : MonoBehaviour
         int lvl = ALLCannon.currentLevel;
         lvl = Mathf.Clamp(lvl, 0, catchRates.Length - 1);
         float prob = catchRates[lvl] / 10000f;
+        Debug.Log(prob);
         if (Random.value > prob)
         {
             Debug.Log($"{bossType} 闪避了攻击");
@@ -88,12 +102,18 @@ public class Boss : MonoBehaviour
 
     public void Init(Vector2 dir)
     {
-        moveDirection = dir.normalized;
+        if (isFinalBoss)
+            moveDirection = Vector2.down; 
+        else
+            moveDirection = dir.normalized; ;
         currentState = MoveState.Entering;
         tripCounter = 0;
         isExiting = false;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        if (!isFinalBoss)
+        {
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
         Debug.Log($"[Boss] Init 方向={moveDirection}");
     }
 
@@ -110,15 +130,19 @@ public class Boss : MonoBehaviour
             case MoveState.Entering: UpdateEntering(); break;
             case MoveState.Shuttling: UpdateShuttling(); break;
             case MoveState.Leaving: break;   // 一直向外飞
+            case MoveState.Staying: break; // 停留期间不移动，由协程控制
         }
 
         // 移动 + 平滑旋转
-        if (moveDirection != Vector2.zero)
+        if (moveDirection != Vector2.zero && currentState != MoveState.Staying)
         {
             transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
-            float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,
-                Quaternion.Euler(0, 0, targetAngle), rotationSmoothSpeed * Time.deltaTime);
+            if (!isFinalBoss)
+            {
+                float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                    Quaternion.Euler(0, 0, targetAngle), rotationSmoothSpeed * Time.deltaTime);
+            }
         }
 
         // —— 销毁逻辑 ——
@@ -137,65 +161,150 @@ public class Boss : MonoBehaviour
 
     void UpdateEntering()
     {
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-        // 一旦进入屏幕中间区域，就开始穿梭
-        if (viewPos.x > 0.2f && viewPos.x < 0.8f)
-        {
-            currentState = MoveState.Shuttling;
-            isExiting = false;
+        if (!centerPoint) return;
+        float dist = Vector2.Distance(transform.position, centerPoint.position);
 
-            if (moveDirection.x >= 0)
+        if ((dist < 1.5f))
+        {
+            if (isFinalBoss)
             {
-                movingRight = true;
-                targetX = Camera.main.ViewportToWorldPoint(new Vector3(0.95f, 0.5f, 0)).x;
+                // 最终Boss：停在中心，开始停留协程
+                moveDirection = Vector2.zero;
+                currentState = MoveState.Staying;
+                Debug.Log("[Boss] 最终Boss进入停留状态");
+                StartCoroutine(StayAndSkillRoutine());
             }
             else
             {
-                movingRight = false;
-                targetX = Camera.main.ViewportToWorldPoint(new Vector3(0.05f, 0.5f, 0)).x;
+                Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+                // 一旦进入屏幕中间区域，就开始穿梭
+                if (viewPos.x > 0.2f && viewPos.x < 0.8f)
+                {
+                    currentState = MoveState.Shuttling;
+                    isExiting = false;
+
+                    if (moveDirection.x >= 0)
+                    {
+                        movingRight = true;
+                        targetX = Camera.main.ViewportToWorldPoint(new Vector3(0.95f, 0.5f, 0)).x;
+                    }
+                    else
+                    {
+                        movingRight = false;
+                        targetX = Camera.main.ViewportToWorldPoint(new Vector3(0.05f, 0.5f, 0)).x;
+                    }
+                    UpdateTargetDirection();
+                    Debug.Log($"[Boss] 进入 Shuttling, targetX={targetX}, movingRight={movingRight}");
+                }
             }
-            UpdateTargetDirection();
-            if (isFinalBoss)
-                effectTriggeredThisPass = false;
-            Debug.Log($"[Boss] 进入 Shuttling, targetX={targetX}, movingRight={movingRight}");
+        }
+
+    }
+    IEnumerator StayAndSkillRoutine()
+    {
+        float timer = 0f;
+        while (timer < stayDuration)
+        {
+            yield return new WaitForSeconds(skillInterval);
+            try
+            {
+                TriggerRandomSkill();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"技能触发异常: {e}");
+            }
+            timer += skillInterval;
+        }
+        currentState = MoveState.Leaving;
+        moveDirection = Vector2.down;
+        Debug.Log("[Boss] 最终Boss停留结束，向下离开");
+    }
+    void TriggerRandomSkill()
+    {
+        int total = 0;
+        foreach (int w in effectWeights) total += w;
+        int rand = Random.Range(0, total);
+        int cumulative = 0;
+        for (int i = 0; i < effectWeights.Length; i++)
+        {
+            cumulative += effectWeights[i];
+            if (rand < cumulative)
+            {
+                switch (i)
+                {
+                    case 0: InkEffect(); Debug.Log("黑雾"); break;
+                    case 1: SummonFish(); Debug.Log("鱼群"); break;
+                    case 2: TentacleAttack(); Debug.Log("Attack"); break;
+                }
+                break;
+            }
         }
     }
+    void InkEffect()
+    {
+        if (anim != null)
+            anim.SetTrigger("Mo");
+        TotemManager.Instance?.DisableRandomTotem(5f);
+        // 特效：黑雾会在 TotemManager.DisableRandomTotem 中生成
+    }
 
+    void SummonFish()
+    {
+        Debug.Log("[Boss] SummonFish 调用");
+        if (fishSpawnPoints == null || fishSpawnPoints.Length == 0)
+        {
+            Debug.LogError("[Boss] Fish Spawn Points 为空！");
+            return;
+        }
+        if (BossManager.Instance == null)
+        {
+            Debug.LogError("[Boss] BossManager.Instance 为空！");
+            return;
+        }
+        BossManager.Instance.SpawnFishWave(fishSpawnPoints, summonCount);
+    }
+    void TentacleAttack()
+    {
+        // 播放章鱼攻击动画（假设 Animator Controller 中有 Attack 触发器）
+        if (anim != null)
+            anim.SetTrigger("Attack");
+
+        // 降低炮台攻速
+        if (Cannon.Instance != null)
+        {
+            Cannon.Instance.attackSpeedMultiplier *= (1 - slowPercent);
+            StartCoroutine(RestoreSpeedAfterDelay(slowDuration));
+        }
+    }
+    IEnumerator RestoreSpeedAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        if (Cannon.Instance != null)
+            Cannon.Instance.attackSpeedMultiplier /= (1 - slowPercent);
+    }
     void UpdateShuttling()
     {
         Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
 
-        // 如果正在离开屏幕（去屏幕外掉头）
         if (isExiting)
         {
             bool beyondLeft = viewPos.x <= -outOfScreenMargin;
             bool beyondRight = viewPos.x >= 1 + outOfScreenMargin;
-            // 到达掉头点
             if ((beyondLeft && !movingRight) || (beyondRight && movingRight))
             {
-                Debug.Log($"[Boss] 到达掉头点，viewPos.x={viewPos.x}, beyondLeft={beyondLeft}, beyondRight={beyondRight}");
                 ReverseDirectionAndReturn();
             }
-            // 保持直线，不修改方向
             return;
         }
 
-        // 检查是否到达目标边界附近，准备向外离开
         if (Mathf.Abs(transform.position.x - targetX) < 0.2f)
         {
-            if (isFinalBoss && !effectTriggeredThisPass)
-            {
-                TriggerFinalBossEffect();
-                effectTriggeredThisPass = true;
-            }
-
             isExiting = true;
             moveDirection = new Vector2(movingRight ? 1f : -1f, 0f);
-            Debug.Log($"[Boss] 到达边界，开始向外离开，方向={moveDirection}");
             return;
         }
 
-        // 尚未到达边界，继续向目标移动
         UpdateTargetDirection();
     }
 
@@ -248,53 +357,4 @@ public class Boss : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void TriggerFinalBossEffect()
-    {
-        // 根据权重随机
-        int totalWeight = 0;
-        foreach (int w in effectWeights) totalWeight += w;
-        int rand = Random.Range(0, totalWeight);
-        int cumulative = 0;
-        for (int i = 0; i < effectWeights.Length; i++)
-        {
-            cumulative += effectWeights[i];
-            if (rand < cumulative)
-            {
-                switch (i)
-                {
-                    case 0: InkEffect(); break;
-                    case 1: TentacleAttack(); break;
-                    case 2: SummonFish(); break;
-                }
-                break;
-            }
-        }
-    }
-    void InkEffect()
-    {
-        if (TotemManager.Instance != null)
-            TotemManager.Instance.DisableRandomTotem(inkDuration);
-    }
-
-    void TentacleAttack()
-    {
-        // 播放攻击动画（在炮台附近）
-        if (attackEffectPrefab != null && Cannon.Instance != null)
-        {
-            Instantiate(attackEffectPrefab, Cannon.Instance.transform.position, Quaternion.identity);
-        }
-        // 降低攻速
-        if (Cannon.Instance != null)
-        {
-            Cannon.Instance.ApplyTempSpeedDebuff(1f - slowPercent, slowDuration);
-        }
-    }
-
-    void SummonFish()
-    {
-        if (BossManager.Instance != null && fishSpawnPoints.Length > 0)
-        {
-            BossManager.Instance.SpawnFishWave(fishSpawnPoints, summonCount);
-        }
-    }
 }

@@ -53,7 +53,7 @@ public class Cannon : MonoBehaviour
         bool lockedButNoTarget = LockSkill.Instance != null
                              && LockSkill.Instance.IsLockModeActive
                              && LockSkill.Instance.LockedTarget == null;
-        if (Input.GetMouseButton(0) && !lockedButNoTarget && Time.time >= nextFireTime
+        if (Input.GetMouseButton(0) && Time.time >= nextFireTime
         && !EventSystem.current.IsPointerOverGameObject())
         {
             Fire();
@@ -75,7 +75,7 @@ public class Cannon : MonoBehaviour
         float mouseXPercent = Mathf.Clamp01(mouseViewport.x);
 
         // 调试日志：每2秒输出一次，避免刷屏
-        if (Time.frameCount % 120 == 0)
+        if (Time.frameCount % 240 == 0)
             Debug.Log($"[{gameObject.name}] mouseX={mouseXPercent:F2}, angle={Mathf.Lerp(80f, -80f, mouseXPercent):F1}");
 
         float angle = Mathf.Lerp(80f, -80f, mouseXPercent);
@@ -88,6 +88,7 @@ public class Cannon : MonoBehaviour
         float costMultiplier = TotemManager.Instance != null ? TotemManager.Instance.CostMultiplier : 1f;
 
         actualCost = Mathf.RoundToInt(originalCost * costMultiplier);
+        Debug.Log("originalCost" + originalCost + " costMultiplier" + costMultiplier);
         if (!GameManager.SpendCoin(actualCost))
         {
             NoCoin.SetActive(true);
@@ -127,10 +128,13 @@ public class Cannon : MonoBehaviour
             GameObject bullet = pool.GetBullet();
         if (bullet != null)
         {
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.SetDirection(transform.up);   // 炮台的前方（需根据图片方向调整）
+
             bullet.transform.position = firePoint.position;
-            bullet.transform.rotation = transform.rotation;
+            bullet.transform.rotation = transform.rotation;   // 保持视觉旋转
             bullet.SetActive(true);
-            // 播放开火音效
+
             AudioManager.PlayShoot();
         }
 

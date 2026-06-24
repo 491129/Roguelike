@@ -129,7 +129,7 @@ public class SkillShopManager : MonoBehaviour
         if (TotemManager.Instance.xijin)
         {
             float xijin = (float)GameManager.Coin / 1000f;
-           // FishAttrbute.escapeChance -= 0.01f * xijin;//111111111111111111111111
+            FishAttrbute.CatchRateMultiplier += 0.01f * xijin;//111111111111111111111111
         }
         
     }
@@ -376,6 +376,7 @@ public class SkillShopManager : MonoBehaviour
     //商店界面加载
     void UpdateSlotUI()
     {
+        
         int slotCount = hasExtraSlot ? 6 : 5;
 
             for (int i = 0; i < slotCount; i++)
@@ -405,9 +406,8 @@ public class SkillShopManager : MonoBehaviour
                         slotImages[i].sprite = currentSlots[i].icon;
                         if (slotPriceTexts != null && slotPriceTexts.Length > i)
                         {
-                            float sqrtMult = Mathf.Sqrt(shopRefreshCount00 + 1);   // √(N+1)
-                            int displayPrice = Mathf.RoundToInt(currentSlots[i].price * sqrtMult * priceMultiplier);
-                            slotPriceTexts[i].text = displayPrice.ToString();
+                        int displayPrice = Mathf.RoundToInt(currentSlots[i].price * priceMultiplier);
+                        slotPriceTexts[i].text = displayPrice.ToString();
                         }
                         slotButtons[i].interactable = true;
                         slotImages[i].gameObject.SetActive(true); // 确保显示
@@ -476,7 +476,17 @@ public class SkillShopManager : MonoBehaviour
     {
         if (item.isTotem)
         {
-            finalPrice = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
+            if (item.itemName == "精兵")
+            {
+                // 条件：当前已放置图腾数量 < 图腾总数 - 2
+                if (TotemManager.Instance.activeCount >= TotemManager.Instance.maxSlots - 1) // 因为 maxSlots 还未减，此处判断应保证买了后还有空位
+                {
+                    Debug.Log("精兵购买条件不满足：图腾数量过多");
+                    return;
+                }
+                // 正常购买逻辑（走图腾分支）
+            }
+            finalPrice = Mathf.RoundToInt(item.price * priceMultiplier);
             // 2. 先尝试扣钱（只扣一次！）
             if (!GameManager.SpendCoin(finalPrice))
             {
@@ -514,8 +524,8 @@ public class SkillShopManager : MonoBehaviour
                 Debug.Log("技能已满");
                 return;
             }
-            finalPriceZZ = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
-         
+            finalPriceZZ = Mathf.RoundToInt(item.price * priceMultiplier);
+
             if (!GameManager.SpendCoin(finalPriceZZ))
             {
                 Debug.Log("金币不足");
@@ -613,7 +623,7 @@ public class SkillShopManager : MonoBehaviour
             UpdateSlotUI();
             return;
         }
-        finalPriceNol = Mathf.RoundToInt(item.price * Mathf.Sqrt(shopRefreshCount00 + 1) * priceMultiplier);
+        finalPriceNol = Mathf.RoundToInt(item.price * priceMultiplier);
         if (!GameManager.SpendCoin(finalPriceNol)) { Debug.Log("金币不足"); return; }
 
         item.onPurchase.Invoke();

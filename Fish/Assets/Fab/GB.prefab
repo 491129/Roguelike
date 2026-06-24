@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.9301233, y: 1.6271725, z: 0}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.13333333}
+  m_LocalScale: {x: 0.07, y: 0.07, z: 0.11666666}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1124126367513464300}
@@ -116,10 +116,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishType: 3
   fishNumber: 2
-  fishSpeed: 1.83
-  goldNum: 6000
+  fishSpeed: 1.2
+  goldNum: 600
   deathEffect: {fileID: 0}
-  deathEffectDuration: 0.5
+  deathEffectDuration: 1.5
   coinPrefab: {fileID: 1288983291828762122, guid: cf9834f28f4709d47937524460a7e7c9, type: 3}
   targetPos: {x: -8, y: -4}
   moveDuration: 0.6
@@ -267,7 +267,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -500
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

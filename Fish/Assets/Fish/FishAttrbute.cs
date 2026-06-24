@@ -82,7 +82,7 @@ using DG.Tweening;
         // 3. 应用全局捕鱼加成（商人海盗、挑剔海盗等）
             float finalCatchRate = Mathf.Clamp01(baseCatchRate * CatchRateMultiplier);
 
-            Debug.Log(baseCatchRate+"1" +finalCatchRate+"2"+ CatchRateMultiplier);
+            //Debug.Log(baseCatchRate+"1" +finalCatchRate+"2"+ CatchRateMultiplier);
 
         // 4. 判断是否捕捉成功
         if (Random.value < finalCatchRate)
@@ -123,11 +123,13 @@ using DG.Tweening;
                     return;   // 不是锁定目标，子弹/渔网无效
             }
                 isDead = true;
+            Animator anim = GetComponent<Animator>();
+            if (anim != null) anim.speed = 3.0f;
             if (LockSkill.Instance != null)
                 LockSkill.Instance.OnTargetDied();
             col.enabled = false;
-                StartCoroutine(DieAfterDelay(0.2f));
-
+               // StartCoroutine(DieAfterDelay(0.2f));
+            StartCoroutine(DieAfterDelay(deathEffectDuration / 3.0f));
             if (deathEffect != null)
             {
                     GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
@@ -213,6 +215,30 @@ using DG.Tweening;
                     else
                         GameManager.AddCoin(coin);
                     break;
+                case FishType.Tuna:
+                    if (TunaSkill.isUsed)
+                    {
+                        GameManager.AddCoin(Mathf.RoundToInt(TunaSkill.fishCoin * getgoldMore));
+                    }
+                    else
+                        GameManager.AddCoin(coin);
+                    break;
+                case FishType.JF:
+                    if (TunaSkill.isUsed)
+                    {
+                        GameManager.AddCoin(Mathf.RoundToInt(TunaSkill.fishCoin * getgoldMore));
+                    }
+                    else
+                        GameManager.AddCoin(coin);
+                    break;
+                case FishType.SF:
+                    if (TunaSkill.isUsed)
+                    {
+                        GameManager.AddCoin(Mathf.RoundToInt(SFSkill.fishCoin * getgoldMore));
+                    }
+                    else
+                        GameManager.AddCoin(coin);
+                    break;
                 default:
                         Debug.Log("N" + goldNum);
                         GameManager.AddCoin(coin);
@@ -255,6 +281,7 @@ using DG.Tweening;
         IEnumerator DieAfterDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
+            fish.OnFishDied();      // 通知生成器
             Destroy(gameObject);
         }
         private void SpawnCoinAndFly()

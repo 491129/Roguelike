@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.22, y: 0.22, z: 0.11}
+  m_LocalScale: {x: 0.32, y: 0.32, z: 0.16}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: c3124b1c94745c34b8f4c025d98e7bb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossType: FreezeTurtle
-  speed: 1
+  speed: 0.6
   catchProbability: 0.5
   rotationSmoothSpeed: 360
   outOfScreenMargin: 0.22
@@ -108,6 +108,14 @@ MonoBehaviour:
   bossDefeated: 0
   catchRates: 0100000002000000030000000a000000c8000000
   goldReward: 35000000
+  isFinalBoss: 0
+  stayDuration: 60
+  skillInterval: 10
+  effectWeights: 030000000300000004000000
+  fishSpawnPoints: []
+  summonCount: 8
+  slowPercent: 0.2
+  slowDuration: 5
 --- !u!95 &-7533001967050841424
 Animator:
   serializedVersion: 5
